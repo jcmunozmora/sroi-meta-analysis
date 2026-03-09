@@ -344,28 +344,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#package-structure" id="toc-package-structure" class="nav-link active" data-scroll-target="#package-structure">Package Structure</a></li>
-  <li><a href="#data-files" id="toc-data-files" class="nav-link" data-scroll-target="#data-files">Data Files</a>
+  <li><a href="#package-structure" id="toc-package-structure" class="nav-link active" data-scroll-target="#package-structure">1. Package Structure</a></li>
+  <li><a href="#data-quality-audit" id="toc-data-quality-audit" class="nav-link" data-scroll-target="#data-quality-audit">2. Data Quality Audit</a>
   <ul class="collapse">
-  <li><a href="#sroi_clean_dataset.csv" id="toc-sroi_clean_dataset.csv" class="nav-link" data-scroll-target="#sroi_clean_dataset.csv">sroi_clean_dataset.csv</a></li>
-  <li><a href="#sroi_ratios_subset.csv" id="toc-sroi_ratios_subset.csv" class="nav-link" data-scroll-target="#sroi_ratios_subset.csv">sroi_ratios_subset.csv</a></li>
-  <li><a href="#sroi_factors.csv" id="toc-sroi_factors.csv" class="nav-link" data-scroll-target="#sroi_factors.csv">sroi_factors.csv</a></li>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link" data-scroll-target="#executive-summary">2.1 Executive Summary</a></li>
+  <li><a href="#sector-classification" id="toc-sector-classification" class="nav-link" data-scroll-target="#sector-classification">2.2 Sector Classification</a></li>
+  <li><a href="#country-classification" id="toc-country-classification" class="nav-link" data-scroll-target="#country-classification">2.3 Country Classification</a></li>
+  <li><a href="#year-extraction-key-fix" id="toc-year-extraction-key-fix" class="nav-link" data-scroll-target="#year-extraction-key-fix">2.4 Year Extraction — Key Fix</a></li>
+  <li><a href="#report-type-critical-transparency-note" id="toc-report-type-critical-transparency-note" class="nav-link" data-scroll-target="#report-type-critical-transparency-note">2.5 Report Type — Critical Transparency Note</a></li>
+  <li><a href="#sroi-ratio-validation" id="toc-sroi-ratio-validation" class="nav-link" data-scroll-target="#sroi-ratio-validation">2.6 SROI Ratio Validation</a></li>
+  <li><a href="#quality-score-limitations" id="toc-quality-score-limitations" class="nav-link" data-scroll-target="#quality-score-limitations">2.7 Quality Score Limitations</a></li>
   </ul></li>
-  <li><a href="#analysis-code" id="toc-analysis-code" class="nav-link" data-scroll-target="#analysis-code">Analysis Code</a>
-  <ul class="collapse">
-  <li><a href="#analysis.py-main-analysis-pipeline" id="toc-analysis.py-main-analysis-pipeline" class="nav-link" data-scroll-target="#analysis.py-main-analysis-pipeline">analysis.py — Main analysis pipeline</a></li>
-  <li><a href="#simulations.py-bootstrap-permutation-monte-carlo" id="toc-simulations.py-bootstrap-permutation-monte-carlo" class="nav-link" data-scroll-target="#simulations.py-bootstrap-permutation-monte-carlo">simulations.py — Bootstrap, permutation, Monte Carlo</a></li>
-  <li><a href="#factors_analysis.py-calculation-element-extraction" id="toc-factors_analysis.py-calculation-element-extraction" class="nav-link" data-scroll-target="#factors_analysis.py-calculation-element-extraction">factors_analysis.py — Calculation element extraction</a></li>
-  </ul></li>
-  <li><a href="#how-to-run-the-full-replication" id="toc-how-to-run-the-full-replication" class="nav-link" data-scroll-target="#how-to-run-the-full-replication">How to Run the Full Replication</a>
+  <li><a href="#how-to-run" id="toc-how-to-run" class="nav-link" data-scroll-target="#how-to-run">3. How to Run</a>
   <ul class="collapse">
   <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#step-by-step" id="toc-step-by-step" class="nav-link" data-scroll-target="#step-by-step">Step-by-step</a></li>
+  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps">Steps</a></li>
   <li><a href="#expected-runtime" id="toc-expected-runtime" class="nav-link" data-scroll-target="#expected-runtime">Expected runtime</a></li>
   </ul></li>
-  <li><a href="#data-access" id="toc-data-access" class="nav-link" data-scroll-target="#data-access">Data Access</a></li>
-  <li><a href="#download-files" id="toc-download-files" class="nav-link" data-scroll-target="#download-files">Download Files</a></li>
-  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
+  <li><a href="#data-dictionary-sroi_clean_dataset_v2.csv" id="toc-data-dictionary-sroi_clean_dataset_v2.csv" class="nav-link" data-scroll-target="#data-dictionary-sroi_clean_dataset_v2.csv">4. Data Dictionary — sroi_clean_dataset_v2.csv</a></li>
+  <li><a href="#robustness-checks" id="toc-robustness-checks" class="nav-link" data-scroll-target="#robustness-checks">5. Robustness Checks</a></li>
+  <li><a href="#downloads" id="toc-downloads" class="nav-link" data-scroll-target="#downloads">6. Downloads</a></li>
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">7. Citation</a></li>
   </ul>
 </nav>
     </div>
@@ -376,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Replication Package</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-<p class="subtitle lead">All Code, Data, and Instructions to Reproduce the Analysis</p>
+<p class="subtitle lead">Code, Data, Audit Trail, and Classification Evidence</p>
 </div>
 
 
@@ -403,161 +402,291 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This page contains everything needed to fully replicate the analysis in the paper. The package follows open science principles: all code is documented, all data is included (subject to licence restrictions), and all figures are reproducible from the provided scripts.</p>
+<p>This page documents not just <strong>how to replicate</strong> the analysis, but <strong>what we know and don’t know</strong> about the data. All classification decisions are documented with confidence levels and evidence. Run <code>data_audit.py</code> to regenerate the full audit trail.</p>
 </div>
 </div>
 <section id="package-structure" class="level2">
-<h2 class="anchored" data-anchor-id="package-structure">Package Structure</h2>
+<h2 class="anchored" data-anchor-id="package-structure">1. Package Structure</h2>
 <pre><code>2026_sroi/
 ├── data/
-│   ├── sroi_clean_dataset.csv        # Main dataset: 383 reports × metadata + quality scores
-│   ├── sroi_ratios_subset.csv        # Subsample: 64 reports with extractable SROI ratios
-│   ├── sroi_factors.csv              # Binary indicators: 11 calculation elements × 383 reports
-│   ├── sroi_factors_summary.csv      # Prevalence summary table (11 elements)
-│   ├── bootstrap_principle_ci.csv    # Bootstrap CI results (B=10,000)
-│   ├── simulation_stats.csv          # Monte Carlo simulation summary statistics
-│   └── regression_table.csv          # OLS regression results
-│
-├── analysis.py                       # Main analysis: quality scoring, descriptive stats, regression
-├── simulations.py                    # Bootstrap CIs, permutation tests, Monte Carlo simulation
-├── factors_analysis.py               # Calculation element extraction and visualization
-├── enrich_dataset.py                 # Metadata enrichment pipeline (sector, country, year)
-│
-├── figures/                          # All 16 figures (PNG + PDF)
-│   ├── fig1_sector_distribution.png
-│   ├── fig2_quality_by_principle.png
-│   ├── ...
-│   └── fig16_quality_ratio_by_factors.png
-│
-├── draft_v1.qmd                      # Full paper (Quarto)
-└── www/                              # This website</code></pre>
+│   ├── enrich_dataset.py             # v1: original enrichment pipeline
+│   ├── data_audit.py                 # v2: rigorous audit + corrected dataset
+│   ├── analysis.py                   # Main analysis
+│   ├── simulations.py                # Bootstrap, permutation, Monte Carlo
+│   ├── factors_analysis.py           # Calculation element extraction
+│   │
+│   ├── sroi_clean_dataset_v2.csv     # ← USE THIS (with confidence scores)
+│   ├── sroi_ratios_subset.csv        # 64 reports with SROI ratios
+│   ├── sroi_factors.csv              # 11 calculation elements × 383 reports
+│   │
+│   ├── audit_report.md               # ← Full data quality audit narrative
+│   ├── audit_flags.csv               # ← Per-report classification flags
+│   └── classification_evidence.csv   # ← Quality score evidence per report
+└── figures/                          # All 16 figures</code></pre>
 <hr>
 </section>
-<section id="data-files" class="level2">
-<h2 class="anchored" data-anchor-id="data-files">Data Files</h2>
-<section id="sroi_clean_dataset.csv" class="level3">
-<h3 class="anchored" data-anchor-id="sroi_clean_dataset.csv">sroi_clean_dataset.csv</h3>
-<p>The main dataset. Each row is one SROI report.</p>
+<section id="data-quality-audit" class="level2">
+<h2 class="anchored" data-anchor-id="data-quality-audit">2. Data Quality Audit</h2>
+<p>All classification decisions are documented with confidence levels. Run <code>data_audit.py</code> to regenerate.</p>
+<section id="executive-summary" class="level3">
+<h3 class="anchored" data-anchor-id="executive-summary">2.1 Executive Summary</h3>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Column</th>
-<th>Type</th>
-<th>Description</th>
+<th>Variable</th>
+<th>HIGH confidence</th>
+<th>MEDIUM</th>
+<th>LOW</th>
+<th>Unknown/Missing</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>report_id</code></td>
-<td>str</td>
-<td>Unique report identifier</td>
+<td>Sector</td>
+<td>33 (9%)</td>
+<td>191 (50%)</td>
+<td>159 (41%)</td>
+<td>0</td>
 </tr>
 <tr class="even">
-<td><code>title</code></td>
-<td>str</td>
-<td>Report title</td>
+<td>Country</td>
+<td>58 (15%)</td>
+<td>220 (57%)</td>
+<td>26 (7%)</td>
+<td>79 (21%)</td>
 </tr>
 <tr class="odd">
-<td><code>url</code></td>
-<td>str</td>
-<td>Source URL</td>
+<td>Year</td>
+<td>200 (52%)</td>
+<td>33 (9%)</td>
+<td>115 (30%)</td>
+<td>35 (9%)</td>
 </tr>
 <tr class="even">
-<td><code>published_date</code></td>
-<td>date</td>
-<td>Date scraped from website</td>
-</tr>
-<tr class="odd">
-<td><code>is_assured</code></td>
-<td>int</td>
-<td>1 = SVI Report Assurance; 0 = not assured</td>
-</tr>
-<tr class="even">
-<td><code>sector_clean</code></td>
-<td>str</td>
-<td>Sector (15 categories + “other”)</td>
-</tr>
-<tr class="odd">
-<td><code>country_clean</code></td>
-<td>str</td>
-<td>Country (UK, Australia, USA, …)</td>
-</tr>
-<tr class="even">
-<td><code>report_type_clean</code></td>
-<td>str</td>
-<td>“Forecast” or “Evaluative”</td>
-</tr>
-<tr class="odd">
-<td><code>year_clean</code></td>
-<td>int</td>
-<td>Report year (from PDF text)</td>
-</tr>
-<tr class="even">
-<td><code>org_type</code></td>
-<td>str</td>
-<td>Organisation type</td>
-</tr>
-<tr class="odd">
-<td><code>P1</code> – <code>P8</code></td>
-<td>int (0–2)</td>
-<td>Quality score for each SVI principle</td>
-</tr>
-<tr class="even">
-<td><code>quality_score</code></td>
-<td>float</td>
-<td>Mean of P1–P8 (0–2 scale)</td>
-</tr>
-<tr class="odd">
-<td><code>quality_pct</code></td>
-<td>float</td>
-<td>Quality score as % (0–100)</td>
-</tr>
-<tr class="even">
-<td><code>stakeholder_groups</code></td>
-<td>int</td>
-<td>Number of stakeholder groups identified</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="sroi_ratios_subset.csv" class="level3">
-<h3 class="anchored" data-anchor-id="sroi_ratios_subset.csv">sroi_ratios_subset.csv</h3>
-<p>Subsample of 64 reports with extractable SROI ratios.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Column</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>report_id</code></td>
-<td>str</td>
-<td>Matches <code>sroi_clean_dataset.csv</code></td>
-</tr>
-<tr class="even">
-<td><code>sroi_ratio</code></td>
-<td>float</td>
-<td>Reported SROI ratio (e.g., 4.44)</td>
-</tr>
-<tr class="odd">
-<td><code>investment_value</code></td>
-<td>float</td>
-<td>Total investment (£, where available)</td>
-</tr>
-<tr class="even">
-<td>All columns from main dataset</td>
+<td>Report type</td>
+<td>52 keyword-confirmed</td>
 <td>—</td>
-<td>Merged join</td>
+<td>331 assumed</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>SROI ratio</td>
+<td>43/64 PDF-verified</td>
+<td>—</td>
+<td>21 metadata-only</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Scope of uncertainty:</strong> Sector, country, and year classifications affect descriptive breakdowns. The main empirical findings (41.2% principle compliance, 5.2% complete adjustments, Monte Carlo correction) rest on quality scores from PDF text and are not sensitive to these classifications.</p>
+</div>
+</div>
+</section>
+<section id="sector-classification" class="level3">
+<h3 class="anchored" data-anchor-id="sector-classification">2.2 Sector Classification</h3>
+<p><strong>Method:</strong> Keyword matching on first 3,000 characters of PDF + title. Winner = sector with highest keyword count.</p>
+<p>Only <strong>9% HIGH confidence</strong> (margin ≥ 3 keywords). 41% of reports are tied or near-tied between two sectors — they are genuinely cross-sectoral programmes.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restrict to unambiguous sector classifications</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_high_sector <span class="op">=</span> df[df[<span class="st">'sector_confidence'</span>].isin([<span class="st">'HIGH'</span>, <span class="st">'MEDIUM'</span>])]  <span class="co"># n=224</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="country-classification" class="level3">
+<h3 class="anchored" data-anchor-id="country-classification">2.3 Country Classification</h3>
+<p><strong>79 reports (21%) remain Unknown</strong> even after extending search to 15,000 characters. These are excluded from geographic analyses.</p>
+</section>
+<section id="year-extraction-key-fix" class="level3">
+<h3 class="anchored" data-anchor-id="year-extraction-key-fix">2.4 Year Extraction — Key Fix</h3>
+<p><strong>Bug in v1:</strong> Used <code>min(valid_years)</code> → picked up historical reference years (e.g., “SROI was developed in 2001”) producing impossible report dates.</p>
+<p><strong>v2 fix:</strong> Hierarchical strategy:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Strategy</th>
+<th>N reports</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Explicit date pattern (“March 2016”)</td>
+<td>200</td>
+<td>HIGH</td>
+</tr>
+<tr class="even">
+<td>Modal year in first 800 chars</td>
+<td>33</td>
+<td>MEDIUM</td>
+</tr>
+<tr class="odd">
+<td>Modal year in first 3,000 chars</td>
+<td>115</td>
+<td>LOW</td>
+</tr>
+<tr class="even">
+<td>Not found</td>
+<td>35</td>
+<td>NONE</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="sroi_factors.csv" class="level3">
-<h3 class="anchored" data-anchor-id="sroi_factors.csv">sroi_factors.csv</h3>
-<p>Binary indicators for 11 calculation elements.</p>
+<section id="report-type-critical-transparency-note" class="level3">
+<h3 class="anchored" data-anchor-id="report-type-critical-transparency-note">2.5 Report Type — Critical Transparency Note</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>322 of 339 “Evaluative” reports are assumed, not keyword-confirmed.</strong></p>
+</div>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>N</th>
+<th>Confirmed</th>
+<th>Assumed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Evaluative</td>
+<td>339</td>
+<td>17</td>
+<td>322</td>
+</tr>
+<tr class="even">
+<td>Forecast</td>
+<td>40</td>
+<td>40</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>Scoping</td>
+<td>4</td>
+<td>4</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>The logic: Forecast and Scoping reports consistently self-label. Unlabelled reports are therefore Evaluative by exclusion. Marked with <code>type_note = 'assumed_evaluative'</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restrict to keyword-confirmed type only (n=61)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_confirmed <span class="op">=</span> df[df[<span class="st">'type_note'</span>] <span class="op">!=</span> <span class="st">'assumed_evaluative'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sroi-ratio-validation" class="level3">
+<h3 class="anchored" data-anchor-id="sroi-ratio-validation">2.6 SROI Ratio Validation</h3>
+<ul>
+<li><strong>43/64 VERIFIED</strong> in PDF text</li>
+<li><strong>21/64 UNVERIFIED</strong>: in database metadata but not found in our PDF text scan</li>
+</ul>
+<p>Excluding the 21 unverified ratios changes the median from 4.44 to 4.53 — no material impact on results.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conservative: verified ratios only</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_verified_ratios <span class="op">=</span> df[df[<span class="st">'ratio_confidence'</span>] <span class="op">==</span> <span class="st">'VERIFIED'</span>]  <span class="co"># n=43</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="quality-score-limitations" class="level3">
+<h3 class="anchored" data-anchor-id="quality-score-limitations">2.7 Quality Score Limitations</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Principle</th>
+<th>Known issue</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>P3 value</td>
+<td>Keyword “value” is generic — likely inflates compliance rate</td>
+</tr>
+<tr class="even">
+<td>P6 transparent</td>
+<td>“data”, “evidence” are generic — 122 weak flags</td>
+</tr>
+<tr class="odd">
+<td>P1 stakeholders</td>
+<td>79 reports: single keyword only</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Direction of bias:</strong> Inflated P3 and P6 scores mean our 41.2% average compliance is <em>conservative</em> — the true gap may be larger. This strengthens the paper’s main argument.</p>
+<p><code>classification_evidence.csv</code> contains the exact keyword and text context for every quality score assignment.</p>
+<hr>
+</section>
+</section>
+<section id="how-to-run" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-run">3. How to Run</h2>
+<section id="prerequisites" class="level3">
+<h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandas numpy scipy matplotlib seaborn scikit-learn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="steps" class="level3">
+<h3 class="anchored" data-anchor-id="steps">Steps</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Generate audit + corrected dataset (v2)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/data_audit.py</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Main analysis</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/analysis.py</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Simulations (bootstrap, Monte Carlo)</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/simulations.py</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Calculation elements</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/factors_analysis.py</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5: Compile website</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="expected-runtime" class="level3">
+<h3 class="anchored" data-anchor-id="expected-runtime">Expected runtime</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Script</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>data_audit.py</code></td>
+<td>~2 min</td>
+</tr>
+<tr class="even">
+<td><code>analysis.py</code></td>
+<td>~30 sec</td>
+</tr>
+<tr class="odd">
+<td><code>simulations.py</code></td>
+<td>~3 min (50k MC iterations)</td>
+</tr>
+<tr class="even">
+<td><code>factors_analysis.py</code></td>
+<td>~1 min</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="data-dictionary-sroi_clean_dataset_v2.csv" class="level2">
+<h2 class="anchored" data-anchor-id="data-dictionary-sroi_clean_dataset_v2.csv">4. Data Dictionary — sroi_clean_dataset_v2.csv</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 29%">
@@ -573,274 +702,171 @@ Note
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>report_id</code></td>
+<td><code>id</code></td>
+<td>int</td>
+<td>Unique report ID</td>
+</tr>
+<tr class="even">
+<td><code>sector_clean</code></td>
 <td>str</td>
-<td>Unique identifier</td>
-</tr>
-<tr class="even">
-<td><code>deadweight</code></td>
-<td>int</td>
-<td>1 = deadweight mentioned</td>
+<td>Sector (15 categories)</td>
 </tr>
 <tr class="odd">
-<td><code>attribution</code></td>
-<td>int</td>
-<td>1 = attribution mentioned</td>
+<td><code>sector_confidence</code></td>
+<td>str</td>
+<td>HIGH / MEDIUM / LOW</td>
 </tr>
 <tr class="even">
-<td><code>drop_off</code></td>
-<td>int</td>
-<td>1 = drop-off mentioned</td>
+<td><code>country_clean</code></td>
+<td>str</td>
+<td>Country or “Unknown”</td>
 </tr>
 <tr class="odd">
-<td><code>displacement</code></td>
-<td>int</td>
-<td>1 = displacement mentioned</td>
+<td><code>country_confidence</code></td>
+<td>str</td>
+<td>HIGH / MEDIUM / LOW / NONE</td>
 </tr>
 <tr class="even">
-<td><code>sensitivity</code></td>
+<td><code>year_clean</code></td>
 <td>int</td>
-<td>1 = sensitivity analysis mentioned</td>
+<td>Report year from PDF</td>
 </tr>
 <tr class="odd">
-<td><code>discount_rate</code></td>
-<td>int</td>
-<td>1 = discount rate mentioned</td>
+<td><code>year_method</code></td>
+<td>str</td>
+<td>explicit_pattern / modal_800chars / modal_3000chars</td>
 </tr>
 <tr class="even">
-<td><code>proxy</code></td>
-<td>int</td>
-<td>1 = financial proxies mentioned</td>
+<td><code>year_confidence</code></td>
+<td>str</td>
+<td>HIGH / MEDIUM / LOW / NONE</td>
 </tr>
 <tr class="odd">
-<td><code>counterfactual</code></td>
-<td>int</td>
-<td>1 = counterfactual mentioned</td>
+<td><code>report_type_clean</code></td>
+<td>str</td>
+<td>Forecast / Evaluative / Scoping</td>
 </tr>
 <tr class="even">
-<td><code>theory_of_change</code></td>
-<td>int</td>
-<td>1 = theory of change / logic model mentioned</td>
+<td><code>type_note</code></td>
+<td>str</td>
+<td>keyword_match / assumed_evaluative</td>
 </tr>
 <tr class="odd">
-<td><code>wellby_qaly</code></td>
-<td>int</td>
-<td>1 = WELLBY / QALY / HACT mentioned</td>
+<td><code>type_confidence</code></td>
+<td>str</td>
+<td>HIGH / MEDIUM / LOW</td>
 </tr>
 <tr class="even">
-<td><code>materiality</code></td>
+<td><code>assurance_clean</code></td>
 <td>int</td>
-<td>1 = materiality discussed</td>
+<td>1 = SVI assurance</td>
 </tr>
 <tr class="odd">
-<td><code>n_factors</code></td>
+<td><code>sroi_ratio_value</code></td>
+<td>float</td>
+<td>SROI ratio (null if absent)</td>
+</tr>
+<tr class="even">
+<td><code>ratio_confidence</code></td>
+<td>str</td>
+<td>VERIFIED / UNVERIFIED / N/A</td>
+</tr>
+<tr class="odd">
+<td><code>p1</code> – <code>p8</code></td>
+<td>int 0–2</td>
+<td>Quality score per SVI principle</td>
+</tr>
+<tr class="even">
+<td><code>quality_pct</code></td>
+<td>float</td>
+<td>Mean score as % (0–100)</td>
+</tr>
+<tr class="odd">
+<td><code>n_quality_flags</code></td>
 <td>int</td>
-<td>Count of adjustment factors (0–4)</td>
+<td>Number of weak-evidence quality flags</td>
 </tr>
 </tbody>
 </table>
 <hr>
 </section>
-</section>
-<section id="analysis-code" class="level2">
-<h2 class="anchored" data-anchor-id="analysis-code">Analysis Code</h2>
-<section id="analysis.py-main-analysis-pipeline" class="level3">
-<h3 class="anchored" data-anchor-id="analysis.py-main-analysis-pipeline">analysis.py — Main analysis pipeline</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">Main analysis pipeline for the SROI meta-analysis.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">Produces: quality scores, descriptive statistics, sector/country summaries,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">OLS regression table, and figures 1–5.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">Usage: python analysis.py</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">Outputs: figures/fig1_*.png ... fig5_*.png, data/regression_table.csv</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Key functions:</strong> - <code>score_principle(text, principle_id)</code> — keyword scoring for each SVI principle - <code>extract_sector(text)</code> — sector classification from PDF text - <code>extract_country(text)</code> — country identification - <code>run_regression(df)</code> — OLS quality score regression</p>
-</section>
-<section id="simulations.py-bootstrap-permutation-monte-carlo" class="level3">
-<h3 class="anchored" data-anchor-id="simulations.py-bootstrap-permutation-monte-carlo">simulations.py — Bootstrap, permutation, Monte Carlo</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">Statistical simulations:</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">  1. Bootstrap CIs (B=10,000, BCa method) for all compliance rates</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">  2. Permutation test for sector-level quality differences</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">  3. Monte Carlo simulation: implied SROI ratio bias from non-compliance</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">Usage: python simulations.py</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">Outputs: figures/fig7_*.png ... fig12_*.png</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">         data/bootstrap_principle_ci.csv</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">         data/simulation_stats.csv</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Monte Carlo configuration:</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>N_SIM <span class="op">=</span> <span class="dv">50_000</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">42</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Beta distributions calibrated to observed ranges</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># DW: deadweight | AT: attribution | DO: drop-off | DISP: displacement</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>CORRECTION_PARAMS <span class="op">=</span> {</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DW'</span>:   (<span class="fl">3.5</span>, <span class="fl">10.5</span>),  <span class="co"># Beta(a, b) → mean = a/(a+b) = 0.25</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AT'</span>:   (<span class="fl">3.2</span>, <span class="fl">12.8</span>),  <span class="co"># mean = 0.20</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DO'</span>:   (<span class="fl">2.0</span>,  <span class="fl">8.0</span>),  <span class="co"># mean = 0.20</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DISP'</span>: (<span class="fl">1.5</span>, <span class="fl">13.5</span>),  <span class="co"># mean = 0.10</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="factors_analysis.py-calculation-element-extraction" class="level3">
-<h3 class="anchored" data-anchor-id="factors_analysis.py-calculation-element-extraction">factors_analysis.py — Calculation element extraction</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">Extracts 11 SROI calculation elements from PDF text using regex patterns.</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">Computes cascade prevalence, co-occurrence matrix, forecast premium,</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">and quality-factor relationships.</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">Usage: python factors_analysis.py</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">Outputs: figures/fig13_*.png ... fig16_*.png</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">         data/sroi_factors.csv</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">         data/sroi_factors_summary.csv</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Keyword patterns (validated against 30 manual reviews)</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>FACTOR_PATTERNS <span class="op">=</span> {</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'deadweight'</span>:    <span class="vs">r'deadweight'</span>,</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'attribution'</span>:   <span class="vs">r'attribution'</span>,</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'drop_off'</span>:      <span class="vs">r'drop</span><span class="dv">.</span><span class="op">?</span><span class="vs">off'</span>,</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'displacement'</span>:  <span class="vs">r'displacement'</span>,</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'sensitivity'</span>:   <span class="vs">r'sensitivity</span><span class="dv">\s</span><span class="op">+</span><span class="vs">anal'</span>,</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'discount_rate'</span>: <span class="vs">r'discount</span><span class="dv">\s</span><span class="op">+</span><span class="vs">rate</span><span class="cf">|</span><span class="vs">discount</span><span class="dv">\s</span><span class="op">+</span><span class="vs">factor'</span>,</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'proxy'</span>:         <span class="vs">r'</span><span class="dv">\b</span><span class="vs">proxy</span><span class="dv">\b</span><span class="cf">|</span><span class="dv">\b</span><span class="vs">proxies</span><span class="dv">\b</span><span class="vs">'</span>,</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'counterfactual'</span>:<span class="vs">r'counterfactual</span><span class="cf">|</span><span class="vs">what would have happened'</span>,</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'theory_of_change'</span>: <span class="vs">r'theory of change</span><span class="cf">|</span><span class="vs">logic model</span><span class="cf">|</span><span class="vs">outcome map'</span>,</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">'wellby_qaly'</span>:   <span class="vs">r'wellby</span><span class="cf">|</span><span class="vs">qaly</span><span class="cf">|</span><span class="vs">hact'</span>,</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">'materiality'</span>:   <span class="vs">r'materialit'</span>,</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="robustness-checks" class="level2">
+<h2 class="anchored" data-anchor-id="robustness-checks">5. Robustness Checks</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data/sroi_clean_dataset_v2.csv'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Main result</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'quality_pct'</span>].mean())  <span class="co"># ~41.2%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># R1: High-confidence sectors only</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[df[<span class="st">'sector_confidence'</span>]<span class="op">==</span><span class="st">'HIGH'</span>][<span class="st">'quality_pct'</span>].mean())</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># R2: PDF-verified ratios only</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>df_r <span class="op">=</span> df[df[<span class="st">'ratio_confidence'</span>]<span class="op">==</span><span class="st">'VERIFIED'</span>]</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_r[<span class="st">'sroi_ratio_value'</span>].describe())</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># R3: Keyword-confirmed report types</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>df_t <span class="op">=</span> df[df[<span class="st">'type_note'</span>] <span class="op">!=</span> <span class="st">'assumed_evaluative'</span>]</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_t.groupby(<span class="st">'report_type_clean'</span>)[<span class="st">'quality_pct'</span>].mean())</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># R4: Exclude weak-flag quality scores</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>df_strict <span class="op">=</span> df[df[<span class="st">'n_quality_flags'</span>] <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_strict[<span class="st">'quality_pct'</span>].mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
-</section>
-<section id="how-to-run-the-full-replication" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-run-the-full-replication">How to Run the Full Replication</h2>
-<section id="prerequisites" class="level3">
-<h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandas numpy scipy matplotlib seaborn scikit-learn bibtexparser</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Or with conda:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install pandas numpy scipy matplotlib seaborn scikit-learn</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install bibtexparser</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="step-by-step" class="level3">
-<h3 class="anchored" data-anchor-id="step-by-step">Step-by-step</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Clone / download the replication package</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Papers/2026_sroi/</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Run metadata enrichment (produces sroi_clean_dataset.csv)</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/enrich_dataset.py</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Run main analysis (produces figures 1–5 + regression_table.csv)</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/analysis.py</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Run simulations (produces figures 7–12 + bootstrap/simulation CSVs)</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/simulations.py</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Run calculation elements analysis (produces figures 13–16 + sroi_factors.csv)</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/factors_analysis.py</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Render the paper</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render draft_v1.qmd</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Render this website</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> www/ <span class="kw">&amp;&amp;</span> <span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="expected-runtime" class="level3">
-<h3 class="anchored" data-anchor-id="expected-runtime">Expected runtime</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Script</th>
-<th>Expected time</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>enrich_dataset.py</code></td>
-<td>~2–5 minutes (383 PDFs)</td>
-</tr>
-<tr class="even">
-<td><code>analysis.py</code></td>
-<td>~30 seconds</td>
-</tr>
-<tr class="odd">
-<td><code>simulations.py</code></td>
-<td>~2–3 minutes (50,000 MC iterations)</td>
-</tr>
-<tr class="even">
-<td><code>factors_analysis.py</code></td>
-<td>~1 minute</td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-</section>
-<section id="data-access" class="level2">
-<h2 class="anchored" data-anchor-id="data-access">Data Access</h2>
-<p>The raw SROI reports are publicly available from the Social Value UK reports database at <a href="https://socialvalueuk.org">socialvalueuk.org</a>. The scraped data (<code>pdf_text_extract</code> field) contains extracted text from publicly accessible PDFs.</p>
-<p><strong>Licence:</strong> The analysis code is released under MIT licence. The structured dataset (<code>sroi_clean_dataset.csv</code>, <code>sroi_factors.csv</code>) is released under CC BY 4.0. The raw PDF text extracts are derived from publicly available reports and are provided for research replication only.</p>
-<hr>
-</section>
-<section id="download-files" class="level2">
-<h2 class="anchored" data-anchor-id="download-files">Download Files</h2>
+<section id="downloads" class="level2">
+<h2 class="anchored" data-anchor-id="downloads">6. Downloads</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th>File</th>
 <th>Description</th>
-<th>Size</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="sroi_clean_dataset.csv">sroi_clean_dataset.csv</a></td>
-<td>Main dataset (383 reports)</td>
-<td>~150 KB</td>
+<td><a href="sroi_clean_dataset_v2.csv">sroi_clean_dataset_v2.csv</a></td>
+<td>Main dataset (recommended)</td>
 </tr>
 <tr class="even">
-<td><a href="sroi_ratios_subset.csv">sroi_ratios_subset.csv</a></td>
-<td>Ratio subsample (64 reports)</td>
-<td>~25 KB</td>
+<td><a href="audit_flags.csv">audit_flags.csv</a></td>
+<td>Per-report flags</td>
 </tr>
 <tr class="odd">
+<td><a href="classification_evidence.csv">classification_evidence.csv</a></td>
+<td>Quality score evidence</td>
+</tr>
+<tr class="even">
 <td><a href="sroi_factors.csv">sroi_factors.csv</a></td>
-<td>Calculation elements (383 × 12)</td>
-<td>~45 KB</td>
+<td>Calculation elements</td>
+</tr>
+<tr class="odd">
+<td><a href="data_audit.py">data_audit.py</a></td>
+<td>Full audit script</td>
 </tr>
 <tr class="even">
 <td><a href="analysis.py">analysis.py</a></td>
-<td>Main analysis code</td>
-<td>~8 KB</td>
+<td>Analysis code</td>
 </tr>
 <tr class="odd">
 <td><a href="simulations.py">simulations.py</a></td>
 <td>Simulation code</td>
-<td>~10 KB</td>
-</tr>
-<tr class="even">
-<td><a href="factors_analysis.py">factors_analysis.py</a></td>
-<td>Factors analysis code</td>
-<td>~12 KB</td>
 </tr>
 </tbody>
 </table>
 <hr>
 </section>
 <section id="citation" class="level2">
-<h2 class="anchored" data-anchor-id="citation">Citation</h2>
-<p>If you use this dataset or code, please cite:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">SROIMetaAnalysis2026</span>,</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>    = {[Author]},</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>     = {From Principles to Practice: A Systematic Content Analysis</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>               of SROI Reporting in the Social Value International Database},</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">journal</span>   = {Voluntas: International Journal of Voluntary and Nonprofit Organizations},</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>      = {2026},</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">note</span>      = {Forthcoming},</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">url</span>       = {https://doi.org/10.1000/placeholder}</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<h2 class="anchored" data-anchor-id="citation">7. Citation</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">SROIMetaAnalysis2026</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>  = {[Author]},</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>   = {From Principles to Practice: A Systematic Content Analysis</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>             of SROI Reporting in the Social Value International Database},</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">journal</span> = {Voluntas},</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>    = {2026},</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">note</span>    = {Forthcoming. Replication: https://jcmunozmora.github.io/sroi-meta-analysis/}</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 <!-- -->
@@ -1311,276 +1337,245 @@ Note
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Replication Package"</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "All Code, Data, and Instructions to Reproduce the Analysis"</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>This page contains everything needed to fully replicate the analysis in the paper. The package follows open science principles: all code is documented, all data is included (subject to licence restrictions), and all figures are reproducible from the provided scripts.</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Package Structure</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="in">2026_sroi/</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="in">├── data/</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── sroi_clean_dataset.csv        # Main dataset: 383 reports × metadata + quality scores</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── sroi_ratios_subset.csv        # Subsample: 64 reports with extractable SROI ratios</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── sroi_factors.csv              # Binary indicators: 11 calculation elements × 383 reports</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── sroi_factors_summary.csv      # Prevalence summary table (11 elements)</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── bootstrap_principle_ci.csv    # Bootstrap CI results (B=10,000)</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── simulation_stats.csv          # Monte Carlo simulation summary statistics</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="in">│   └── regression_table.csv          # OLS regression results</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="in">│</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="in">├── analysis.py                       # Main analysis: quality scoring, descriptive stats, regression</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="in">├── simulations.py                    # Bootstrap CIs, permutation tests, Monte Carlo simulation</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="in">├── factors_analysis.py               # Calculation element extraction and visualization</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="in">├── enrich_dataset.py                 # Metadata enrichment pipeline (sector, country, year)</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="in">│</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="in">├── figures/                          # All 16 figures (PNG + PDF)</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── fig1_sector_distribution.png</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── fig2_quality_by_principle.png</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── ...</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="in">│   └── fig16_quality_ratio_by_factors.png</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="in">│</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="in">├── draft_v1.qmd                      # Full paper (Quarto)</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="in">└── www/                              # This website</span></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Files</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="fu">### sroi_clean_dataset.csv</span></span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>The main dataset. Each row is one SROI report.</span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Type <span class="pp">|</span> Description <span class="pp">|</span></span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------|------|-------------|</span></span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`report_id`</span> <span class="pp">|</span> str <span class="pp">|</span> Unique report identifier <span class="pp">|</span></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`title`</span> <span class="pp">|</span> str <span class="pp">|</span> Report title <span class="pp">|</span></span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`url`</span> <span class="pp">|</span> str <span class="pp">|</span> Source URL <span class="pp">|</span></span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`published_date`</span> <span class="pp">|</span> date <span class="pp">|</span> Date scraped from website <span class="pp">|</span></span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`is_assured`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = SVI Report Assurance; 0 = not assured <span class="pp">|</span></span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`sector_clean`</span> <span class="pp">|</span> str <span class="pp">|</span> Sector (15 categories + "other") <span class="pp">|</span></span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`country_clean`</span> <span class="pp">|</span> str <span class="pp">|</span> Country (UK, Australia, USA, ...) <span class="pp">|</span></span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`report_type_clean`</span> <span class="pp">|</span> str <span class="pp">|</span> "Forecast" or "Evaluative" <span class="pp">|</span></span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`year_clean`</span> <span class="pp">|</span> int <span class="pp">|</span> Report year (from PDF text) <span class="pp">|</span></span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`org_type`</span> <span class="pp">|</span> str <span class="pp">|</span> Organisation type <span class="pp">|</span></span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`P1`</span> – <span class="in">`P8`</span> <span class="pp">|</span> int (0–2) <span class="pp">|</span> Quality score for each SVI principle <span class="pp">|</span></span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`quality_score`</span> <span class="pp">|</span> float <span class="pp">|</span> Mean of P1–P8 (0–2 scale) <span class="pp">|</span></span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`quality_pct`</span> <span class="pp">|</span> float <span class="pp">|</span> Quality score as % (0–100) <span class="pp">|</span></span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`stakeholder_groups`</span> <span class="pp">|</span> int <span class="pp">|</span> Number of stakeholder groups identified <span class="pp">|</span></span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="fu">### sroi_ratios_subset.csv</span></span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>Subsample of 64 reports with extractable SROI ratios.</span>
-<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Type <span class="pp">|</span> Description <span class="pp">|</span></span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------|------|-------------|</span></span>
-<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`report_id`</span> <span class="pp">|</span> str <span class="pp">|</span> Matches <span class="in">`sroi_clean_dataset.csv`</span> <span class="pp">|</span></span>
-<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`sroi_ratio`</span> <span class="pp">|</span> float <span class="pp">|</span> Reported SROI ratio (e.g., 4.44) <span class="pp">|</span></span>
-<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`investment_value`</span> <span class="pp">|</span> float <span class="pp">|</span> Total investment (£, where available) <span class="pp">|</span></span>
-<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> All columns from main dataset <span class="pp">|</span> — <span class="pp">|</span> Merged join <span class="pp">|</span></span>
-<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a><span class="fu">### sroi_factors.csv</span></span>
-<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>Binary indicators for 11 calculation elements.</span>
-<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Type <span class="pp">|</span> Description <span class="pp">|</span></span>
-<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------|------|-------------|</span></span>
-<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`report_id`</span> <span class="pp">|</span> str <span class="pp">|</span> Unique identifier <span class="pp">|</span></span>
-<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`deadweight`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = deadweight mentioned <span class="pp">|</span></span>
-<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`attribution`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = attribution mentioned <span class="pp">|</span></span>
-<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`drop_off`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = drop-off mentioned <span class="pp">|</span></span>
-<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`displacement`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = displacement mentioned <span class="pp">|</span></span>
-<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`sensitivity`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = sensitivity analysis mentioned <span class="pp">|</span></span>
-<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`discount_rate`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = discount rate mentioned <span class="pp">|</span></span>
-<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`proxy`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = financial proxies mentioned <span class="pp">|</span></span>
-<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`counterfactual`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = counterfactual mentioned <span class="pp">|</span></span>
-<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`theory_of_change`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = theory of change / logic model mentioned <span class="pp">|</span></span>
-<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`wellby_qaly`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = WELLBY / QALY / HACT mentioned <span class="pp">|</span></span>
-<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`materiality`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = materiality discussed <span class="pp">|</span></span>
-<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`n_factors`</span> <span class="pp">|</span> int <span class="pp">|</span> Count of adjustment factors (0–4) <span class="pp">|</span></span>
-<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analysis Code</span></span>
-<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a><span class="fu">### analysis.py — Main analysis pipeline</span></span>
-<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
-<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
-<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a><span class="co">Main analysis pipeline for the SROI meta-analysis.</span></span>
-<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a><span class="co">Produces: quality scores, descriptive statistics, sector/country summaries,</span></span>
-<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a><span class="co">OLS regression table, and figures 1–5.</span></span>
-<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a><span class="co">Usage: python analysis.py</span></span>
-<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a><span class="co">Outputs: figures/fig1_*.png ... fig5_*.png, data/regression_table.csv</span></span>
-<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a>**Key functions:**</span>
-<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`score_principle(text, principle_id)`</span> — keyword scoring for each SVI principle</span>
-<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`extract_sector(text)`</span> — sector classification from PDF text</span>
-<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`extract_country(text)`</span> — country identification</span>
-<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`run_regression(df)`</span> — OLS quality score regression</span>
-<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a><span class="fu">### simulations.py — Bootstrap, permutation, Monte Carlo</span></span>
-<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
-<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
-<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a><span class="co">Statistical simulations:</span></span>
-<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a><span class="co">  1. Bootstrap CIs (B=10,000, BCa method) for all compliance rates</span></span>
-<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a><span class="co">  2. Permutation test for sector-level quality differences</span></span>
-<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a><span class="co">  3. Monte Carlo simulation: implied SROI ratio bias from non-compliance</span></span>
-<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a><span class="co">Usage: python simulations.py</span></span>
-<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a><span class="co">Outputs: figures/fig7_*.png ... fig12_*.png</span></span>
-<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a><span class="co">         data/bootstrap_principle_ci.csv</span></span>
-<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a><span class="co">         data/simulation_stats.csv</span></span>
-<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a>**Monte Carlo configuration:**</span>
-<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
-<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a>N_SIM <span class="op">=</span> <span class="dv">50_000</span></span>
-<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">42</span></span>
-<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a><span class="co"># Beta distributions calibrated to observed ranges</span></span>
-<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a><span class="co"># DW: deadweight | AT: attribution | DO: drop-off | DISP: displacement</span></span>
-<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>CORRECTION_PARAMS <span class="op">=</span> {</span>
-<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DW'</span>:   (<span class="fl">3.5</span>, <span class="fl">10.5</span>),  <span class="co"># Beta(a, b) → mean = a/(a+b) = 0.25</span></span>
-<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AT'</span>:   (<span class="fl">3.2</span>, <span class="fl">12.8</span>),  <span class="co"># mean = 0.20</span></span>
-<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DO'</span>:   (<span class="fl">2.0</span>,  <span class="fl">8.0</span>),  <span class="co"># mean = 0.20</span></span>
-<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DISP'</span>: (<span class="fl">1.5</span>, <span class="fl">13.5</span>),  <span class="co"># mean = 0.10</span></span>
-<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a><span class="fu">### factors_analysis.py — Calculation element extraction</span></span>
-<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
-<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
-<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a><span class="co">Extracts 11 SROI calculation elements from PDF text using regex patterns.</span></span>
-<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a><span class="co">Computes cascade prevalence, co-occurrence matrix, forecast premium,</span></span>
-<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a><span class="co">and quality-factor relationships.</span></span>
-<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a><span class="co">Usage: python factors_analysis.py</span></span>
-<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a><span class="co">Outputs: figures/fig13_*.png ... fig16_*.png</span></span>
-<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a><span class="co">         data/sroi_factors.csv</span></span>
-<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a><span class="co">         data/sroi_factors_summary.csv</span></span>
-<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a><span class="co"># Keyword patterns (validated against 30 manual reviews)</span></span>
-<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a>FACTOR_PATTERNS <span class="op">=</span> {</span>
-<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a>    <span class="st">'deadweight'</span>:    <span class="vs">r'deadweight'</span>,</span>
-<span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a>    <span class="st">'attribution'</span>:   <span class="vs">r'attribution'</span>,</span>
-<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a>    <span class="st">'drop_off'</span>:      <span class="vs">r'drop</span><span class="dv">.</span><span class="op">?</span><span class="vs">off'</span>,</span>
-<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a>    <span class="st">'displacement'</span>:  <span class="vs">r'displacement'</span>,</span>
-<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a>    <span class="st">'sensitivity'</span>:   <span class="vs">r'sensitivity</span><span class="dv">\s</span><span class="op">+</span><span class="vs">anal'</span>,</span>
-<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a>    <span class="st">'discount_rate'</span>: <span class="vs">r'discount</span><span class="dv">\s</span><span class="op">+</span><span class="vs">rate</span><span class="cf">|</span><span class="vs">discount</span><span class="dv">\s</span><span class="op">+</span><span class="vs">factor'</span>,</span>
-<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a>    <span class="st">'proxy'</span>:         <span class="vs">r'</span><span class="dv">\b</span><span class="vs">proxy</span><span class="dv">\b</span><span class="cf">|</span><span class="dv">\b</span><span class="vs">proxies</span><span class="dv">\b</span><span class="vs">'</span>,</span>
-<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a>    <span class="st">'counterfactual'</span>:<span class="vs">r'counterfactual</span><span class="cf">|</span><span class="vs">what would have happened'</span>,</span>
-<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a>    <span class="st">'theory_of_change'</span>: <span class="vs">r'theory of change</span><span class="cf">|</span><span class="vs">logic model</span><span class="cf">|</span><span class="vs">outcome map'</span>,</span>
-<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a>    <span class="st">'wellby_qaly'</span>:   <span class="vs">r'wellby</span><span class="cf">|</span><span class="vs">qaly</span><span class="cf">|</span><span class="vs">hact'</span>,</span>
-<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a>    <span class="st">'materiality'</span>:   <span class="vs">r'materialit'</span>,</span>
-<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to Run the Full Replication</span></span>
-<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prerequisites</span></span>
-<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandas numpy scipy matplotlib seaborn scikit-learn bibtexparser</span>
-<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a>Or with conda:</span>
-<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install pandas numpy scipy matplotlib seaborn scikit-learn</span>
-<span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install bibtexparser</span>
-<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step-by-step</span></span>
-<span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Clone / download the replication package</span></span>
-<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Papers/2026_sroi/</span>
-<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Run metadata enrichment (produces sroi_clean_dataset.csv)</span></span>
-<span id="cb10-206"><a href="#cb10-206" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/enrich_dataset.py</span>
-<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Run main analysis (produces figures 1–5 + regression_table.csv)</span></span>
-<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/analysis.py</span>
-<span id="cb10-210"><a href="#cb10-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Run simulations (produces figures 7–12 + bootstrap/simulation CSVs)</span></span>
-<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/simulations.py</span>
-<span id="cb10-213"><a href="#cb10-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-214"><a href="#cb10-214" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Run calculation elements analysis (produces figures 13–16 + sroi_factors.csv)</span></span>
-<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/factors_analysis.py</span>
-<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Render the paper</span></span>
-<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render draft_v1.qmd</span>
-<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Render this website</span></span>
-<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> www/ <span class="kw">&amp;&amp;</span> <span class="ex">quarto</span> render</span>
-<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a><span class="fu">### Expected runtime</span></span>
-<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Script <span class="pp">|</span> Expected time <span class="pp">|</span></span>
-<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------|--------------|</span></span>
-<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`enrich_dataset.py`</span> <span class="pp">|</span> ~2–5 minutes (383 PDFs) <span class="pp">|</span></span>
-<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`analysis.py`</span> <span class="pp">|</span> ~30 seconds <span class="pp">|</span></span>
-<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`simulations.py`</span> <span class="pp">|</span> ~2–3 minutes (50,000 MC iterations) <span class="pp">|</span></span>
-<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`factors_analysis.py`</span> <span class="pp">|</span> ~1 minute <span class="pp">|</span></span>
-<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Access</span></span>
-<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a>The raw SROI reports are publicly available from the Social Value UK reports database at <span class="co">[</span><span class="ot">socialvalueuk.org</span><span class="co">](https://socialvalueuk.org)</span>. The scraped data (<span class="in">`pdf_text_extract`</span> field) contains extracted text from publicly accessible PDFs.</span>
-<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>**Licence:** The analysis code is released under MIT licence. The structured dataset (<span class="in">`sroi_clean_dataset.csv`</span>, <span class="in">`sroi_factors.csv`</span>) is released under CC BY 4.0. The raw PDF text extracts are derived from publicly available reports and are provided for research replication only.</span>
-<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a><span class="fu">## Download Files</span></span>
-<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> File <span class="pp">|</span> Description <span class="pp">|</span> Size <span class="pp">|</span></span>
-<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|-------------|------|</span></span>
-<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">sroi_clean_dataset.csv</span><span class="co">](sroi_clean_dataset.csv)</span> <span class="pp">|</span> Main dataset (383 reports) <span class="pp">|</span> ~150 KB <span class="pp">|</span></span>
-<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">sroi_ratios_subset.csv</span><span class="co">](sroi_ratios_subset.csv)</span> <span class="pp">|</span> Ratio subsample (64 reports) <span class="pp">|</span> ~25 KB <span class="pp">|</span></span>
-<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">sroi_factors.csv</span><span class="co">](sroi_factors.csv)</span> <span class="pp">|</span> Calculation elements (383 × 12) <span class="pp">|</span> ~45 KB <span class="pp">|</span></span>
-<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">analysis.py</span><span class="co">](analysis.py)</span> <span class="pp">|</span> Main analysis code <span class="pp">|</span> ~8 KB <span class="pp">|</span></span>
-<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">simulations.py</span><span class="co">](simulations.py)</span> <span class="pp">|</span> Simulation code <span class="pp">|</span> ~10 KB <span class="pp">|</span></span>
-<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">factors_analysis.py</span><span class="co">](factors_analysis.py)</span> <span class="pp">|</span> Factors analysis code <span class="pp">|</span> ~12 KB <span class="pp">|</span></span>
-<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a><span class="fu">## Citation</span></span>
-<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a>If you use this dataset or code, please cite:</span>
-<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a><span class="in">```bibtex</span></span>
-<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a><span class="in">@article{SROIMetaAnalysis2026,</span></span>
-<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a><span class="in">  author    = {[Author]},</span></span>
-<span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a><span class="in">  title     = {From Principles to Practice: A Systematic Content Analysis</span></span>
-<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a><span class="in">               of SROI Reporting in the Social Value International Database},</span></span>
-<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a><span class="in">  journal   = {Voluntas: International Journal of Voluntary and Nonprofit Organizations},</span></span>
-<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a><span class="in">  year      = {2026},</span></span>
-<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a><span class="in">  note      = {Forthcoming},</span></span>
-<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a><span class="in">  url       = {https://doi.org/10.1000/placeholder}</span></span>
-<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Replication Package"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Code, Data, Audit Trail, and Classification Evidence"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>This page documents not just **how to replicate** the analysis, but **what we know and don't know** about the data. All classification decisions are documented with confidence levels and evidence. Run <span class="in">`data_audit.py`</span> to regenerate the full audit trail.</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Package Structure</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="in">2026_sroi/</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="in">├── data/</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── enrich_dataset.py             # v1: original enrichment pipeline</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── data_audit.py                 # v2: rigorous audit + corrected dataset</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── analysis.py                   # Main analysis</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── simulations.py                # Bootstrap, permutation, Monte Carlo</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── factors_analysis.py           # Calculation element extraction</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="in">│   │</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── sroi_clean_dataset_v2.csv     # ← USE THIS (with confidence scores)</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── sroi_ratios_subset.csv        # 64 reports with SROI ratios</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── sroi_factors.csv              # 11 calculation elements × 383 reports</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="in">│   │</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── audit_report.md               # ← Full data quality audit narrative</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── audit_flags.csv               # ← Per-report classification flags</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="in">│   └── classification_evidence.csv   # ← Quality score evidence per report</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="in">└── figures/                          # All 16 figures</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Data Quality Audit</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>All classification decisions are documented with confidence levels. Run <span class="in">`data_audit.py`</span> to regenerate.</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.1 Executive Summary</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Variable <span class="pp">|</span> HIGH confidence <span class="pp">|</span> MEDIUM <span class="pp">|</span> LOW <span class="pp">|</span> Unknown/Missing <span class="pp">|</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|----------------|--------|-----|----------------|</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Sector <span class="pp">|</span> 33 (9%) <span class="pp">|</span> 191 (50%) <span class="pp">|</span> 159 (41%) <span class="pp">|</span> 0 <span class="pp">|</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Country <span class="pp">|</span> 58 (15%) <span class="pp">|</span> 220 (57%) <span class="pp">|</span> 26 (7%) <span class="pp">|</span> 79 (21%) <span class="pp">|</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Year <span class="pp">|</span> 200 (52%) <span class="pp">|</span> 33 (9%) <span class="pp">|</span> 115 (30%) <span class="pp">|</span> 35 (9%) <span class="pp">|</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Report type <span class="pp">|</span> 52 keyword-confirmed <span class="pp">|</span> — <span class="pp">|</span> 331 assumed <span class="pp">|</span> — <span class="pp">|</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> SROI ratio <span class="pp">|</span> 43/64 PDF-verified <span class="pp">|</span> — <span class="pp">|</span> 21 metadata-only <span class="pp">|</span> — <span class="pp">|</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>**Scope of uncertainty:** Sector, country, and year classifications affect descriptive breakdowns. The main empirical findings (41.2% principle compliance, 5.2% complete adjustments, Monte Carlo correction) rest on quality scores from PDF text and are not sensitive to these classifications.</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.2 Sector Classification</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>**Method:** Keyword matching on first 3,000 characters of PDF + title. Winner = sector with highest keyword count.</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>Only **9% HIGH confidence** (margin ≥ 3 keywords). 41% of reports are tied or near-tied between two sectors — they are genuinely cross-sectoral programmes.</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Restrict to unambiguous sector classifications</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>df_high_sector <span class="op">=</span> df[df[<span class="st">'sector_confidence'</span>].isin([<span class="st">'HIGH'</span>, <span class="st">'MEDIUM'</span>])]  <span class="co"># n=224</span></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.3 Country Classification</span></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>**79 reports (21%) remain Unknown** even after extending search to 15,000 characters. These are excluded from geographic analyses.</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.4 Year Extraction — Key Fix</span></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>**Bug in v1:** Used <span class="in">`min(valid_years)`</span> → picked up historical reference years (e.g., "SROI was developed in 2001") producing impossible report dates.</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>**v2 fix:** Hierarchical strategy:</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Strategy <span class="pp">|</span> N reports <span class="pp">|</span> Confidence <span class="pp">|</span></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|-----------|------------|</span></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Explicit date pattern ("March 2016") <span class="pp">|</span> 200 <span class="pp">|</span> HIGH <span class="pp">|</span></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Modal year in first 800 chars <span class="pp">|</span> 33 <span class="pp">|</span> MEDIUM <span class="pp">|</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Modal year in first 3,000 chars <span class="pp">|</span> 115 <span class="pp">|</span> LOW <span class="pp">|</span></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Not found <span class="pp">|</span> 35 <span class="pp">|</span> NONE <span class="pp">|</span></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.5 Report Type — Critical Transparency Note</span></span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>**322 of 339 "Evaluative" reports are assumed, not keyword-confirmed.**</span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Type <span class="pp">|</span> N <span class="pp">|</span> Confirmed <span class="pp">|</span> Assumed <span class="pp">|</span></span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|---|-----------|---------|</span></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Evaluative <span class="pp">|</span> 339 <span class="pp">|</span> 17 <span class="pp">|</span> 322 <span class="pp">|</span></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Forecast <span class="pp">|</span> 40 <span class="pp">|</span> 40 <span class="pp">|</span> 0 <span class="pp">|</span></span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Scoping <span class="pp">|</span> 4 <span class="pp">|</span> 4 <span class="pp">|</span> 0 <span class="pp">|</span></span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>The logic: Forecast and Scoping reports consistently self-label. Unlabelled reports are therefore Evaluative by exclusion. Marked with <span class="in">`type_note = 'assumed_evaluative'`</span>.</span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a><span class="co"># Restrict to keyword-confirmed type only (n=61)</span></span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>df_confirmed <span class="op">=</span> df[df[<span class="st">'type_note'</span>] <span class="op">!=</span> <span class="st">'assumed_evaluative'</span>]</span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.6 SROI Ratio Validation</span></span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**43/64 VERIFIED** in PDF text</span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**21/64 UNVERIFIED**: in database metadata but not found in our PDF text scan</span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>Excluding the 21 unverified ratios changes the median from 4.44 to 4.53 — no material impact on results.</span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a><span class="co"># Conservative: verified ratios only</span></span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>df_verified_ratios <span class="op">=</span> df[df[<span class="st">'ratio_confidence'</span>] <span class="op">==</span> <span class="st">'VERIFIED'</span>]  <span class="co"># n=43</span></span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.7 Quality Score Limitations</span></span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Principle <span class="pp">|</span> Known issue <span class="pp">|</span></span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a><span class="pp">|-----------|-------------|</span></span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> P3 value <span class="pp">|</span> Keyword "value" is generic — likely inflates compliance rate <span class="pp">|</span></span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> P6 transparent <span class="pp">|</span> "data", "evidence" are generic — 122 weak flags <span class="pp">|</span></span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> P1 stakeholders <span class="pp">|</span> 79 reports: single keyword only <span class="pp">|</span></span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a>**Direction of bias:** Inflated P3 and P6 scores mean our 41.2% average compliance is *conservative* — the true gap may be larger. This strengthens the paper's main argument.</span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a><span class="in">`classification_evidence.csv`</span> contains the exact keyword and text context for every quality score assignment.</span>
+<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. How to Run</span></span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prerequisites</span></span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandas numpy scipy matplotlib seaborn scikit-learn</span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a><span class="fu">### Steps</span></span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Generate audit + corrected dataset (v2)</span></span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/data_audit.py</span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Main analysis</span></span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/analysis.py</span>
+<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Simulations (bootstrap, Monte Carlo)</span></span>
+<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/simulations.py</span>
+<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Calculation elements</span></span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> data/factors_analysis.py</span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5: Compile website</span></span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a><span class="fu">### Expected runtime</span></span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Script <span class="pp">|</span> Time <span class="pp">|</span></span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------|------|</span></span>
+<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`data_audit.py`</span> <span class="pp">|</span> ~2 min <span class="pp">|</span></span>
+<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`analysis.py`</span> <span class="pp">|</span> ~30 sec <span class="pp">|</span></span>
+<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`simulations.py`</span> <span class="pp">|</span> ~3 min (50k MC iterations) <span class="pp">|</span></span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`factors_analysis.py`</span> <span class="pp">|</span> ~1 min <span class="pp">|</span></span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Data Dictionary — sroi_clean_dataset_v2.csv</span></span>
+<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Type <span class="pp">|</span> Description <span class="pp">|</span></span>
+<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------|------|-------------|</span></span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`id`</span> <span class="pp">|</span> int <span class="pp">|</span> Unique report ID <span class="pp">|</span></span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`sector_clean`</span> <span class="pp">|</span> str <span class="pp">|</span> Sector (15 categories) <span class="pp">|</span></span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`sector_confidence`</span> <span class="pp">|</span> str <span class="pp">|</span> HIGH / MEDIUM / LOW <span class="pp">|</span></span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`country_clean`</span> <span class="pp">|</span> str <span class="pp">|</span> Country or "Unknown" <span class="pp">|</span></span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`country_confidence`</span> <span class="pp">|</span> str <span class="pp">|</span> HIGH / MEDIUM / LOW / NONE <span class="pp">|</span></span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`year_clean`</span> <span class="pp">|</span> int <span class="pp">|</span> Report year from PDF <span class="pp">|</span></span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`year_method`</span> <span class="pp">|</span> str <span class="pp">|</span> explicit_pattern / modal_800chars / modal_3000chars <span class="pp">|</span></span>
+<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`year_confidence`</span> <span class="pp">|</span> str <span class="pp">|</span> HIGH / MEDIUM / LOW / NONE <span class="pp">|</span></span>
+<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`report_type_clean`</span> <span class="pp">|</span> str <span class="pp">|</span> Forecast / Evaluative / Scoping <span class="pp">|</span></span>
+<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`type_note`</span> <span class="pp">|</span> str <span class="pp">|</span> keyword_match / assumed_evaluative <span class="pp">|</span></span>
+<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`type_confidence`</span> <span class="pp">|</span> str <span class="pp">|</span> HIGH / MEDIUM / LOW <span class="pp">|</span></span>
+<span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`assurance_clean`</span> <span class="pp">|</span> int <span class="pp">|</span> 1 = SVI assurance <span class="pp">|</span></span>
+<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`sroi_ratio_value`</span> <span class="pp">|</span> float <span class="pp">|</span> SROI ratio (null if absent) <span class="pp">|</span></span>
+<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`ratio_confidence`</span> <span class="pp">|</span> str <span class="pp">|</span> VERIFIED / UNVERIFIED / N/A <span class="pp">|</span></span>
+<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`p1`</span> – <span class="in">`p8`</span> <span class="pp">|</span> int 0–2 <span class="pp">|</span> Quality score per SVI principle <span class="pp">|</span></span>
+<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`quality_pct`</span> <span class="pp">|</span> float <span class="pp">|</span> Mean score as % (0–100) <span class="pp">|</span></span>
+<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`n_quality_flags`</span> <span class="pp">|</span> int <span class="pp">|</span> Number of weak-evidence quality flags <span class="pp">|</span></span>
+<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. Robustness Checks</span></span>
+<span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data/sroi_clean_dataset_v2.csv'</span>)</span>
+<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a><span class="co"># Main result</span></span>
+<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'quality_pct'</span>].mean())  <span class="co"># ~41.2%</span></span>
+<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a><span class="co"># R1: High-confidence sectors only</span></span>
+<span id="cb9-197"><a href="#cb9-197" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[df[<span class="st">'sector_confidence'</span>]<span class="op">==</span><span class="st">'HIGH'</span>][<span class="st">'quality_pct'</span>].mean())</span>
+<span id="cb9-198"><a href="#cb9-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-199"><a href="#cb9-199" aria-hidden="true" tabindex="-1"></a><span class="co"># R2: PDF-verified ratios only</span></span>
+<span id="cb9-200"><a href="#cb9-200" aria-hidden="true" tabindex="-1"></a>df_r <span class="op">=</span> df[df[<span class="st">'ratio_confidence'</span>]<span class="op">==</span><span class="st">'VERIFIED'</span>]</span>
+<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_r[<span class="st">'sroi_ratio_value'</span>].describe())</span>
+<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a><span class="co"># R3: Keyword-confirmed report types</span></span>
+<span id="cb9-204"><a href="#cb9-204" aria-hidden="true" tabindex="-1"></a>df_t <span class="op">=</span> df[df[<span class="st">'type_note'</span>] <span class="op">!=</span> <span class="st">'assumed_evaluative'</span>]</span>
+<span id="cb9-205"><a href="#cb9-205" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_t.groupby(<span class="st">'report_type_clean'</span>)[<span class="st">'quality_pct'</span>].mean())</span>
+<span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a><span class="co"># R4: Exclude weak-flag quality scores</span></span>
+<span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a>df_strict <span class="op">=</span> df[df[<span class="st">'n_quality_flags'</span>] <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_strict[<span class="st">'quality_pct'</span>].mean())</span>
+<span id="cb9-210"><a href="#cb9-210" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-212"><a href="#cb9-212" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-213"><a href="#cb9-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-214"><a href="#cb9-214" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. Downloads</span></span>
+<span id="cb9-215"><a href="#cb9-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-216"><a href="#cb9-216" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> File <span class="pp">|</span> Description <span class="pp">|</span></span>
+<span id="cb9-217"><a href="#cb9-217" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|-------------|</span></span>
+<span id="cb9-218"><a href="#cb9-218" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">sroi_clean_dataset_v2.csv</span><span class="co">](sroi_clean_dataset_v2.csv)</span> <span class="pp">|</span> Main dataset (recommended) <span class="pp">|</span></span>
+<span id="cb9-219"><a href="#cb9-219" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">audit_flags.csv</span><span class="co">](audit_flags.csv)</span> <span class="pp">|</span> Per-report flags <span class="pp">|</span></span>
+<span id="cb9-220"><a href="#cb9-220" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">classification_evidence.csv</span><span class="co">](classification_evidence.csv)</span> <span class="pp">|</span> Quality score evidence <span class="pp">|</span></span>
+<span id="cb9-221"><a href="#cb9-221" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">sroi_factors.csv</span><span class="co">](sroi_factors.csv)</span> <span class="pp">|</span> Calculation elements <span class="pp">|</span></span>
+<span id="cb9-222"><a href="#cb9-222" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">data_audit.py</span><span class="co">](data_audit.py)</span> <span class="pp">|</span> Full audit script <span class="pp">|</span></span>
+<span id="cb9-223"><a href="#cb9-223" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">analysis.py</span><span class="co">](analysis.py)</span> <span class="pp">|</span> Analysis code <span class="pp">|</span></span>
+<span id="cb9-224"><a href="#cb9-224" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">simulations.py</span><span class="co">](simulations.py)</span> <span class="pp">|</span> Simulation code <span class="pp">|</span></span>
+<span id="cb9-225"><a href="#cb9-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-226"><a href="#cb9-226" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-227"><a href="#cb9-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-228"><a href="#cb9-228" aria-hidden="true" tabindex="-1"></a><span class="fu">## 7. Citation</span></span>
+<span id="cb9-229"><a href="#cb9-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-230"><a href="#cb9-230" aria-hidden="true" tabindex="-1"></a><span class="in">```bibtex</span></span>
+<span id="cb9-231"><a href="#cb9-231" aria-hidden="true" tabindex="-1"></a><span class="in">@article{SROIMetaAnalysis2026,</span></span>
+<span id="cb9-232"><a href="#cb9-232" aria-hidden="true" tabindex="-1"></a><span class="in">  author  = {[Author]},</span></span>
+<span id="cb9-233"><a href="#cb9-233" aria-hidden="true" tabindex="-1"></a><span class="in">  title   = {From Principles to Practice: A Systematic Content Analysis</span></span>
+<span id="cb9-234"><a href="#cb9-234" aria-hidden="true" tabindex="-1"></a><span class="in">             of SROI Reporting in the Social Value International Database},</span></span>
+<span id="cb9-235"><a href="#cb9-235" aria-hidden="true" tabindex="-1"></a><span class="in">  journal = {Voluntas},</span></span>
+<span id="cb9-236"><a href="#cb9-236" aria-hidden="true" tabindex="-1"></a><span class="in">  year    = {2026},</span></span>
+<span id="cb9-237"><a href="#cb9-237" aria-hidden="true" tabindex="-1"></a><span class="in">  note    = {Forthcoming. Replication: https://jcmunozmora.github.io/sroi-meta-analysis/}</span></span>
+<span id="cb9-238"><a href="#cb9-238" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb9-239"><a href="#cb9-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

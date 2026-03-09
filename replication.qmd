@@ -1,270 +1,239 @@
 ---
 title: "Replication Package"
-subtitle: "All Code, Data, and Instructions to Reproduce the Analysis"
+subtitle: "Code, Data, Audit Trail, and Classification Evidence"
 ---
 
 ::: {.callout-note}
-This page contains everything needed to fully replicate the analysis in the paper. The package follows open science principles: all code is documented, all data is included (subject to licence restrictions), and all figures are reproducible from the provided scripts.
+This page documents not just **how to replicate** the analysis, but **what we know and don't know** about the data. All classification decisions are documented with confidence levels and evidence. Run `data_audit.py` to regenerate the full audit trail.
 :::
 
-## Package Structure
+## 1. Package Structure
 
 ```
 2026_sroi/
 ├── data/
-│   ├── sroi_clean_dataset.csv        # Main dataset: 383 reports × metadata + quality scores
-│   ├── sroi_ratios_subset.csv        # Subsample: 64 reports with extractable SROI ratios
-│   ├── sroi_factors.csv              # Binary indicators: 11 calculation elements × 383 reports
-│   ├── sroi_factors_summary.csv      # Prevalence summary table (11 elements)
-│   ├── bootstrap_principle_ci.csv    # Bootstrap CI results (B=10,000)
-│   ├── simulation_stats.csv          # Monte Carlo simulation summary statistics
-│   └── regression_table.csv          # OLS regression results
-│
-├── analysis.py                       # Main analysis: quality scoring, descriptive stats, regression
-├── simulations.py                    # Bootstrap CIs, permutation tests, Monte Carlo simulation
-├── factors_analysis.py               # Calculation element extraction and visualization
-├── enrich_dataset.py                 # Metadata enrichment pipeline (sector, country, year)
-│
-├── figures/                          # All 16 figures (PNG + PDF)
-│   ├── fig1_sector_distribution.png
-│   ├── fig2_quality_by_principle.png
-│   ├── ...
-│   └── fig16_quality_ratio_by_factors.png
-│
-├── draft_v1.qmd                      # Full paper (Quarto)
-└── www/                              # This website
+│   ├── enrich_dataset.py             # v1: original enrichment pipeline
+│   ├── data_audit.py                 # v2: rigorous audit + corrected dataset
+│   ├── analysis.py                   # Main analysis
+│   ├── simulations.py                # Bootstrap, permutation, Monte Carlo
+│   ├── factors_analysis.py           # Calculation element extraction
+│   │
+│   ├── sroi_clean_dataset_v2.csv     # ← USE THIS (with confidence scores)
+│   ├── sroi_ratios_subset.csv        # 64 reports with SROI ratios
+│   ├── sroi_factors.csv              # 11 calculation elements × 383 reports
+│   │
+│   ├── audit_report.md               # ← Full data quality audit narrative
+│   ├── audit_flags.csv               # ← Per-report classification flags
+│   └── classification_evidence.csv   # ← Quality score evidence per report
+└── figures/                          # All 16 figures
 ```
 
 ---
 
-## Data Files
+## 2. Data Quality Audit
 
-### sroi_clean_dataset.csv
+All classification decisions are documented with confidence levels. Run `data_audit.py` to regenerate.
 
-The main dataset. Each row is one SROI report.
+### 2.1 Executive Summary
 
-| Column | Type | Description |
-|--------|------|-------------|
-| `report_id` | str | Unique report identifier |
-| `title` | str | Report title |
-| `url` | str | Source URL |
-| `published_date` | date | Date scraped from website |
-| `is_assured` | int | 1 = SVI Report Assurance; 0 = not assured |
-| `sector_clean` | str | Sector (15 categories + "other") |
-| `country_clean` | str | Country (UK, Australia, USA, ...) |
-| `report_type_clean` | str | "Forecast" or "Evaluative" |
-| `year_clean` | int | Report year (from PDF text) |
-| `org_type` | str | Organisation type |
-| `P1` – `P8` | int (0–2) | Quality score for each SVI principle |
-| `quality_score` | float | Mean of P1–P8 (0–2 scale) |
-| `quality_pct` | float | Quality score as % (0–100) |
-| `stakeholder_groups` | int | Number of stakeholder groups identified |
+| Variable | HIGH confidence | MEDIUM | LOW | Unknown/Missing |
+|----------|----------------|--------|-----|----------------|
+| Sector | 33 (9%) | 191 (50%) | 159 (41%) | 0 |
+| Country | 58 (15%) | 220 (57%) | 26 (7%) | 79 (21%) |
+| Year | 200 (52%) | 33 (9%) | 115 (30%) | 35 (9%) |
+| Report type | 52 keyword-confirmed | — | 331 assumed | — |
+| SROI ratio | 43/64 PDF-verified | — | 21 metadata-only | — |
 
-### sroi_ratios_subset.csv
+::: {.callout-important}
+**Scope of uncertainty:** Sector, country, and year classifications affect descriptive breakdowns. The main empirical findings (41.2% principle compliance, 5.2% complete adjustments, Monte Carlo correction) rest on quality scores from PDF text and are not sensitive to these classifications.
+:::
 
-Subsample of 64 reports with extractable SROI ratios.
+### 2.2 Sector Classification
 
-| Column | Type | Description |
-|--------|------|-------------|
-| `report_id` | str | Matches `sroi_clean_dataset.csv` |
-| `sroi_ratio` | float | Reported SROI ratio (e.g., 4.44) |
-| `investment_value` | float | Total investment (£, where available) |
-| All columns from main dataset | — | Merged join |
+**Method:** Keyword matching on first 3,000 characters of PDF + title. Winner = sector with highest keyword count.
 
-### sroi_factors.csv
+Only **9% HIGH confidence** (margin ≥ 3 keywords). 41% of reports are tied or near-tied between two sectors — they are genuinely cross-sectoral programmes.
 
-Binary indicators for 11 calculation elements.
+```python
+# Restrict to unambiguous sector classifications
+df_high_sector = df[df['sector_confidence'].isin(['HIGH', 'MEDIUM'])]  # n=224
+```
 
-| Column | Type | Description |
-|--------|------|-------------|
-| `report_id` | str | Unique identifier |
-| `deadweight` | int | 1 = deadweight mentioned |
-| `attribution` | int | 1 = attribution mentioned |
-| `drop_off` | int | 1 = drop-off mentioned |
-| `displacement` | int | 1 = displacement mentioned |
-| `sensitivity` | int | 1 = sensitivity analysis mentioned |
-| `discount_rate` | int | 1 = discount rate mentioned |
-| `proxy` | int | 1 = financial proxies mentioned |
-| `counterfactual` | int | 1 = counterfactual mentioned |
-| `theory_of_change` | int | 1 = theory of change / logic model mentioned |
-| `wellby_qaly` | int | 1 = WELLBY / QALY / HACT mentioned |
-| `materiality` | int | 1 = materiality discussed |
-| `n_factors` | int | Count of adjustment factors (0–4) |
+### 2.3 Country Classification
+
+**79 reports (21%) remain Unknown** even after extending search to 15,000 characters. These are excluded from geographic analyses.
+
+### 2.4 Year Extraction — Key Fix
+
+**Bug in v1:** Used `min(valid_years)` → picked up historical reference years (e.g., "SROI was developed in 2001") producing impossible report dates.
+
+**v2 fix:** Hierarchical strategy:
+
+| Strategy | N reports | Confidence |
+|----------|-----------|------------|
+| Explicit date pattern ("March 2016") | 200 | HIGH |
+| Modal year in first 800 chars | 33 | MEDIUM |
+| Modal year in first 3,000 chars | 115 | LOW |
+| Not found | 35 | NONE |
+
+### 2.5 Report Type — Critical Transparency Note
+
+::: {.callout-important}
+**322 of 339 "Evaluative" reports are assumed, not keyword-confirmed.**
+:::
+
+| Type | N | Confirmed | Assumed |
+|------|---|-----------|---------|
+| Evaluative | 339 | 17 | 322 |
+| Forecast | 40 | 40 | 0 |
+| Scoping | 4 | 4 | 0 |
+
+The logic: Forecast and Scoping reports consistently self-label. Unlabelled reports are therefore Evaluative by exclusion. Marked with `type_note = 'assumed_evaluative'`.
+
+```python
+# Restrict to keyword-confirmed type only (n=61)
+df_confirmed = df[df['type_note'] != 'assumed_evaluative']
+```
+
+### 2.6 SROI Ratio Validation
+
+- **43/64 VERIFIED** in PDF text
+- **21/64 UNVERIFIED**: in database metadata but not found in our PDF text scan
+
+Excluding the 21 unverified ratios changes the median from 4.44 to 4.53 — no material impact on results.
+
+```python
+# Conservative: verified ratios only
+df_verified_ratios = df[df['ratio_confidence'] == 'VERIFIED']  # n=43
+```
+
+### 2.7 Quality Score Limitations
+
+| Principle | Known issue |
+|-----------|-------------|
+| P3 value | Keyword "value" is generic — likely inflates compliance rate |
+| P6 transparent | "data", "evidence" are generic — 122 weak flags |
+| P1 stakeholders | 79 reports: single keyword only |
+
+**Direction of bias:** Inflated P3 and P6 scores mean our 41.2% average compliance is *conservative* — the true gap may be larger. This strengthens the paper's main argument.
+
+`classification_evidence.csv` contains the exact keyword and text context for every quality score assignment.
 
 ---
 
-## Analysis Code
-
-### analysis.py — Main analysis pipeline
-
-```python
-#!/usr/bin/env python3
-"""
-Main analysis pipeline for the SROI meta-analysis.
-Produces: quality scores, descriptive statistics, sector/country summaries,
-OLS regression table, and figures 1–5.
-
-Usage: python analysis.py
-Outputs: figures/fig1_*.png ... fig5_*.png, data/regression_table.csv
-"""
-```
-
-**Key functions:**
-- `score_principle(text, principle_id)` — keyword scoring for each SVI principle
-- `extract_sector(text)` — sector classification from PDF text
-- `extract_country(text)` — country identification
-- `run_regression(df)` — OLS quality score regression
-
-### simulations.py — Bootstrap, permutation, Monte Carlo
-
-```python
-#!/usr/bin/env python3
-"""
-Statistical simulations:
-  1. Bootstrap CIs (B=10,000, BCa method) for all compliance rates
-  2. Permutation test for sector-level quality differences
-  3. Monte Carlo simulation: implied SROI ratio bias from non-compliance
-
-Usage: python simulations.py
-Outputs: figures/fig7_*.png ... fig12_*.png
-         data/bootstrap_principle_ci.csv
-         data/simulation_stats.csv
-"""
-```
-
-**Monte Carlo configuration:**
-
-```python
-N_SIM = 50_000
-SEED = 42
-
-# Beta distributions calibrated to observed ranges
-# DW: deadweight | AT: attribution | DO: drop-off | DISP: displacement
-CORRECTION_PARAMS = {
-    'DW':   (3.5, 10.5),  # Beta(a, b) → mean = a/(a+b) = 0.25
-    'AT':   (3.2, 12.8),  # mean = 0.20
-    'DO':   (2.0,  8.0),  # mean = 0.20
-    'DISP': (1.5, 13.5),  # mean = 0.10
-}
-```
-
-### factors_analysis.py — Calculation element extraction
-
-```python
-#!/usr/bin/env python3
-"""
-Extracts 11 SROI calculation elements from PDF text using regex patterns.
-Computes cascade prevalence, co-occurrence matrix, forecast premium,
-and quality-factor relationships.
-
-Usage: python factors_analysis.py
-Outputs: figures/fig13_*.png ... fig16_*.png
-         data/sroi_factors.csv
-         data/sroi_factors_summary.csv
-"""
-
-# Keyword patterns (validated against 30 manual reviews)
-FACTOR_PATTERNS = {
-    'deadweight':    r'deadweight',
-    'attribution':   r'attribution',
-    'drop_off':      r'drop.?off',
-    'displacement':  r'displacement',
-    'sensitivity':   r'sensitivity\s+anal',
-    'discount_rate': r'discount\s+rate|discount\s+factor',
-    'proxy':         r'\bproxy\b|\bproxies\b',
-    'counterfactual':r'counterfactual|what would have happened',
-    'theory_of_change': r'theory of change|logic model|outcome map',
-    'wellby_qaly':   r'wellby|qaly|hact',
-    'materiality':   r'materialit',
-}
-```
-
----
-
-## How to Run the Full Replication
+## 3. How to Run
 
 ### Prerequisites
 
 ```bash
-pip install pandas numpy scipy matplotlib seaborn scikit-learn bibtexparser
+pip install pandas numpy scipy matplotlib seaborn scikit-learn
 ```
 
-Or with conda:
+### Steps
 
 ```bash
-conda install pandas numpy scipy matplotlib seaborn scikit-learn
-pip install bibtexparser
-```
+# Step 1: Generate audit + corrected dataset (v2)
+python data/data_audit.py
 
-### Step-by-step
-
-```bash
-# 1. Clone / download the replication package
-cd Papers/2026_sroi/
-
-# 2. Run metadata enrichment (produces sroi_clean_dataset.csv)
-python data/enrich_dataset.py
-
-# 3. Run main analysis (produces figures 1–5 + regression_table.csv)
+# Step 2: Main analysis
 python data/analysis.py
 
-# 4. Run simulations (produces figures 7–12 + bootstrap/simulation CSVs)
+# Step 3: Simulations (bootstrap, Monte Carlo)
 python data/simulations.py
 
-# 5. Run calculation elements analysis (produces figures 13–16 + sroi_factors.csv)
+# Step 4: Calculation elements
 python data/factors_analysis.py
 
-# 6. Render the paper
-quarto render draft_v1.qmd
-
-# 7. Render this website
-cd www/ && quarto render
+# Step 5: Compile website
+quarto render
 ```
 
 ### Expected runtime
 
-| Script | Expected time |
-|--------|--------------|
-| `enrich_dataset.py` | ~2–5 minutes (383 PDFs) |
-| `analysis.py` | ~30 seconds |
-| `simulations.py` | ~2–3 minutes (50,000 MC iterations) |
-| `factors_analysis.py` | ~1 minute |
+| Script | Time |
+|--------|------|
+| `data_audit.py` | ~2 min |
+| `analysis.py` | ~30 sec |
+| `simulations.py` | ~3 min (50k MC iterations) |
+| `factors_analysis.py` | ~1 min |
 
 ---
 
-## Data Access
+## 4. Data Dictionary — sroi_clean_dataset_v2.csv
 
-The raw SROI reports are publicly available from the Social Value UK reports database at [socialvalueuk.org](https://socialvalueuk.org). The scraped data (`pdf_text_extract` field) contains extracted text from publicly accessible PDFs.
-
-**Licence:** The analysis code is released under MIT licence. The structured dataset (`sroi_clean_dataset.csv`, `sroi_factors.csv`) is released under CC BY 4.0. The raw PDF text extracts are derived from publicly available reports and are provided for research replication only.
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | int | Unique report ID |
+| `sector_clean` | str | Sector (15 categories) |
+| `sector_confidence` | str | HIGH / MEDIUM / LOW |
+| `country_clean` | str | Country or "Unknown" |
+| `country_confidence` | str | HIGH / MEDIUM / LOW / NONE |
+| `year_clean` | int | Report year from PDF |
+| `year_method` | str | explicit_pattern / modal_800chars / modal_3000chars |
+| `year_confidence` | str | HIGH / MEDIUM / LOW / NONE |
+| `report_type_clean` | str | Forecast / Evaluative / Scoping |
+| `type_note` | str | keyword_match / assumed_evaluative |
+| `type_confidence` | str | HIGH / MEDIUM / LOW |
+| `assurance_clean` | int | 1 = SVI assurance |
+| `sroi_ratio_value` | float | SROI ratio (null if absent) |
+| `ratio_confidence` | str | VERIFIED / UNVERIFIED / N/A |
+| `p1` – `p8` | int 0–2 | Quality score per SVI principle |
+| `quality_pct` | float | Mean score as % (0–100) |
+| `n_quality_flags` | int | Number of weak-evidence quality flags |
 
 ---
 
-## Download Files
+## 5. Robustness Checks
 
-| File | Description | Size |
-|------|-------------|------|
-| [sroi_clean_dataset.csv](sroi_clean_dataset.csv) | Main dataset (383 reports) | ~150 KB |
-| [sroi_ratios_subset.csv](sroi_ratios_subset.csv) | Ratio subsample (64 reports) | ~25 KB |
-| [sroi_factors.csv](sroi_factors.csv) | Calculation elements (383 × 12) | ~45 KB |
-| [analysis.py](analysis.py) | Main analysis code | ~8 KB |
-| [simulations.py](simulations.py) | Simulation code | ~10 KB |
-| [factors_analysis.py](factors_analysis.py) | Factors analysis code | ~12 KB |
+```python
+import pandas as pd
+
+df = pd.read_csv('data/sroi_clean_dataset_v2.csv')
+
+# Main result
+print(df['quality_pct'].mean())  # ~41.2%
+
+# R1: High-confidence sectors only
+print(df[df['sector_confidence']=='HIGH']['quality_pct'].mean())
+
+# R2: PDF-verified ratios only
+df_r = df[df['ratio_confidence']=='VERIFIED']
+print(df_r['sroi_ratio_value'].describe())
+
+# R3: Keyword-confirmed report types
+df_t = df[df['type_note'] != 'assumed_evaluative']
+print(df_t.groupby('report_type_clean')['quality_pct'].mean())
+
+# R4: Exclude weak-flag quality scores
+df_strict = df[df['n_quality_flags'] == 0]
+print(df_strict['quality_pct'].mean())
+```
 
 ---
 
-## Citation
+## 6. Downloads
 
-If you use this dataset or code, please cite:
+| File | Description |
+|------|-------------|
+| [sroi_clean_dataset_v2.csv](sroi_clean_dataset_v2.csv) | Main dataset (recommended) |
+| [audit_flags.csv](audit_flags.csv) | Per-report flags |
+| [classification_evidence.csv](classification_evidence.csv) | Quality score evidence |
+| [sroi_factors.csv](sroi_factors.csv) | Calculation elements |
+| [data_audit.py](data_audit.py) | Full audit script |
+| [analysis.py](analysis.py) | Analysis code |
+| [simulations.py](simulations.py) | Simulation code |
+
+---
+
+## 7. Citation
 
 ```bibtex
 @article{SROIMetaAnalysis2026,
-  author    = {[Author]},
-  title     = {From Principles to Practice: A Systematic Content Analysis
-               of SROI Reporting in the Social Value International Database},
-  journal   = {Voluntas: International Journal of Voluntary and Nonprofit Organizations},
-  year      = {2026},
-  note      = {Forthcoming},
-  url       = {https://doi.org/10.1000/placeholder}
+  author  = {[Author]},
+  title   = {From Principles to Practice: A Systematic Content Analysis
+             of SROI Reporting in the Social Value International Database},
+  journal = {Voluntas},
+  year    = {2026},
+  note    = {Forthcoming. Replication: https://jcmunozmora.github.io/sroi-meta-analysis/}
 }
 ```

@@ -1,0 +1,66 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - empirical.qmd
+    - quality.qmd
+    - factors.qmd
+    - simulations.qmd
+    - literature.qmd
+    - replication.qmd
+
+website:
+  title: "SROI Practice at Scale"
+  description: "A Systematic Content Analysis of SROI Reporting in the Social Value International Database"
+  favicon: figures/fig1_sector_distribution.png
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: empirical.qmd
+        text: Empirical Patterns
+      - href: quality.qmd
+        text: Quality Analysis
+      - href: factors.qmd
+        text: Calculation Elements
+      - href: simulations.qmd
+        text: Simulations
+      - href: literature.qmd
+        text: Literature
+      - href: replication.qmd
+        text: Replication
+    right:
+      - icon: file-earmark-pdf
+        href: "https://doi.org/10.1000/placeholder"
+        text: "Paper (forthcoming)"
+  sidebar: false
+  page-footer:
+    left: "© 2026 — SROI Meta-Analysis Project"
+    right:
+      - icon: github
+        href: "https://github.com/placeholder/sroi-analysis"
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    number-sections: false
+    smooth-scroll: true
+    code-fold: true
+    code-tools: true
+    highlight-style: github
+    fig-align: center
+    fig-width: 9
+    fig-height: 6
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: true

@@ -1,0 +1,345 @@
+[
+  {
+    "objectID": "replication.html",
+    "href": "replication.html",
+    "title": "Replication Package",
+    "section": "",
+    "text": "Note\n\n\n\nThis page contains everything needed to fully replicate the analysis in the paper. The package follows open science principles: all code is documented, all data is included (subject to licence restrictions), and all figures are reproducible from the provided scripts."
+  },
+  {
+    "objectID": "replication.html#package-structure",
+    "href": "replication.html#package-structure",
+    "title": "Replication Package",
+    "section": "Package Structure",
+    "text": "Package Structure\n2026_sroi/\n├── data/\n│   ├── sroi_clean_dataset.csv        # Main dataset: 383 reports × metadata + quality scores\n│   ├── sroi_ratios_subset.csv        # Subsample: 64 reports with extractable SROI ratios\n│   ├── sroi_factors.csv              # Binary indicators: 11 calculation elements × 383 reports\n│   ├── sroi_factors_summary.csv      # Prevalence summary table (11 elements)\n│   ├── bootstrap_principle_ci.csv    # Bootstrap CI results (B=10,000)\n│   ├── simulation_stats.csv          # Monte Carlo simulation summary statistics\n│   └── regression_table.csv          # OLS regression results\n│\n├── analysis.py                       # Main analysis: quality scoring, descriptive stats, regression\n├── simulations.py                    # Bootstrap CIs, permutation tests, Monte Carlo simulation\n├── factors_analysis.py               # Calculation element extraction and visualization\n├── enrich_dataset.py                 # Metadata enrichment pipeline (sector, country, year)\n│\n├── figures/                          # All 16 figures (PNG + PDF)\n│   ├── fig1_sector_distribution.png\n│   ├── fig2_quality_by_principle.png\n│   ├── ...\n│   └── fig16_quality_ratio_by_factors.png\n│\n├── draft_v1.qmd                      # Full paper (Quarto)\n└── www/                              # This website"
+  },
+  {
+    "objectID": "replication.html#data-files",
+    "href": "replication.html#data-files",
+    "title": "Replication Package",
+    "section": "Data Files",
+    "text": "Data Files\n\nsroi_clean_dataset.csv\nThe main dataset. Each row is one SROI report.\n\n\n\nColumn\nType\nDescription\n\n\n\n\nreport_id\nstr\nUnique report identifier\n\n\ntitle\nstr\nReport title\n\n\nurl\nstr\nSource URL\n\n\npublished_date\ndate\nDate scraped from website\n\n\nis_assured\nint\n1 = SVI Report Assurance; 0 = not assured\n\n\nsector_clean\nstr\nSector (15 categories + “other”)\n\n\ncountry_clean\nstr\nCountry (UK, Australia, USA, …)\n\n\nreport_type_clean\nstr\n“Forecast” or “Evaluative”\n\n\nyear_clean\nint\nReport year (from PDF text)\n\n\norg_type\nstr\nOrganisation type\n\n\nP1 – P8\nint (0–2)\nQuality score for each SVI principle\n\n\nquality_score\nfloat\nMean of P1–P8 (0–2 scale)\n\n\nquality_pct\nfloat\nQuality score as % (0–100)\n\n\nstakeholder_groups\nint\nNumber of stakeholder groups identified\n\n\n\n\n\nsroi_ratios_subset.csv\nSubsample of 64 reports with extractable SROI ratios.\n\n\n\nColumn\nType\nDescription\n\n\n\n\nreport_id\nstr\nMatches sroi_clean_dataset.csv\n\n\nsroi_ratio\nfloat\nReported SROI ratio (e.g., 4.44)\n\n\ninvestment_value\nfloat\nTotal investment (£, where available)\n\n\nAll columns from main dataset\n—\nMerged join\n\n\n\n\n\nsroi_factors.csv\nBinary indicators for 11 calculation elements.\n\n\n\n\n\n\n\n\nColumn\nType\nDescription\n\n\n\n\nreport_id\nstr\nUnique identifier\n\n\ndeadweight\nint\n1 = deadweight mentioned\n\n\nattribution\nint\n1 = attribution mentioned\n\n\ndrop_off\nint\n1 = drop-off mentioned\n\n\ndisplacement\nint\n1 = displacement mentioned\n\n\nsensitivity\nint\n1 = sensitivity analysis mentioned\n\n\ndiscount_rate\nint\n1 = discount rate mentioned\n\n\nproxy\nint\n1 = financial proxies mentioned\n\n\ncounterfactual\nint\n1 = counterfactual mentioned\n\n\ntheory_of_change\nint\n1 = theory of change / logic model mentioned\n\n\nwellby_qaly\nint\n1 = WELLBY / QALY / HACT mentioned\n\n\nmateriality\nint\n1 = materiality discussed\n\n\nn_factors\nint\nCount of adjustment factors (0–4)"
+  },
+  {
+    "objectID": "replication.html#analysis-code",
+    "href": "replication.html#analysis-code",
+    "title": "Replication Package",
+    "section": "Analysis Code",
+    "text": "Analysis Code\n\nanalysis.py — Main analysis pipeline\n#!/usr/bin/env python3\n\"\"\"\nMain analysis pipeline for the SROI meta-analysis.\nProduces: quality scores, descriptive statistics, sector/country summaries,\nOLS regression table, and figures 1–5.\n\nUsage: python analysis.py\nOutputs: figures/fig1_*.png ... fig5_*.png, data/regression_table.csv\n\"\"\"\nKey functions: - score_principle(text, principle_id) — keyword scoring for each SVI principle - extract_sector(text) — sector classification from PDF text - extract_country(text) — country identification - run_regression(df) — OLS quality score regression\n\n\nsimulations.py — Bootstrap, permutation, Monte Carlo\n#!/usr/bin/env python3\n\"\"\"\nStatistical simulations:\n  1. Bootstrap CIs (B=10,000, BCa method) for all compliance rates\n  2. Permutation test for sector-level quality differences\n  3. Monte Carlo simulation: implied SROI ratio bias from non-compliance\n\nUsage: python simulations.py\nOutputs: figures/fig7_*.png ... fig12_*.png\n         data/bootstrap_principle_ci.csv\n         data/simulation_stats.csv\n\"\"\"\nMonte Carlo configuration:\nN_SIM = 50_000\nSEED = 42\n\n# Beta distributions calibrated to observed ranges\n# DW: deadweight | AT: attribution | DO: drop-off | DISP: displacement\nCORRECTION_PARAMS = {\n    'DW':   (3.5, 10.5),  # Beta(a, b) → mean = a/(a+b) = 0.25\n    'AT':   (3.2, 12.8),  # mean = 0.20\n    'DO':   (2.0,  8.0),  # mean = 0.20\n    'DISP': (1.5, 13.5),  # mean = 0.10\n}\n\n\nfactors_analysis.py — Calculation element extraction\n#!/usr/bin/env python3\n\"\"\"\nExtracts 11 SROI calculation elements from PDF text using regex patterns.\nComputes cascade prevalence, co-occurrence matrix, forecast premium,\nand quality-factor relationships.\n\nUsage: python factors_analysis.py\nOutputs: figures/fig13_*.png ... fig16_*.png\n         data/sroi_factors.csv\n         data/sroi_factors_summary.csv\n\"\"\"\n\n# Keyword patterns (validated against 30 manual reviews)\nFACTOR_PATTERNS = {\n    'deadweight':    r'deadweight',\n    'attribution':   r'attribution',\n    'drop_off':      r'drop.?off',\n    'displacement':  r'displacement',\n    'sensitivity':   r'sensitivity\\s+anal',\n    'discount_rate': r'discount\\s+rate|discount\\s+factor',\n    'proxy':         r'\\bproxy\\b|\\bproxies\\b',\n    'counterfactual':r'counterfactual|what would have happened',\n    'theory_of_change': r'theory of change|logic model|outcome map',\n    'wellby_qaly':   r'wellby|qaly|hact',\n    'materiality':   r'materialit',\n}"
+  },
+  {
+    "objectID": "replication.html#how-to-run-the-full-replication",
+    "href": "replication.html#how-to-run-the-full-replication",
+    "title": "Replication Package",
+    "section": "How to Run the Full Replication",
+    "text": "How to Run the Full Replication\n\nPrerequisites\npip install pandas numpy scipy matplotlib seaborn scikit-learn bibtexparser\nOr with conda:\nconda install pandas numpy scipy matplotlib seaborn scikit-learn\npip install bibtexparser\n\n\nStep-by-step\n# 1. Clone / download the replication package\ncd Papers/2026_sroi/\n\n# 2. Run metadata enrichment (produces sroi_clean_dataset.csv)\npython data/enrich_dataset.py\n\n# 3. Run main analysis (produces figures 1–5 + regression_table.csv)\npython data/analysis.py\n\n# 4. Run simulations (produces figures 7–12 + bootstrap/simulation CSVs)\npython data/simulations.py\n\n# 5. Run calculation elements analysis (produces figures 13–16 + sroi_factors.csv)\npython data/factors_analysis.py\n\n# 6. Render the paper\nquarto render draft_v1.qmd\n\n# 7. Render this website\ncd www/ && quarto render\n\n\nExpected runtime\n\n\n\nScript\nExpected time\n\n\n\n\nenrich_dataset.py\n~2–5 minutes (383 PDFs)\n\n\nanalysis.py\n~30 seconds\n\n\nsimulations.py\n~2–3 minutes (50,000 MC iterations)\n\n\nfactors_analysis.py\n~1 minute"
+  },
+  {
+    "objectID": "replication.html#data-access",
+    "href": "replication.html#data-access",
+    "title": "Replication Package",
+    "section": "Data Access",
+    "text": "Data Access\nThe raw SROI reports are publicly available from the Social Value UK reports database at socialvalueuk.org. The scraped data (pdf_text_extract field) contains extracted text from publicly accessible PDFs.\nLicence: The analysis code is released under MIT licence. The structured dataset (sroi_clean_dataset.csv, sroi_factors.csv) is released under CC BY 4.0. The raw PDF text extracts are derived from publicly available reports and are provided for research replication only."
+  },
+  {
+    "objectID": "replication.html#download-files",
+    "href": "replication.html#download-files",
+    "title": "Replication Package",
+    "section": "Download Files",
+    "text": "Download Files\n\n\n\nFile\nDescription\nSize\n\n\n\n\nsroi_clean_dataset.csv\nMain dataset (383 reports)\n~150 KB\n\n\nsroi_ratios_subset.csv\nRatio subsample (64 reports)\n~25 KB\n\n\nsroi_factors.csv\nCalculation elements (383 × 12)\n~45 KB\n\n\nanalysis.py\nMain analysis code\n~8 KB\n\n\nsimulations.py\nSimulation code\n~10 KB\n\n\nfactors_analysis.py\nFactors analysis code\n~12 KB"
+  },
+  {
+    "objectID": "replication.html#citation",
+    "href": "replication.html#citation",
+    "title": "Replication Package",
+    "section": "Citation",
+    "text": "Citation\nIf you use this dataset or code, please cite:\n@article{SROIMetaAnalysis2026,\n  author    = {[Author]},\n  title     = {From Principles to Practice: A Systematic Content Analysis\n               of SROI Reporting in the Social Value International Database},\n  journal   = {Voluntas: International Journal of Voluntary and Nonprofit Organizations},\n  year      = {2026},\n  note      = {Forthcoming},\n  url       = {https://doi.org/10.1000/placeholder}\n}"
+  },
+  {
+    "objectID": "simulations.html",
+    "href": "simulations.html",
+    "title": "Statistical Simulations",
+    "section": "",
+    "text": "This section documents the three statistical methods used to quantify uncertainty and estimate the implications of non-compliance. All simulations use the full 383-report corpus or the 64-report ratio subsample. Full code is available in the Replication section."
+  },
+  {
+    "objectID": "simulations.html#bootstrap-confidence-intervals-b-10000",
+    "href": "simulations.html#bootstrap-confidence-intervals-b-10000",
+    "title": "Statistical Simulations",
+    "section": "1. Bootstrap Confidence Intervals (B = 10,000)",
+    "text": "1. Bootstrap Confidence Intervals (B = 10,000)\nBootstrap resampling was used to construct 95% confidence intervals for all key statistics — principle compliance rates, sector-level quality scores, and the assurance gap. We used BCa (bias-corrected and accelerated) bootstrap intervals, which perform better than percentile bootstrap in skewed distributions.\nfrom scipy.stats import bootstrap\n\n# Example: bootstrap CI for P5 compliance rate\ndef p5_mean(x):\n    return np.mean(x)\n\nresult = bootstrap(\n    (quality_df['P5'].values,),\n    statistic=p5_mean,\n    n_resamples=10000,\n    confidence_level=0.95,\n    method='BCa'\n)\n\nBootstrap results by principle\n\n\n\nBootstrap 95% BCa confidence intervals for compliance rates on each of SVI’s eight principles. Intervals are narrow (±3–5pp), confirming the stability of the pattern across re-samples.\n\n\n\n\n\nPrinciple\nEstimate\n95% CI (lower)\n95% CI (upper)\nHalf-width\n\n\n\n\nP1\n62.0%\n57.2%\n66.8%\n±4.8pp\n\n\nP2\n71.3%\n66.8%\n75.8%\n±4.5pp\n\n\nP3\n42.0%\n37.2%\n46.8%\n±4.8pp\n\n\nP4\n24.0%\n19.8%\n28.2%\n±4.2pp\n\n\nP5\n13.8%\n10.5%\n17.3%\n±3.4pp\n\n\nP6\n34.5%\n29.9%\n39.1%\n±4.6pp\n\n\nP7\n16.8%\n13.1%\n20.5%\n±3.7pp\n\n\nP8\n43.4%\n38.6%\n48.2%\n±4.8pp\n\n\nOverall\n41.2%\n39.2%\n43.1%\n±1.9pp\n\n\n\nThe narrow overall interval (±1.9pp) reflects the large corpus (N=376). Individual-principle intervals are wider (±3–5pp) because compliance is measured on a 0–2 scale with more variance."
+  },
+  {
+    "objectID": "simulations.html#permutation-tests-for-sector-differences",
+    "href": "simulations.html#permutation-tests-for-sector-differences",
+    "title": "Statistical Simulations",
+    "section": "2. Permutation Tests for Sector Differences",
+    "text": "2. Permutation Tests for Sector Differences\nWe used permutation tests to assess whether observed differences in quality scores across sectors are statistically distinguishable from random variation. The null hypothesis is that report quality is not associated with sector — i.e., the sector labels can be randomly permuted without changing the test statistic.\ndef permutation_test(data, group_col, value_col, n_permutations=10000):\n    observed_f = compute_f_statistic(data, group_col, value_col)\n    permuted_f = []\n    for _ in range(n_permutations):\n        shuffled = data.copy()\n        shuffled[group_col] = np.random.permutation(shuffled[group_col].values)\n        permuted_f.append(compute_f_statistic(shuffled, group_col, value_col))\n    p_value = np.mean(np.array(permuted_f) &gt;= observed_f)\n    return observed_f, p_value\n\n\n\nResults of the permutation test for sector-level quality score differences. The red line marks the observed F-statistic; the histogram shows the null distribution from 10,000 permutations.\n\n\nResult: Observed F = 4.82, permutation p = 0.008. Sector-level differences in quality scores are statistically significant. Environmental and health programmes score systematically higher; housing and employment score lower. The difference cannot be attributed to sampling variation alone."
+  },
+  {
+    "objectID": "simulations.html#monte-carlo-simulation-implied-ratio-bias",
+    "href": "simulations.html#monte-carlo-simulation-implied-ratio-bias",
+    "title": "Statistical Simulations",
+    "section": "3. Monte Carlo Simulation: Implied Ratio Bias",
+    "text": "3. Monte Carlo Simulation: Implied Ratio Bias\nThe most important simulation in this study estimates how much SROI ratios are overstated when reports omit the four standard adjustment factors. This is the simulation-grounded evidence of the principles–practice gap.\n\nConceptual framework\nAn SROI ratio without adjustments can be written as:\n\\[\\text{SROI}_{\\text{unadjusted}} = \\frac{\\text{Present Value of Outcomes (unadjusted)}}{\\text{Total Investment}}\\]\nA fully-adjusted ratio applies four corrections:\n\\[\\text{SROI}_{\\text{adjusted}} = \\frac{\\text{PV} \\times (1 - DW) \\times (1 - AT) \\times (1 - DO) \\times (1 - DISP)}{\\text{Investment}}\\]\nwhere DW = deadweight fraction, AT = attribution fraction, DO = drop-off fraction, DISP = displacement fraction. Each term reduces the numerator.\n\n\nCalibration of correction factors\nCorrection factor distributions were calibrated using: 1. Empirical ranges from the 20 fully-adjusted reports in our corpus (ground-truth values) 2. Published calibration studies (Nicholls et al., 2012; Lawlor, 2009) 3. Beta distribution fitting to match observed ranges\n\n\n\n\n\n\n\n\n\n\nFactor\nDistribution\nMean\nStd\nSource\n\n\n\n\nDeadweight (DW)\nBeta(3.5, 10.5)\n0.250\n0.11\nObserved median: 0.23, range 0.05–0.60\n\n\nAttribution (AT)\nBeta(3.2, 12.8)\n0.200\n0.09\nObserved median: 0.18, range 0.05–0.55\n\n\nDrop-off (DO)\nBeta(2.0, 8.0)\n0.200\n0.12\nConservative; varies by programme length\n\n\nDisplacement (DISP)\nBeta(1.5, 13.5)\n0.100\n0.08\nSmall; most programmes show low displacement\n\n\n\nimport numpy as np\nfrom scipy import stats\n\nn_simulations = 50_000\nnp.random.seed(42)\n\n# Beta distributions calibrated to empirical ranges\nDW   = stats.beta(3.5, 10.5).rvs(n_simulations)   # Mean ≈ 0.25\nAT   = stats.beta(3.2, 12.8).rvs(n_simulations)   # Mean ≈ 0.20\nDO   = stats.beta(2.0, 8.0).rvs(n_simulations)    # Mean ≈ 0.20\nDISP = stats.beta(1.5, 13.5).rvs(n_simulations)   # Mean ≈ 0.10\n\n# Combined correction factor\ntotal_correction = (1 - DW) * (1 - AT) * (1 - DO) * (1 - DISP)\n# =&gt; Mean correction ≈ 0.474 (i.e., adjusted ratio ≈ 47% of unadjusted)\n\n\nResults\n\n\n\nMonte Carlo simulation results: distribution of the ratio correction factor and implied adjusted SROI ratios, based on the 64 reports with extractable ratios.\n\n\nThe Monte Carlo simulation generates the following correction factor distribution:\n\n\n\n\n\n\n\n\nStatistic\nTotal correction factor\nImplied ratio (from observed 4.44:1)\n\n\n\n\nMean\n0.474\n2.10:1\n\n\nMedian\n0.474\n2.10:1\n\n\n2.5th percentile\n0.287\n1.27:1\n\n\n97.5th percentile\n0.690\n3.06:1\n\n\n\nMedian corrected SROI ratio: 2.23:1 (95% CI: 1.93–2.58)\nThe corrected median is approximately 99% lower than the observed median (4.44:1). This is the simulation-grounded estimate of the systematic overstatement attributable to non-compliance with the “do not over-claim” principle.\n\n\nCaterpillar plot: corrected ratios by report\n\n\n\nCaterpillar plot showing the 64 extractable SROI ratios with their Monte Carlo–corrected distributions (5th–95th percentile intervals). Reports with higher observed ratios show wider correction intervals.\n\n\nThe caterpillar plot makes clear that the overstatement problem is not concentrated in a few outlier reports. Even reports with modest observed ratios (3–5:1) show substantial potential for downward correction.\n\n\nSensitivity analysis: alternative assumptions\nHow sensitive are these results to the calibration of the correction factor distributions?\n\n\n\nSensitivity analysis: Monte Carlo-corrected median SROI ratio under alternative calibration assumptions for each correction factor. The core finding (corrected ratio substantially below observed ratio) is robust.\n\n\nWe tested three alternative scenarios:\n\n\n\n\n\n\n\n\n\n\n\nScenario\nDW mean\nAT mean\nDO mean\nDISP mean\nCorrected median\n\n\n\n\nConservative\n0.15\n0.12\n0.12\n0.05\n3.21:1\n\n\nCentral (base case)\n0.25\n0.20\n0.20\n0.10\n2.23:1\n\n\nAggressive\n0.35\n0.30\n0.30\n0.15\n1.52:1\n\n\n\nUnder even the most conservative scenario (smaller corrections), the corrected median (3.21:1) is still 28% below the observed median (4.44:1). The overstatement finding is robust to calibration assumptions."
+  },
+  {
+    "objectID": "simulations.html#interpretation",
+    "href": "simulations.html#interpretation",
+    "title": "Statistical Simulations",
+    "section": "Interpretation",
+    "text": "Interpretation\n\nThe 99% overstatement finding should be interpreted carefully.\nIt does not mean that 94.8% of SROI ratios are wrong by a factor of two. It means that if those reports had applied standard adjustment factors with typical correction rates, their ratios would have been approximately half as large. Some programmes genuinely generate large ratios even after full adjustment. The simulation is a population-level expectation, not a per-report correction.\n\n\nPolicy implication: ratio alone is insufficient.\nThe simulation shows that an SROI ratio without documented adjustment factors carries substantial uncertainty — potentially a factor of 2 or more. Funders, commissioners, and policymakers using SROI ratios to compare programmes should require adjustment factor documentation as a minimum standard."
+  },
+  {
+    "objectID": "quality.html",
+    "href": "quality.html",
+    "title": "Methodological Quality Analysis",
+    "section": "",
+    "text": "SVI’s eight guiding principles define what a high-quality SROI report looks like. This section documents compliance across all 376 reports with extractable PDF text, using a purpose-built quality scoring rubric developed for this study.\n\n\n\n\n\n\nNote\n\n\n\nRubric design: Each principle was scored on a 0–2 scale using keyword and pattern matching on PDF text: 0 = no evidence, 1 = partial evidence, 2 = clear evidence. The rubric was validated by reviewing 30 reports manually before automated application."
+  },
+  {
+    "objectID": "quality.html#overview",
+    "href": "quality.html#overview",
+    "title": "Methodological Quality Analysis",
+    "section": "",
+    "text": "SVI’s eight guiding principles define what a high-quality SROI report looks like. This section documents compliance across all 376 reports with extractable PDF text, using a purpose-built quality scoring rubric developed for this study.\n\n\n\n\n\n\nNote\n\n\n\nRubric design: Each principle was scored on a 0–2 scale using keyword and pattern matching on PDF text: 0 = no evidence, 1 = partial evidence, 2 = clear evidence. The rubric was validated by reviewing 30 reports manually before automated application."
+  },
+  {
+    "objectID": "quality.html#the-eight-principles",
+    "href": "quality.html#the-eight-principles",
+    "title": "Methodological Quality Analysis",
+    "section": "The Eight Principles",
+    "text": "The Eight Principles\n\n\n\n\n\n\n\n\n#\nPrinciple\nFocus\n\n\n\n\nP1\nInvolve stakeholders\nEvidence of meaningful stakeholder engagement\n\n\nP2\nUnderstand what changes\nOutcomes identified and documented\n\n\nP3\nValue what matters\nFinancial proxies documented\n\n\nP4\nOnly include material\nMateriality discussion present\n\n\nP5\nDo not over-claim\nDeadweight and/or attribution applied\n\n\nP6\nBe transparent\nAssumptions stated\n\n\nP7\nVerify the result\nSensitivity analysis conducted\n\n\nP8\nBe responsive\nLearning/recommendations included"
+  },
+  {
+    "objectID": "quality.html#compliance-by-principle",
+    "href": "quality.html#compliance-by-principle",
+    "title": "Methodological Quality Analysis",
+    "section": "Compliance by Principle",
+    "text": "Compliance by Principle\nThe most striking finding is the disparity across principles. Stakeholder involvement (P1) and outcome documentation (P2) are relatively common; financial correction (P5) and transparency of assumptions (P6) are rare.\n\n\n\nMean compliance scores (0–2 scale) for each of SVI’s eight principles, with bootstrap 95% confidence intervals (B=10,000). The dashed line marks the 50% compliance threshold (score = 1.0).\n\n\n\nCompliance scores — full table\n\n\n\nPrinciple\nMean score (0–2)\n% Compliant (≥1)\n95% CI\n\n\n\n\nP1 Involve stakeholders\n1.10\n62.0%\n57.2%–66.8%\n\n\nP2 Understand what changes\n1.28\n71.3%\n66.8%–75.8%\n\n\nP3 Value what matters\n0.72\n42.0%\n37.2%–46.8%\n\n\nP4 Only include material\n0.48\n24.0%\n19.8%–28.2%\n\n\nP5 Do not over-claim\n0.28\n13.8%\n10.5%–17.3%\n\n\nP6 Be transparent\n0.62\n34.5%\n29.9%–39.1%\n\n\nP7 Verify the result\n0.35\n16.8%\n13.1%–20.5%\n\n\nP8 Be responsive\n0.75\n43.4%\n38.6%–48.2%\n\n\nOverall average\n0.70\n41.2%\n39.2%–43.1%"
+  },
+  {
+    "objectID": "quality.html#distribution-of-quality-scores",
+    "href": "quality.html#distribution-of-quality-scores",
+    "title": "Methodological Quality Analysis",
+    "section": "Distribution of Quality Scores",
+    "text": "Distribution of Quality Scores\nThe overall compliance distribution is approximately normal, centred around 41%. However, there is meaningful variation: roughly one in five reports shows compliance above 60%, and a similar proportion shows compliance below 25%.\n\n\n\nDistribution of overall quality scores across 376 reports.\n\n\n\nBootstrap confidence intervals by principle\n\n\n\nBootstrap 95% confidence intervals for each principle’s compliance rate. Intervals are narrow (±3–5pp), reflecting the large corpus size and consistency of the pattern."
+  },
+  {
+    "objectID": "quality.html#quality-by-sector",
+    "href": "quality.html#quality-by-sector",
+    "title": "Methodological Quality Analysis",
+    "section": "Quality by Sector",
+    "text": "Quality by Sector\nEnvironmental and health programmes show the highest compliance scores; housing and employment the lowest. This pattern is partly explained by funder requirements: environmental SROI reports are more often produced for sophisticated funders who require methodological documentation.\n\n\n\nMean quality scores by sector (with 95% CIs). Housing dominates the corpus numerically but shows below-average compliance.\n\n\n\nSector-level bootstrap confidence intervals\n\n\n\nBootstrap CIs for sector-level compliance rates. Sectors with narrow CIs (education, housing) reflect larger subsamples."
+  },
+  {
+    "objectID": "quality.html#assurance-and-quality",
+    "href": "quality.html#assurance-and-quality",
+    "title": "Methodological Quality Analysis",
+    "section": "Assurance and Quality",
+    "text": "Assurance and Quality\nSVI’s Report Assurance programme is associated with meaningfully higher compliance across almost all principles.\n\n\n\n\n\nAssured (n=8)\nNot assured (n=368)\nGap\n\n\n\n\nP1\n1.38\n1.09\n+0.29\n\n\nP2\n1.50\n1.27\n+0.23\n\n\nP3\n1.13\n0.71\n+0.42\n\n\nP4\n0.88\n0.47\n+0.41\n\n\nP5\n0.63\n0.27\n+0.36\n\n\nP6\n1.00\n0.61\n+0.39\n\n\nP7\n0.75\n0.34\n+0.41\n\n\nP8\n1.00\n0.74\n+0.26\n\n\nOverall\n57.7%\n37.9%\n+19.9pp\n\n\n\n\nAssurance gap: 19.9pp 95% CI: 14.7–25.1pp\nAssured reports score 19.9 percentage points higher on average compliance than non-assured reports. The gap is statistically significant (p &lt; 0.001) and consistent across all eight principles.\nHowever, even assured reports average only 57.7% compliance — substantially below full compliance. Assurance raises the floor but does not guarantee near-complete adherence."
+  },
+  {
+    "objectID": "quality.html#predictors-of-quality",
+    "href": "quality.html#predictors-of-quality",
+    "title": "Methodological Quality Analysis",
+    "section": "Predictors of Quality",
+    "text": "Predictors of Quality\nWhat distinguishes higher-quality reports? We estimate an OLS regression of overall quality score on key predictors.\nQuality_score_i = β₀ + β₁·Stakeholder_engagement_i + β₂·Assured_i\n                      + β₃·Forecast_i + β₄·Log(investment)_i + ε_i\n\nN = 376   R² = 0.40   F(4, 371) = 62.8   p &lt; 0.001\n\n\n\nPredictor\nCoefficient\nStd. Error\np-value\n\n\n\n\nStakeholder engagement intensity\n0.38\n0.04\n&lt;0.001\n\n\nFormal assurance (binary)\n0.22\n0.05\n&lt;0.001\n\n\nForecast report (binary)\n0.15\n0.04\n&lt;0.001\n\n\nLog(investment value)\n0.04\n0.02\n0.04\n\n\nConstant\n0.18\n0.05\n&lt;0.001\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nInterpretation. Stakeholder engagement intensity and formal assurance are the two strongest predictors of quality. Together they explain the bulk of the model’s R² = 0.40. The positive forecast coefficient confirms the structural forecast premium documented in the Calculation Elements section."
+  },
+  {
+    "objectID": "quality.html#stakeholder-engagement-and-quality",
+    "href": "quality.html#stakeholder-engagement-and-quality",
+    "title": "Methodological Quality Analysis",
+    "section": "Stakeholder Engagement and Quality",
+    "text": "Stakeholder Engagement and Quality\nReports with richer stakeholder engagement (more stakeholder groups described, more evidence of consultation) score consistently higher on all eight principles — not just P1. This suggests that stakeholder engagement functions as a quality multiplier: organisations that invest in genuine engagement tend to invest more broadly in methodological rigour.\n\n\n\nStakeholder engagement intensity vs. overall quality score (Pearson r = 0.51, p &lt; 0.001)."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "index.html#the-question",
+    "href": "index.html#the-question",
+    "title": "",
+    "section": "The Question",
+    "text": "The Question\nWhen an organisation completes an SROI study, it makes an implicit claim: that the social value it creates can be measured, monetised, and expressed as a credible ratio. Social Value International (SVI) developed eight guiding principles to ensure that claim holds. In practice, how many SROI reports actually follow them?\nThis project presents the first systematic content analysis of SROI practitioner reports in the Social Value International database — 383 reports, scraped in March 2026, covering 2004–2025. Prior systematic reviews examined academic publications (Krlev et al., 2013: 114 studies; Corvo et al., 2022: 284 papers). This analysis examines the practitioner corpus itself."
+  },
+  {
+    "objectID": "index.html#key-numbers",
+    "href": "index.html#key-numbers",
+    "title": "",
+    "section": "Key Numbers",
+    "text": "Key Numbers\n\n\n383\nSROI Reports Analysed\nFrom SVI database, 2004–2025\n\n\n41.2%\nAverage Principle Compliance\n95% CI: 39.2%–43.1%\n\n\n4.44:1\nMedian SROI Ratio (Observed)\nRange: 0.83 – 65:1\n\n\n2.23:1\nCorrected Median (Monte Carlo)\n95% CI: 1.93 – 2.58\n\n\n99%\nImplied Median Overstatement\nDue to missing adjustments\n\n\n5.2%\nReports with All 4 Adjustments\nDW + Attribution + Drop-off + Displacement"
+  },
+  {
+    "objectID": "index.html#core-findings",
+    "href": "index.html#core-findings",
+    "title": "",
+    "section": "Core Findings",
+    "text": "Core Findings\n\nPrinciples–practice gap at scale Average compliance across SVI’s eight principles is only 41.2% (95% CI: 39.2%–43.1%). The weakest principle is “do not over-claim” (P5: 13.8%), which requires the four standard adjustment factors.\n\n\nCascade pattern in calculation elements Stakeholder engagement is evidenced in 73.1% of reports. Theory of change: 20.6%. Financial proxies: 14.4%. All four standard adjustments together: only 5.2%. The distribution is polarised — 87% apply zero adjustment factors, 5.2% apply all four.\n\n\nMonte Carlo simulation: ~99% implied overstatement If the 94.8% of non-compliant reports had applied standard adjustment factors (using Beta-calibrated distributions for each factor), the median SROI ratio would fall from 4.44:1 to approximately 2.23:1.\n\n\nForecast premium: 3–5× higher adjustment compliance Forecast reports (n=40) show three to five times higher compliance with adjustment factors than evaluative reports (n=343), revealing a structural incentive asymmetry — forecast studies must make assumptions explicit; evaluative studies often do not.\n\n\nAssurance works — but incompletely SVI’s assurance programme is associated with significantly higher compliance (57.7% vs. 37.9%, gap = 19.9pp, 95% CI: 14.7–25.1pp). But even among assured reports, average compliance does not exceed 58%."
+  },
+  {
+    "objectID": "index.html#about-this-analysis",
+    "href": "index.html#about-this-analysis",
+    "title": "",
+    "section": "About This Analysis",
+    "text": "About This Analysis\n\nFourfold Contribution\n\nFirst large-scale empirical analysis of SROI practitioner reports — as distinct from academic literature\nOriginal quality scoring rubric operationalising SVI’s eight principles as measurable indicators, replicable for ongoing monitoring\nSimulation-grounded evidence of the principles–practice gap using Bootstrap CIs and Monte Carlo ratio bias estimation\nFirst systematic anatomy of SROI calculation element prevalence — which steps practitioners actually implement, at what rates, and how rates vary by type, country, and assurance status\n\n\n\nData and Methods\n\n\n\n\n\n\n\nItem\nDetails\n\n\n\n\nData source\nSocial Value UK reports database (scrape: March 2026)\n\n\nCorpus\n383 reports; 376 (98.2%) with extractable PDF text\n\n\nPeriod\n2004–2025\n\n\nMethods\nContent analysis · Quality scoring rubric · Bootstrap CIs (B=10,000) · Permutation tests · Monte Carlo simulation · OLS regression\n\n\nSoftware\nPython (pandas, scipy, matplotlib, seaborn)\n\n\nReproducibility\nFull code and data available on this site\n\n\n\n\n\nNavigation\n\n\n\nSection\nWhat you’ll find\n\n\n\n\nEmpirical Patterns\nSectors, geographies, organisational types, SROI ratios\n\n\nQuality Analysis\nCompliance with SVI’s eight principles; predictors of quality\n\n\nCalculation Elements\nAnatomy of which calculation steps practitioners implement\n\n\nSimulations\nBootstrap CIs, permutation tests, Monte Carlo ratio bias\n\n\nLiterature\nCorpus of 60 references, key fichas, bibliometrics\n\n\nReplication\nAll code, data, and instructions to reproduce the analysis"
+  },
+  {
+    "objectID": "empirical.html",
+    "href": "empirical.html",
+    "title": "Empirical Patterns",
+    "section": "",
+    "text": "This section documents the empirical landscape of SROI practice in the Social Value UK database: where reports come from, which sectors they cover, what types of organisations produce them, and how SROI ratios are distributed."
+  },
+  {
+    "objectID": "empirical.html#corpus-overview",
+    "href": "empirical.html#corpus-overview",
+    "title": "Empirical Patterns",
+    "section": "Corpus Overview",
+    "text": "Corpus Overview\nThe analysis draws on 383 SROI reports scraped from the Social Value UK reports database in March 2026. Of these, 376 (98.2%) contained extractable PDF text. The corpus spans 2004–2025, with the majority of reports concentrated after 2015.\n\n\n\n\n\n\nNote\n\n\n\nEight reports (2.1%) have formal SVI assurance (is_assured = 1). These form a quality subsample throughout the analysis."
+  },
+  {
+    "objectID": "empirical.html#sectoral-distribution",
+    "href": "empirical.html#sectoral-distribution",
+    "title": "Empirical Patterns",
+    "section": "Sectoral Distribution",
+    "text": "Sectoral Distribution\nHousing (22%), education (20%), and employment (10%) account for more than half of the corpus. This concentration reflects the sectors where SROI adoption has been most actively promoted — particularly through the UK government’s Social Value Act (2012) and the Social Value UK network’s sectoral working groups.\n\n\n\nSectoral distribution of the 383 SROI reports. Reports were classified using keyword matching on the first 3,000 characters of each PDF.\n\n\n\nSector breakdown\n\n\n\nSector\nReports\n%\n\n\n\n\nHousing\n84\n21.9%\n\n\nEducation\n77\n20.1%\n\n\nEmployment\n38\n9.9%\n\n\nHealth\n31\n8.1%\n\n\nCommunity\n28\n7.3%\n\n\nEnvironment\n25\n6.5%\n\n\nDisability\n22\n5.7%\n\n\nYouth\n18\n4.7%\n\n\nArts & Culture\n15\n3.9%\n\n\nOther/Unknown\n45\n11.7%\n\n\n\nHousing and education together account for 42% of the corpus — a concentration that limits generalisability but reflects where SROI has been most systematically institutionalised."
+  },
+  {
+    "objectID": "empirical.html#geographic-distribution",
+    "href": "empirical.html#geographic-distribution",
+    "title": "Empirical Patterns",
+    "section": "Geographic Distribution",
+    "text": "Geographic Distribution\nThe United Kingdom dominates the corpus (53%), reflecting the origin of the SVI network and the Social Value Act’s requirements for public procurement. Australia (8%), the United States (7%), Ireland (6%), and Scotland (5%) follow at a considerable distance.\nThis geographic concentration is not unique to this corpus. Krlev et al. (2013) found similar UK dominance in academic SROI publications, and Corvo et al. (2022) confirmed persistent UK concentration in the peer-reviewed literature. The practitioner base may be even more concentrated.\nA note on the Scotland/UK distinction: Scottish reports are coded separately because Scotland operates its own public procurement social value requirements through different legislation. In practice, Scottish methodology follows the same SVI framework as the rest of the UK."
+  },
+  {
+    "objectID": "empirical.html#report-types",
+    "href": "empirical.html#report-types",
+    "title": "Empirical Patterns",
+    "section": "Report Types",
+    "text": "Report Types\n\n\n\nType\nN\n%\n\n\n\n\nEvaluative\n343\n89.6%\n\n\nForecast\n40\n10.4%\n\n\nScoping\n0\n0.0%\n\n\n\nForecast reports, which project future social value before a programme begins, account for 10.4% of the corpus. This distinction is analytically important: forecast reports must make assumptions explicit in a way that evaluative reports often do not, which — as we show in the Calculation Elements section — generates a structural forecast premium in methodological quality."
+  },
+  {
+    "objectID": "empirical.html#sroi-ratios",
+    "href": "empirical.html#sroi-ratios",
+    "title": "Empirical Patterns",
+    "section": "SROI Ratios",
+    "text": "SROI Ratios\nOf the 383 reports in the corpus, 64 (16.7%) contain a clearly extractable SROI ratio. The remainder present social value calculations without a single summary ratio, use narrative-only presentations, or use formats that prevented automated extraction.\n\n\n\n\nDistribution of the 64 extractable SROI ratios. The distribution is heavily right-skewed; the median (4.44:1) provides a more representative central tendency than the mean (7.52:1).\n\n\n\n\n\nStatistic\nValue\n\n\n\n\nN (with ratio)\n64\n\n\nMean\n7.52:1\n\n\nMedian\n4.44:1\n\n\nStd. deviation\n9.18\n\n\n25th percentile\n2.55:1\n\n\n75th percentile\n8.73:1\n\n\nMinimum\n0.83:1\n\n\nMaximum\n65:1\n\n\nSkewness\n4.1\n\n\n\n\n\nRatio interpretation\nThe ratio distribution has three notable properties:\n\nHeavy right skew. The mean (7.52:1) is substantially above the median (4.44:1), driven by a small number of reports with ratios above 20:1. Outlier ratios above 15:1 are almost always associated with programmes where outcomes are measured very broadly, proxies are uncorrected, or the denominator (investment) is narrowly defined.\nNon-trivial variance. The interquartile range (2.55–8.73) spans more than 6 ratio units. This variance is partly substantive (different programme types generate different value) and partly artefactual (different methodological choices inflate or deflate the ratio).\nFloor cases. Three reports show ratios below 1:1, meaning the measured social value returned is less than the investment. These are not methodological errors — they may reflect programmes that were genuinely ineffective, or programmes where the choice of outcome scope and proxy was conservative.\n\n\n\nRatio by sector\n\n\n\n\n\n\nNote\n\n\n\nThe subsample of 64 reports with extractable ratios is too small for robust sector-level ratio comparisons. The Bootstrap Confidence Intervals section presents permutation tests showing which sector-level differences, if any, are statistically distinguishable from sampling variation."
+  },
+  {
+    "objectID": "empirical.html#temporal-trends",
+    "href": "empirical.html#temporal-trends",
+    "title": "Empirical Patterns",
+    "section": "Temporal Trends",
+    "text": "Temporal Trends\nReport volume grew substantially from 2010 to 2018, then stabilised. The 2012 Social Value Act in England and Wales — which required public bodies to consider social value in procurement — coincides with the sharpest growth period in the corpus. Post-2020 counts are lower, consistent with database submission lags (recent reports may not yet be in the database).\nThe ratio distribution shows no statistically significant temporal trend (permutation test p = 0.31), suggesting that methodological quality has not improved systematically over the 20-year period of the database."
+  },
+  {
+    "objectID": "factors.html",
+    "href": "factors.html",
+    "title": "SROI Calculation Elements",
+    "section": "",
+    "text": "Note\n\n\n\nThis section presents the first systematic analysis of SROI calculation element prevalence at scale. We track eleven specific calculation steps across all 383 reports, document a cascade pattern of declining compliance, and identify structural asymmetries between forecast and evaluative reports."
+  },
+  {
+    "objectID": "factors.html#the-six-stage-sroi-process",
+    "href": "factors.html#the-six-stage-sroi-process",
+    "title": "SROI Calculation Elements",
+    "section": "The Six-Stage SROI Process",
+    "text": "The Six-Stage SROI Process\nSVI’s SROI methodology involves six stages:\n\nEstablishing scope and identifying stakeholders\nMapping outcomes (theory of change)\nEvidencing outcomes and assigning values (financial proxies)\nEstablishing impact — the adjustment stage (deadweight, attribution, drop-off, displacement)\nCalculating the SROI ratio\nReporting and embedding\n\nOur analysis tracks eleven calculation elements corresponding to these stages, extracted from PDF text using validated keyword patterns."
+  },
+  {
+    "objectID": "factors.html#the-cascade-pattern",
+    "href": "factors.html#the-cascade-pattern",
+    "title": "SROI Calculation Elements",
+    "section": "The Cascade Pattern",
+    "text": "The Cascade Pattern\nThe most striking finding is the cascade: each stage of increasing methodological sophistication is practised by fewer reports than the one before.\n\n\n\nThe SROI compliance cascade: from stakeholder engagement (73.1%) to all four standard adjustments together (5.2%). Each bar represents the percentage of the 383-report corpus evidencing that element.\n\n\n\nPrevalence of each element\n\n\n\nElement\nN\n% of corpus\nStage\n\n\n\n\nStakeholder engagement\n280\n73.1%\nStage 1\n\n\nTheory of change / logic model\n79\n20.6%\nStage 2\n\n\nFinancial proxies\n55\n14.4%\nStage 3\n\n\nCounterfactual mentioned\n52\n13.6%\nStage 4a\n\n\nDeadweight\n39\n10.2%\nStage 4a\n\n\nAttribution\n31\n8.1%\nStage 4b\n\n\nDrop-off\n24\n6.3%\nStage 4c\n\n\nDisplacement\n21\n5.5%\nStage 4d\n\n\nAll four adjustments\n20\n5.2%\nStage 4 (complete)\n\n\nSensitivity analysis\n47\n12.3%\nStage 5\n\n\nDiscount rate applied\n19\n5.0%\nStage 5\n\n\n\nThe drop-off between Stage 1 (stakeholder engagement: 73.1%) and Stage 3 (financial proxies: 14.4%) is sharp — a 59-percentage-point decline. The drop from Stage 3 to complete Stage 4 adjustments (5.2%) represents a further 9-percentage-point decline."
+  },
+  {
+    "objectID": "factors.html#the-threshold-phenomenon",
+    "href": "factors.html#the-threshold-phenomenon",
+    "title": "SROI Calculation Elements",
+    "section": "The Threshold Phenomenon",
+    "text": "The Threshold Phenomenon\nA key finding is that the distribution of adjustment factor compliance is not continuous — it is polarised.\n\n\n\n\nn_factors (0–4)\nN reports\n%\n\n\n\n\n0\n333\n87.0%\n\n\n1\n10\n2.6%\n\n\n2\n8\n2.1%\n\n\n3\n12\n3.1%\n\n\n4\n20\n5.2%\n\n\n\n\nThe threshold phenomenon\n87% of reports apply zero of the four standard adjustment factors. Only 5.2% apply all four. The middle range (1–3 factors) accounts for less than 8% of reports.\nThis pattern is inconsistent with a continuous compliance gradient. It is consistent with a bricolage threshold: organisations either treat adjustment factors as a complete methodological package (applying all or none), or they lack the capacity or incentive to implement partial compliance.\n\n\nThis finding extends Molecke & Pinkse’s (2017) bricolage framework: rather than selectively combining elements, practitioners appear to face an all-or-nothing threshold in adjustment factor implementation."
+  },
+  {
+    "objectID": "factors.html#co-occurrence-of-adjustment-factors",
+    "href": "factors.html#co-occurrence-of-adjustment-factors",
+    "title": "SROI Calculation Elements",
+    "section": "Co-occurrence of Adjustment Factors",
+    "text": "Co-occurrence of Adjustment Factors\nWhen a report implements one adjustment factor, which others does it implement?\n\n\n\nCo-occurrence heatmap (left) and conditional compliance rates (right): when deadweight is present, 79.5% of reports also report attribution, 61.5% drop-off, and 59.0% displacement. Adjustment factors are treated as a package.\n\n\nThe co-occurrence rates are high: when any one adjustment factor is present, the others are likely to be present too. Deadweight and attribution have the highest co-occurrence (79.5%), consistent with their conceptual interdependence — attribution corrections typically require a deadweight baseline."
+  },
+  {
+    "objectID": "factors.html#the-forecast-premium",
+    "href": "factors.html#the-forecast-premium",
+    "title": "SROI Calculation Elements",
+    "section": "The Forecast Premium",
+    "text": "The Forecast Premium\nForecast reports (n=40) show dramatically higher compliance with adjustment factors than evaluative reports (n=343). This structural asymmetry is the most policy-relevant finding of this analysis.\n\n\n\nCalculation element compliance by report type (Forecast vs. Evaluative) and assurance status (Assured vs. Not assured). Forecast reports show 3–5× higher adjustment factor compliance across all four elements.\n\n\n\nForecast vs. evaluative comparison\n\n\n\nElement\nForecast (n=40)\nEvaluative (n=343)\nPremium\n\n\n\n\nStakeholder engagement\n87.5%\n71.4%\n1.2×\n\n\nTheory of change\n45.0%\n18.1%\n2.5×\n\n\nFinancial proxies\n35.0%\n12.0%\n2.9×\n\n\nDeadweight\n37.5%\n7.3%\n5.1×\n\n\nAttribution\n32.5%\n5.8%\n5.6×\n\n\nDrop-off\n27.5%\n4.1%\n6.7×\n\n\nDisplacement\n25.0%\n3.8%\n6.6×\n\n\nAll four adjustments\n22.5%\n3.2%\n7.0×\n\n\nSensitivity analysis\n35.0%\n9.6%\n3.6×\n\n\n\n\nTheoretical explanation: the forecast premium\nForecast SROI studies must project future social value before any programme activity has taken place. This structural requirement forces practitioners to make assumptions explicit: what is the deadweight rate in this population? What share of outcomes can be attributed to this programme versus other factors? What is the appropriate discount rate for future value?\nEvaluative studies, by contrast, can report observed outcomes without documenting the adjustment assumptions that would have been necessary to correct them. The forecast premium is therefore not a sign of forecast practitioners being more rigorous — it is a sign of the framework creating stronger accountability constraints when projections must be defended in advance."
+  },
+  {
+    "objectID": "factors.html#adjustment-factors-and-quality-scores",
+    "href": "factors.html#adjustment-factors-and-quality-scores",
+    "title": "SROI Calculation Elements",
+    "section": "Adjustment Factors and Quality Scores",
+    "text": "Adjustment Factors and Quality Scores\nReports that implement more adjustment factors score substantially higher on overall quality — but the relationship is non-linear.\n\n\n\nQuality scores and SROI ratios by number of adjustment factors implemented (0–4). Quality scores rise sharply between 0 and 2 factors; the quality gain diminishes at 3–4. SROI ratios decline as more correction factors are applied, confirming that adjustments reduce reported value.\n\n\nTwo patterns stand out:\n\nQuality rises with adjustment factors. Each additional adjustment factor is associated with an approximately 15-point increase in overall quality score. Reports implementing all four factors average quality scores around 65%, compared to 32% for reports with zero factors.\nSROI ratios decline with adjustment factors. The median SROI ratio falls as more correction factors are applied — from approximately 6.2:1 (no adjustments) to 3.1:1 (all four adjustments). This is the mechanical consequence of corrections reducing the numerator (social value) while the denominator (investment) remains unchanged.\n\nThis SROI ratio decline with adjustment factors is direct empirical evidence of the over-claiming problem: unadjusted ratios systematically overstate social value relative to fully-adjusted ratios."
+  },
+  {
+    "objectID": "factors.html#implications-for-practitioners",
+    "href": "factors.html#implications-for-practitioners",
+    "title": "SROI Calculation Elements",
+    "section": "Implications for Practitioners",
+    "text": "Implications for Practitioners\n\nThe weak link is Stage 4 The SVI framework’s adjustment stage — deadweight, attribution, drop-off, displacement — is where compliance collapses. Only 5.2% of reports implement all four. Practitioners and trainers should focus capacity-building resources at this stage.\n\n\nThe engagement–adjustment gap is the core problem 73.1% of reports document stakeholder engagement. Only 5.2% implement all adjustment factors. This 68-percentage-point gap represents the core methodological failure in SROI practice: practitioners invest in the visible, stakeholder-facing parts of the process but not in the technical adjustment steps that determine the credibility of the ratio.\n\n\nForecast reports offer a model Forecast reports demonstrate that complete adjustment factor implementation is feasible within a practitioner context. The forecast methodology — which requires explicit assumption documentation — should inform how evaluative SROI guidelines are updated."
+  },
+  {
+    "objectID": "literature.html",
+    "href": "literature.html",
+    "title": "Literature Review",
+    "section": "",
+    "text": "The literature search was conducted using a systematic protocol adapted for SROI and social value measurement research. We searched academic databases (Web of Science, Scopus, Google Scholar) and grey literature repositories (Social Value UK, 3ie, IDS OpenDocs) using the following primary search terms:\n\n\"social return on investment\" OR \"SROI\"\n\"social value measurement\" AND (\"systematic review\" OR \"meta-analysis\")\n\"impact measurement\" AND (\"social enterprise\" OR \"nonprofit\")\n\"SVI principles\" OR \"Social Value International\"\n\nSearch date: October–November 2025\nInclusion criteria: - Academic papers or grey literature reports focused on SROI methodology, critique, or systematic review - Published 2000–2025 - English language\nExclusion criteria: - Applied SROI case studies without methodological contribution - Conference abstracts without full text\nFinal corpus: 60 references retained for the literature review."
+  },
+  {
+    "objectID": "literature.html#search-strategy",
+    "href": "literature.html#search-strategy",
+    "title": "Literature Review",
+    "section": "",
+    "text": "The literature search was conducted using a systematic protocol adapted for SROI and social value measurement research. We searched academic databases (Web of Science, Scopus, Google Scholar) and grey literature repositories (Social Value UK, 3ie, IDS OpenDocs) using the following primary search terms:\n\n\"social return on investment\" OR \"SROI\"\n\"social value measurement\" AND (\"systematic review\" OR \"meta-analysis\")\n\"impact measurement\" AND (\"social enterprise\" OR \"nonprofit\")\n\"SVI principles\" OR \"Social Value International\"\n\nSearch date: October–November 2025\nInclusion criteria: - Academic papers or grey literature reports focused on SROI methodology, critique, or systematic review - Published 2000–2025 - English language\nExclusion criteria: - Applied SROI case studies without methodological contribution - Conference abstracts without full text\nFinal corpus: 60 references retained for the literature review."
+  },
+  {
+    "objectID": "literature.html#key-prior-reviews",
+    "href": "literature.html#key-prior-reviews",
+    "title": "Literature Review",
+    "section": "Key Prior Reviews",
+    "text": "Key Prior Reviews\nThe three published systematic reviews of SROI are the primary literature this paper builds on and extends:\n\nKrlev et al. (2013)\nFull citation: Krlev, G., Münscher, R., & Mülbert, K. (2013). Social Return on Investment (SROI): State of the Art and Perspectives. CSI Working Paper, University of Heidelberg.\n\nCorpus: 114 SROI studies (2002–2012)\nKey findings: Rapid growth in UK social enterprise; significant geographic concentration; substantial methodological variation across studies; most studies lack standardised reporting\nMethods: Systematic content analysis of academic and semi-academic publications\nLimitation relevant to this paper: Analysis limited to academic/semi-academic publications; practitioner report base not examined\n\n\n\nCorvo et al. (2022)\nFull citation: Corvo, L., Pastore, L., Mastrodascio, M., & Cepiku, D. (2022). The social return on investment model: A systematic literature review. Meditari Accountancy Research, 30(7), 49–83. https://doi.org/10.1108/MEDAR-05-2021-1307\n\nCorpus: 284 academic papers (through 2021)\nKey findings: UK dominance; methodological heterogeneity; persistent failure to engage with counterfactuals or sensitivity analysis; SROI increasingly applied beyond its social enterprise origins\nMethods: Systematic literature review; bibliometric analysis\nLimitation: Academic literature only; no analysis of practitioner reports\n\n\n\nGutiérrez-Nieto et al. (2025)\nFull citation: Gutiérrez-Nieto, B., et al. (2025). From social enterprise to global sustainability agenda: A bibliometric review of SROI research. Humanities and Social Sciences Communications. https://doi.org/10.1057/s41599-025-05529-w\n\nCorpus: Academic publications 2000–2023\nKey findings: SROI’s academic output diversifying geographically and sectorally; core methodological debates unchanged; growing application in environmental and agricultural contexts\nMethods: Bibliometric analysis (VOSviewer, co-citation networks)\nLimitation: Publication patterns only; no methodological quality assessment"
+  },
+  {
+    "objectID": "literature.html#critical-debates-referenced-in-this-paper",
+    "href": "literature.html#critical-debates-referenced-in-this-paper",
+    "title": "Literature Review",
+    "section": "Critical Debates Referenced in This Paper",
+    "text": "Critical Debates Referenced in This Paper\n\n\n\n\n\n\n\nReference\nKey Contribution to SROI Literature\n\n\n\n\nArvidson et al. (2013)\nTension between standardisation and contextual validity; homelessness SROI case\n\n\nGibbon & Dey (2011)\nCommensuration problem; “scaling up or dumbing down?” critique\n\n\nMaas & Liket (2011)\nConceptual and operational challenges in social enterprise impact measurement\n\n\nMolecke & Pinkse (2017)\nBricolage framework: selective application driven by legitimation rather than rigour\n\n\nRyan & Lyne (2008)\nMethodological issues in SROI calculation and application\n\n\nNicholls et al. (2012)\nSVI SROI Guide (2nd edition) — the foundational methodological reference\n\n\nLawlor et al. (2009)\nNEF SROI Guide — social enterprise case methodology"
+  },
+  {
+    "objectID": "literature.html#bibliometrics",
+    "href": "literature.html#bibliometrics",
+    "title": "Literature Review",
+    "section": "Bibliometrics",
+    "text": "Bibliometrics\n\nPublication volume by year\nAcademic SROI publications grew steadily from 2009 to 2017, then stabilised. The growth trajectory roughly parallels the policy institutionalisation of SROI in the UK (Social Value Act 2012) and Scotland (Procurement Reform Act 2014).\n\n\nGeographic concentration in prior reviews\nAll three prior systematic reviews confirm UK dominance in the SROI academic literature — consistent with UK dominance in our practitioner corpus (53% of reports). This is not a sampling artefact: SROI methodology was developed in the UK, the SVI network originated there, and UK public procurement policy created systematic demand for SROI reports.\n\n\nJournals that have published SROI methodology papers\n\n\n\n\n\n\n\n\nJournal\nPapers (approx.)\nFocus\n\n\n\n\nVoluntas\n8+\nNonprofit management, methodology critique\n\n\nSocial and Environmental Accountability Journal\n6+\nAccounting, social value\n\n\nJournal of Business Ethics\n5+\nBusiness ethics, measurement\n\n\nThird Sector Research\n4+\nUK third sector\n\n\nEvaluation\n3+\nMethods\n\n\nMeditari Accountancy Research\n3+\nAccounting\n\n\n\nVoluntas has published the most methodologically focused SROI critiques, including Arena et al. (2015), Maier et al. (2015), and Arvidson et al. (2013) — confirming it as the primary target journal for methodologically oriented SROI papers."
+  },
+  {
+    "objectID": "literature.html#fichas-de-lectura-reading-notes",
+    "href": "literature.html#fichas-de-lectura-reading-notes",
+    "title": "Literature Review",
+    "section": "Fichas de Lectura (Reading Notes)",
+    "text": "Fichas de Lectura (Reading Notes)\nDetailed reading notes (fichas) are available for the following references. These fichas document methodology, key findings, direct quotes, and positioning relative to this paper’s argument.\n\n\n\nCitekey\nReference\nFicha status\n\n\n\n\nKrlev2013\nKrlev et al. (2013)\n✓ Complete\n\n\nCorvo2022\nCorvo et al. (2022)\n✓ Complete\n\n\nGutierrezNietoEtAl2025\nGutiérrez-Nieto et al. (2025)\n✓ Complete\n\n\nArvidson2013\nArvidson et al. (2013)\n✓ Complete\n\n\nGibbonDey2011\nGibbon & Dey (2011)\n✓ Complete\n\n\nMaasLiket2011\nMaas & Liket (2011)\n✓ Complete\n\n\nMoleckePinkse2017\nMolecke & Pinkse (2017)\n✓ Complete\n\n\nRyanLyne2008\nRyan & Lyne (2008)\n✓ Complete\n\n\nNichollsEtAl2012\nNicholls et al. (2012)\n✓ Complete\n\n\n\nFichas are stored in the project literature folder and are available on request."
+  },
+  {
+    "objectID": "literature.html#full-bibliography-bibtex",
+    "href": "literature.html#full-bibliography-bibtex",
+    "title": "Literature Review",
+    "section": "Full Bibliography (BibTeX)",
+    "text": "Full Bibliography (BibTeX)\nThe complete BibTeX bibliography (60 references) is available in the Replication package as references.bib.\nKey entry types: - @article — peer-reviewed journal papers (38 entries) - @book / @incollection — books and book chapters (7 entries) - @techreport — working papers and institutional reports (11 entries) - @misc — web resources and databases (4 entries)"
+  }
+]

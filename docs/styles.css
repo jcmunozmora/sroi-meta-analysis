@@ -1,0 +1,194 @@
+/* ─── Typography ─────────────────────────────────────────────────────────── */
+body {
+  font-family: "Source Serif Pro", Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #2c3e50;
+}
+
+code, pre {
+  font-family: "Source Code Pro", "Fira Code", monospace;
+}
+
+/* ─── Hero / landing banner ─────────────────────────────────────────────── */
+.hero-banner {
+  background: linear-gradient(135deg, #1a3a4f 0%, #2e7d9f 60%, #4db6ac 100%);
+  color: white;
+  padding: 4rem 2rem 3rem 2rem;
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-banner h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+  color: white;
+}
+
+.hero-banner .subtitle {
+  font-size: 1.15rem;
+  opacity: 0.88;
+  margin-bottom: 1.5rem;
+}
+
+.hero-banner .meta {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* ─── Stat cards ─────────────────────────────────────────────────────────── */
+.stat-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.stat-card strong {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a3a4f;
+  line-height: 1.1;
+  margin-bottom: 0.3rem;
+}
+
+.stat-card .stat-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a3a4f;
+  line-height: 1.1;
+  margin-bottom: 0.3rem;
+}
+
+.stat-card .stat-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.stat-card .stat-ci {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-top: 0.2rem;
+}
+
+/* ─── Finding cards ─────────────────────────────────────────────────────── */
+.finding-card {
+  border-left: 4px solid #2e7d9f;
+  background: #f0f7ff;
+  padding: 1rem 1.25rem;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 1rem;
+}
+
+.finding-card.warning {
+  border-left-color: #e67e22;
+  background: #fff8f0;
+}
+
+.finding-card.success {
+  border-left-color: #27ae60;
+  background: #f0fff5;
+}
+
+.finding-card strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+}
+
+/* ─── Section headers ────────────────────────────────────────────────────── */
+h2 {
+  color: #1a3a4f;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.4rem;
+  margin-top: 2.5rem;
+}
+
+h3 {
+  color: #2e5070;
+}
+
+/* ─── Tables ─────────────────────────────────────────────────────────────── */
+.table thead {
+  background-color: #1a3a4f;
+  color: white;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(46, 125, 159, 0.05);
+}
+
+/* ─── Code blocks ────────────────────────────────────────────────────────── */
+pre.sourceCode {
+  background: #1e2a35;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+/* ─── Callout overrides ──────────────────────────────────────────────────── */
+.callout-note {
+  border-left-color: #2e7d9f;
+}
+
+.callout-important {
+  border-left-color: #e74c3c;
+}
+
+/* ─── Figure captions ────────────────────────────────────────────────────── */
+figcaption {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 0.4rem;
+  font-style: italic;
+}
+
+/* ─── Nav bar ────────────────────────────────────────────────────────────── */
+.navbar {
+  background-color: #1a3a4f !important;
+}
+
+.navbar-brand, .navbar .nav-link {
+  color: rgba(255,255,255,0.9) !important;
+}
+
+.navbar .nav-link:hover {
+  color: #4db6ac !important;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+.page-footer {
+  background: #f1f5f9;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* ─── Grid helpers ────────────────────────────────────────────────────────── */
+.grid-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .hero-banner h1 { font-size: 1.5rem; }
+}

@@ -1,0 +1,17 @@
+,value
+obs_median_ratio,4.4399999999999995
+mc_corrected_median_mean,2.230290696026959
+mc_corrected_median_ci_lo,1.930508203644363
+mc_corrected_median_ci_hi,2.5781903581070944
+implied_overstatement_median_pct,99.07718791588101
+obs_mean_ratio,6.797187500000001
+mc_corrected_mean_mean,4.422254141684873
+implied_overstatement_mean_pct,53.70413554319791
+permutation_F_obs,1.2264707700497077
+permutation_p,0.2666
+bootstrap_assurance_gap_mean,19.88661696840611
+bootstrap_assurance_gap_ci_lo,14.74447233632538
+bootstrap_assurance_gap_ci_hi,25.074958162178596
+bootstrap_overall_quality_mean,41.18989361702128
+bootstrap_overall_quality_ci_lo,39.24787234042553
+bootstrap_overall_quality_ci_hi,43.08886968085106

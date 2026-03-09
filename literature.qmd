@@ -1,0 +1,130 @@
+---
+title: "Literature Review"
+subtitle: "Systematic Search, Corpus, and Bibliometrics"
+---
+
+## Search Strategy
+
+The literature search was conducted using a systematic protocol adapted for SROI and social value measurement research. We searched academic databases (Web of Science, Scopus, Google Scholar) and grey literature repositories (Social Value UK, 3ie, IDS OpenDocs) using the following primary search terms:
+
+- `"social return on investment" OR "SROI"`
+- `"social value measurement" AND ("systematic review" OR "meta-analysis")`
+- `"impact measurement" AND ("social enterprise" OR "nonprofit")`
+- `"SVI principles" OR "Social Value International"`
+
+**Search date:** October–November 2025
+
+**Inclusion criteria:**
+- Academic papers or grey literature reports focused on SROI methodology, critique, or systematic review
+- Published 2000–2025
+- English language
+
+**Exclusion criteria:**
+- Applied SROI case studies without methodological contribution
+- Conference abstracts without full text
+
+**Final corpus:** 60 references retained for the literature review.
+
+---
+
+## Key Prior Reviews
+
+The three published systematic reviews of SROI are the primary literature this paper builds on and extends:
+
+### Krlev et al. (2013)
+
+**Full citation:** Krlev, G., Münscher, R., & Mülbert, K. (2013). *Social Return on Investment (SROI): State of the Art and Perspectives*. CSI Working Paper, University of Heidelberg.
+
+- **Corpus:** 114 SROI studies (2002–2012)
+- **Key findings:** Rapid growth in UK social enterprise; significant geographic concentration; substantial methodological variation across studies; most studies lack standardised reporting
+- **Methods:** Systematic content analysis of academic and semi-academic publications
+- **Limitation relevant to this paper:** Analysis limited to academic/semi-academic publications; practitioner report base not examined
+
+### Corvo et al. (2022)
+
+**Full citation:** Corvo, L., Pastore, L., Mastrodascio, M., & Cepiku, D. (2022). The social return on investment model: A systematic literature review. *Meditari Accountancy Research*, 30(7), 49–83. https://doi.org/10.1108/MEDAR-05-2021-1307
+
+- **Corpus:** 284 academic papers (through 2021)
+- **Key findings:** UK dominance; methodological heterogeneity; persistent failure to engage with counterfactuals or sensitivity analysis; SROI increasingly applied beyond its social enterprise origins
+- **Methods:** Systematic literature review; bibliometric analysis
+- **Limitation:** Academic literature only; no analysis of practitioner reports
+
+### Gutiérrez-Nieto et al. (2025)
+
+**Full citation:** Gutiérrez-Nieto, B., et al. (2025). From social enterprise to global sustainability agenda: A bibliometric review of SROI research. *Humanities and Social Sciences Communications*. https://doi.org/10.1057/s41599-025-05529-w
+
+- **Corpus:** Academic publications 2000–2023
+- **Key findings:** SROI's academic output diversifying geographically and sectorally; core methodological debates unchanged; growing application in environmental and agricultural contexts
+- **Methods:** Bibliometric analysis (VOSviewer, co-citation networks)
+- **Limitation:** Publication patterns only; no methodological quality assessment
+
+---
+
+## Critical Debates Referenced in This Paper
+
+| Reference | Key Contribution to SROI Literature |
+|-----------|-------------------------------------|
+| Arvidson et al. (2013) | Tension between standardisation and contextual validity; homelessness SROI case |
+| Gibbon & Dey (2011) | Commensuration problem; "scaling up or dumbing down?" critique |
+| Maas & Liket (2011) | Conceptual and operational challenges in social enterprise impact measurement |
+| Molecke & Pinkse (2017) | Bricolage framework: selective application driven by legitimation rather than rigour |
+| Ryan & Lyne (2008) | Methodological issues in SROI calculation and application |
+| Nicholls et al. (2012) | SVI SROI Guide (2nd edition) — the foundational methodological reference |
+| Lawlor et al. (2009) | NEF SROI Guide — social enterprise case methodology |
+
+---
+
+## Bibliometrics
+
+### Publication volume by year
+
+Academic SROI publications grew steadily from 2009 to 2017, then stabilised. The growth trajectory roughly parallels the policy institutionalisation of SROI in the UK (Social Value Act 2012) and Scotland (Procurement Reform Act 2014).
+
+### Geographic concentration in prior reviews
+
+All three prior systematic reviews confirm UK dominance in the SROI academic literature — consistent with UK dominance in our practitioner corpus (53% of reports). This is not a sampling artefact: SROI methodology was developed in the UK, the SVI network originated there, and UK public procurement policy created systematic demand for SROI reports.
+
+### Journals that have published SROI methodology papers
+
+| Journal | Papers (approx.) | Focus |
+|---------|-----------------|-------|
+| Voluntas | 8+ | Nonprofit management, methodology critique |
+| Social and Environmental Accountability Journal | 6+ | Accounting, social value |
+| Journal of Business Ethics | 5+ | Business ethics, measurement |
+| Third Sector Research | 4+ | UK third sector |
+| Evaluation | 3+ | Methods |
+| Meditari Accountancy Research | 3+ | Accounting |
+
+**Voluntas** has published the most methodologically focused SROI critiques, including Arena et al. (2015), Maier et al. (2015), and Arvidson et al. (2013) — confirming it as the primary target journal for methodologically oriented SROI papers.
+
+---
+
+## Fichas de Lectura (Reading Notes)
+
+Detailed reading notes (fichas) are available for the following references. These fichas document methodology, key findings, direct quotes, and positioning relative to this paper's argument.
+
+| Citekey | Reference | Ficha status |
+|---------|-----------|-------------|
+| Krlev2013 | Krlev et al. (2013) | ✓ Complete |
+| Corvo2022 | Corvo et al. (2022) | ✓ Complete |
+| GutierrezNietoEtAl2025 | Gutiérrez-Nieto et al. (2025) | ✓ Complete |
+| Arvidson2013 | Arvidson et al. (2013) | ✓ Complete |
+| GibbonDey2011 | Gibbon & Dey (2011) | ✓ Complete |
+| MaasLiket2011 | Maas & Liket (2011) | ✓ Complete |
+| MoleckePinkse2017 | Molecke & Pinkse (2017) | ✓ Complete |
+| RyanLyne2008 | Ryan & Lyne (2008) | ✓ Complete |
+| NichollsEtAl2012 | Nicholls et al. (2012) | ✓ Complete |
+
+Fichas are stored in the project literature folder and are available on request.
+
+---
+
+## Full Bibliography (BibTeX)
+
+The complete BibTeX bibliography (60 references) is available in the [Replication](replication.qmd) package as `references.bib`.
+
+Key entry types:
+- `@article` — peer-reviewed journal papers (38 entries)
+- `@book` / `@incollection` — books and book chapters (7 entries)
+- `@techreport` — working papers and institutional reports (11 entries)
+- `@misc` — web resources and databases (4 entries)

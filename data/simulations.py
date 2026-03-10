@@ -27,7 +27,7 @@ B = 10_000   # bootstrap / permutation replications
 
 # ── Paths & style ─────────────────────────────────────────────────────────────
 BASE   = Path(__file__).parent.parent
-DATA   = BASE / "data" / "sroi_clean_dataset.csv"
+DATA   = BASE / "data" / "sroi_clean_dataset_v3.csv"
 FIGDIR = BASE / "figures"
 FIGDIR.mkdir(exist_ok=True)
 
@@ -313,8 +313,9 @@ DS_ALPHA, DS_BETA   = 1.4, 26.6   # displacement
 HORIZON             = 2            # typical reporting horizon (years)
 N_SIM               = 50_000       # Monte Carlo iterations
 
-ratios = df["sroi_ratio_value"].dropna().values
-p5     = df.loc[df["sroi_ratio_value"].notna(), "p5_do_not_overclaim"].values
+_ratio_mask = df["sroi_ratio_lpdf"].notna() & (df["sroi_ratio_lpdf"] <= 50)
+ratios = df.loc[_ratio_mask, "sroi_ratio_lpdf"].values
+p5     = df.loc[_ratio_mask, "p5_do_not_overclaim_llm"].values
 
 print(f"\nRatio sample: n={len(ratios)}")
 print(f"P5 compliance distribution in ratio subset:")
@@ -448,12 +449,12 @@ ax.set_title(f"(b) Distribution of MC-corrected median ratios\n"
              fontsize=10)
 ax.legend(fontsize=8.5)
 
-fig.suptitle(
-    "Figure 10. Monte Carlo simulation of SROI ratio bias from non-compliance with P5\n"
-    "Adjustment factors: deadweight Beta(3.5,10.5) ~ 25%; attribution Beta(3.2,12.8) ~ 20%;\n"
-    "drop-off Beta(2.3,20.7) ~ 10%/yr over 2 years; displacement Beta(1.4,26.6) ~ 5%",
-    fontsize=9, y=1.02
-)
+# fig.suptitle(
+#     "Figure 10. Monte Carlo simulation of SROI ratio bias from non-compliance with P5\n"
+#     "Adjustment factors: deadweight Beta(3.5,10.5) ~ 25%; attribution Beta(3.2,12.8) ~ 20%;\n"
+#     "drop-off Beta(2.3,20.7) ~ 10%/yr over 2 years; displacement Beta(1.4,26.6) ~ 5%",
+#     fontsize=9, y=1.02
+# )
 plt.tight_layout()
 plt.savefig(FIGDIR / "fig10_mc_ratio_bias.pdf", bbox_inches="tight")
 plt.savefig(FIGDIR / "fig10_mc_ratio_bias.png", bbox_inches="tight", dpi=200)
@@ -479,11 +480,11 @@ ax.axhline(mc_median_mean, color=GREEN, lw=1.5, linestyle="--",
            label=f"Corrected median ({mc_median_mean:.2f}:1)")
 ax.set_xlabel("Reports sorted by observed SROI ratio")
 ax.set_ylabel("SROI ratio")
-ax.set_title(
-    "Figure 11. Observed vs. MC-corrected SROI ratios with 95% uncertainty intervals\n"
-    "(sorted by observed ratio; corrected for deadweight, attribution, drop-off, displacement)",
-    fontsize=10, loc="left"
-)
+# ax.set_title(
+#     "Figure 11. Observed vs. MC-corrected SROI ratios with 95% uncertainty intervals\n"
+#     "(sorted by observed ratio; corrected for deadweight, attribution, drop-off, displacement)",
+#     fontsize=10, loc="left"
+# )
 ax.legend(fontsize=8.5, loc="upper left")
 ax.set_yscale("log")
 ax.set_ylabel("SROI ratio (log scale)")
@@ -552,11 +553,11 @@ for ax, (label, (dw_m, at_m, do_m, ds_m)) in zip(axes, scenarios.items()):
     if ax == axes[0]:
         ax.set_ylabel("Frequency")
 
-fig.suptitle(
-    "Figure 12. Sensitivity analysis: implied SROI ratio overstatement under different\n"
-    "assumptions for deadweight (DW), attribution (AT), drop-off, and displacement",
-    fontsize=10
-)
+# fig.suptitle(
+#     "Figure 12. Sensitivity analysis: implied SROI ratio overstatement under different\n"
+#     "assumptions for deadweight (DW), attribution (AT), drop-off, and displacement",
+#     fontsize=10
+# )
 plt.tight_layout()
 plt.savefig(FIGDIR / "fig12_mc_sensitivity.pdf", bbox_inches="tight")
 plt.savefig(FIGDIR / "fig12_mc_sensitivity.png", bbox_inches="tight", dpi=200)

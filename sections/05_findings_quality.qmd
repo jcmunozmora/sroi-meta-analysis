@@ -1,0 +1,147 @@
+# Findings: Methodological Quality
+
+## Overall Compliance with SVI Principles
+
+Across 376 reports with extractable PDF text, keyword-based quality scores average 6.59 out of 16 (41.2%; 95% CI: 39.2%--43.1%). LLM-validated scores (Agent A, `gpt-4o-mini`) average 2.98 out of 16 (18.6%). Agent C (`gpt-4o`, SROI practitioner persona), applied to all 383 reports, yields an overall compliance of 20.2% --- converging closely with Agent A and confirming that both LLM-based estimates are robust to model choice and framing. All three methods agree on the rank ordering of principles; they disagree on magnitude, with the keyword method generating 954 false positives and 186 false negatives relative to the LLM coder. Both LLM estimates (18.6% and 20.2%) are conservative lower bounds: their convergence provides strong evidence that the keyword ceiling substantially overstates compliance, but establishing a reliable point estimate would require systematic human expert coding on a larger stratified sample. The keyword distribution is right-skewed and non-normal (Shapiro-Wilk W=0.95, p<0.001; Figure 3a), confirming that low compliance is the dominant pattern in the corpus.
+
+## Principle-by-Principle Analysis
+
+Table 3 and Figure 2 present average scores for each principle under all three measures, ranked by keyword score from lowest to highest compliance. All three methods agree on ordering; the gap between keyword and both LLM estimates is widest for P3, P4, and P6, where generic vocabulary creates the most false positives. The two LLM methods (Agent A and Agent C) yield closely convergent estimates for most principles, providing strong corroboration that the ~20% compliance finding is robust.
+
+| Principle | KW % | LLM-A % | Agent C % | KW FP | KW FN |
+|-----------|-----:|---------:|----------:|------:|------:|
+| P5: Do not over-claim | 14.0% | **11.2%** | **8.4%** | 32 | 59 |
+| P4: Only include material | 24.2% | **2.9%** | **16.4%** | 136 | 5 |
+| P7: Verify the result | 36.0% | **10.8%** | **10.8%** | 140 | 14 |
+| P8: Be responsive | 38.7% | **21.3%** | **18.5%** | 108 | 65 |
+| P3: Value what matters | 42.7% | **6.4%** | **23.9%** | 232 | 2 |
+| P6: Be transparent | 55.1% | **25.2%** | **13.7%** | 142 | 27 |
+| P1: Involve stakeholders | 55.3% | **22.6%** | **31.7%** | 127 | 12 |
+| P2: Understand what changes | 64.0% | **48.7%** | **37.7%** | 37 | 2 |
+| **Overall % of max** | **40.4%** | **18.6%** | **20.2%** | **954** | **186** |
+
+**Table 3: Compliance with SVI's eight principles --- three-method comparison (n=383 reports)**
+*KW = keyword score (upper bound); LLM-A = GPT-4o-mini systematic coder; Agent C = GPT-4o SROI practitioner persona. FP/FN = keyword false positives/negatives relative to LLM-A across full corpus.*
+
+![Compliance with SVI's eight reporting principles.](figures/fig2_quality_by_principle.png){#fig-principles width=100%}
+
+![Distribution of overall quality scores and comparison by assurance status.](figures/fig3_quality_distribution.png){#fig-qdist width=100%}
+
+The results reveal a striking gradient. Both measures agree that compliance is highest for the principles closest to SROI's basic identity: understanding what changes (P2, keyword 1.28/2; LLM 0.97/2) and involving stakeholders (P1, keyword 1.11/2; LLM 0.45/2). P2 is the only principle where the LLM score is reasonably close to the keyword score (ratio 0.76), reflecting that outcome mapping language is specific enough that keyword detection is more reliable.
+
+Compliance drops markedly for the principles requiring more advanced methodological work. The "do not over-claim" principle (P5) shows the lowest keyword score (0.28/2) and is the only principle where false negatives (59) substantially outnumber false positives (32) --- the keyword method actually *under-identifies* this principle because technical adjustment terms appear in contexts keywords miss. The LLM score (0.23/2) is close to the keyword estimate, making P5 the most reliably measured principle. The "only include what is material" principle (P4) shows the largest false positive problem: 136 false positives against only 5 false negatives, driven by the ubiquity of the word "material" in SROI reports regardless of whether a genuine materiality assessment is conducted. Fewer than 3% of reports substantively address materiality by the LLM estimate.
+
+The most severe false positive inflation affects P3 (value what matters), with 232 false positives: the word "value" appears in every SROI title. The LLM corrects this to 6.4% of maximum, a fivefold downward revision from the keyword estimate of 42.5%. Critically, 6.4% measures *documented* proxy justification, not proxy use: any report that calculates a ratio has used proxies, but the majority did so without foregrounding selection criteria in language the rubric targets.
+
+This compliance gradient is consistent with @Ebrahim2005's accountability myopia prediction. Compliance is highest for P2 (understanding what changes: 48.7% LLM) and P1 (involving stakeholders: 22.6% LLM) --- the principles most legible to funders and commissioners, and the ones whose outputs (an outcome list, a stakeholder section) appear in every report's introduction. Compliance is lowest for P5 (do not over-claim: 11.2% LLM) and P4 (materiality: 2.9% LLM) --- the principles that require technical documentation of adjustments that would *reduce* the ratio. Organizations under funder pressure to demonstrate high social returns face structural incentives to comply with the visible principles and avoid the ones that would lower their headline figure.
+
+### Expert-Calibrated Validation
+
+Agent C (kappa vs. LLM-A = 0.44) confirms the bias direction: keyword scoring produces 24 false positives in the 80-decision IRR sample versus only 15 for LLM Agent A, with agreement weakest for P4 and P6. These findings provide large-scale empirical support for @MaasLiket2011 and @GibbonDey2011's argument that attribution and materiality are SROI's most demanding and most frequently violated requirements.
+
+## Assured versus Non-Assured Reports
+
+Reports identified as having received SVI Report Assurance (n=63) score significantly higher on the quality rubric than non-assured reports (n=314; Figure 3). The three-method comparison reveals a nuanced picture of assurance effects that goes beyond a simple quality gap.
+
+**On the keyword score (upper bound):** assured reports average 57.7% vs. 37.6% for non-assured: a gap of 20.1 percentage points that is large and highly significant (t=8.41, p<0.001, Cohen's d=1.07). The large effect size suggests that the SROI vocabulary associated with quality principles --- deadweight, attribution, sensitivity analysis, materiality --- is substantially more present in assured reports.
+
+**On the LLM score (conservative estimate):** the gap narrows considerably. Assured reports average 22.9% vs. 18.1% for non-assured: a gap of only 4.8 percentage points (t=2.70, p=0.007, Cohen's d=0.37, moderate). The Mann-Whitney U test confirms significance (p=0.021). This gap is real and meaningful, but it is less than a quarter of the keyword gap.
+
+**On the Agent C score (expert-calibrated estimate):** the gap is intermediate. Assured reports average 30.0% vs. 18.6% for non-assured: a gap of 11.4 percentage points (t=5.91, p<0.001, Cohen's d=0.62, medium-large).
+
+| Quality measure | Assured (n=63) | Not assured (n=314) | Gap | Cohen's d | p |
+|-----------------|:--------------:|:-------------------:|:---:|:---------:|:-:|
+| Keyword (upper bound) | 57.7% | 37.6% | +20.1pp | 1.07 | <0.001 |
+| LLM Agent A (conservative) | 22.9% | 18.1% | +4.8pp | 0.37 | 0.007 |
+| Agent C (expert-calibrated) | 30.0% | 18.6% | +11.4pp | 0.62 | <0.001 |
+
+**Table 4: Quality score by assurance status under all three measures**
+
+The divergence across measures is itself a key finding. The keyword gap (d=1.07) is nearly three times the LLM gap (d=0.37), and Agent C lies between them. This pattern suggests that a substantial component of the keyword assurance premium reflects *compliance language* --- the vocabulary of SROI principles embedded in assured reports' prose --- rather than substantive methodological implementation. Assured reports are written to *sound* more compliant; whether they are substantively more rigorous is a more contested question, and the LLM estimate suggests the substantive gap is considerably smaller than the keyword gap implies.
+
+This interpretation is consistent with SVI's own published description of Report Assurance as a principles-based assessment: the process checks whether a report *demonstrates understanding* of the eight principles, but explicitly does **not** verify the underlying stakeholder engagement, data, or calculations [@SVI2019]. Practitioners familiar with the assurance criteria can satisfy the checklist through disclosure and framing while leaving the mathematical calculations largely unchanged.
+
+The widest keyword gap is for P5, P7, and P3 --- all principles where generic vocabulary generates large false positives. Even among assured reports, P5 and P4 LLM compliance remains below 30%, confirming that the process does not close the gap on the most demanding principles.
+
+**The ratio distribution provides the most direct evidence that assurance works on one dimension:** assured reports show a lower median SROI ratio (3.50:1) than non-assured reports (3.97:1), with a substantially lower mean (4.77 vs. 7.52) and fewer implausibly high values (3.7% vs. 11.2% above 15:1). The assurance process does encourage more conservative ratio computation, even if it cannot guarantee substantive compliance across all dimensions.
+
+Proxy method also differs by assurance status: assured reports favor unit costs (27.0% vs. 14.0%) and HACT benchmarks (3.2% vs. 0.6%), while non-assured reports rely more heavily on replacement/avoided cost (23.9% vs. 12.7%), consistent with the quality premium observed for HACT-anchored approaches.
+
+## Quality by Sector
+
+Kruskal-Wallis test across eleven sectors (H=15.4, df=10, p=0.117) finds no statistically significant differences, confirming that low compliance is not sector-specific. Health-sector reports (mean 47.5%, 95% CI: 41.6%--53.4%) score highest, reflecting established WELLBY and QALY frameworks; social inclusion reports score lowest (mean 30.8%). The within-sector variance is large in every sector, underscoring that quality is primarily an organizational rather than sectoral phenomenon.
+
+![Mean quality scores by sector with 95% confidence intervals.](figures/fig4_quality_by_sector.png){#fig-sector-quality width=90%}
+
+## Predictors of Reporting Quality: Multivariate Analysis
+
+To identify the factors most strongly associated with quality score variation, I estimated an OLS regression of quality score (%) on sector, country, organization type, assurance status, report year, and a proxy for stakeholder engagement intensity (log-transformed count of stakeholder-related keyword mentions in the PDF text). Standard errors are heteroskedasticity-robust (HC3). The sample includes 265 reports for which all covariates are available.
+
+The model explains 41.7% of quality score variance (Adjusted R^2=0.381; F=10.96, p<0.001). Three variables emerge as statistically significant predictors (Table 5):
+
+**Stakeholder engagement (log mentions)** is the strongest predictor in the model (beta=8.40, SE=0.99, p<0.001). Each unit increase in log-stakeholder mentions --- roughly a tripling of keyword frequency --- is associated with an 8.4 percentage-point increase in the overall quality score, conditional on all other covariates. Figure 5 shows this relationship holds across both assured and non-assured reports. This finding aligns with the theoretical expectation that genuine stakeholder engagement, rather than being merely a first step, permeates the entire reporting process: reports in which stakeholders are substantively present tend to apply the other SVI principles more thoroughly.
+
+**Formal assurance** is the second strongest predictor (beta=10.36, SE=2.78, p<0.001). After controlling for sector, country, organization type, and stakeholder engagement, formally assured reports score 10.4 percentage points higher than non-assured reports. This effect is statistically robust and substantively meaningful: it suggests that the assurance process captures genuine quality differences beyond those explained by organizational characteristics.
+
+No sector dummy reaches conventional statistical significance. The health sector coefficient is positive (beta=6.67, SE=3.51, p=0.058), consistent with the descriptive pattern but falling short of the 5% threshold in the larger sample. Australian reports score significantly lower than UK reports (beta=-7.98, SE=3.31, p=0.016), consistent with a practitioner community operating without the HACT Social Value Bank or equivalent proxy databases.
+
+Report year, organization type, and the remaining sector and country dummies are not statistically significant, suggesting that quality has not improved systematically over time and that sector explains less of the variance than stakeholder engagement and assurance status.
+
+| Variable | beta | SE | p | Sig. |
+|----------|----|----|---|------|
+| **log(Stakeholder mentions)** | 8.40 | 0.99 | <0.001 | *** |
+| **Assured (vs. not)** | 10.36 | 2.78 | <0.001 | *** |
+| Health sector (vs. housing) | 6.67 | 3.51 | 0.058 | |
+| Australia (vs. UK) | -7.98 | 3.31 | 0.016 | * |
+| Year (standardized) | -0.22 | 0.95 | 0.820 | |
+| Organization type dummies | --- | --- | >0.25 | |
+| Other sector dummies | --- | --- | >0.32 | |
+
+**Table 5. OLS regression of quality score (%) on report characteristics (N=265; HC3 robust SE)**
+*Reference categories: housing sector, UK, charity. Adj. R^2=0.381.*
+
+
+![Relationship between stakeholder engagement intensity and overall quality score.](figures/fig5_stakeholders_vs_quality.png){#fig-stakeholders width=85%}
+
+## Nonprofit Subsample Robustness Check
+
+Because 33.4% of the corpus (128 reports) comes from government and public sector bodies, and a further 11.2% from private organizations, a concern arises that the compliance findings reflect the behavior of non-nonprofit reporters rather than the charities and social enterprises that form SROI's primary institutional constituency. To address this, I restrict the analysis to the 149 organizations classified as charities (n=128) or social enterprises (n=21) and compare their quality profiles against the 128 reports from government and private sector organizations.
+
+The results confirm that the compliance deficit is not driven by non-nonprofit organizations in the corpus. Charity and social enterprise reports show a mean LLM quality score of 19.3% (median 18.8%) --- nearly identical to the government and private sector mean of 20.3% (median 18.8%). The difference is substantively negligible and statistically non-significant (t=-0.60, p=0.548; Mann-Whitney U, p=0.661; Cohen's d=-0.07). The compliance gradient across principles is the same in direction regardless of organization type: P2 and P1 lead, P4 and P5 trail, in both subgroups.
+
+| Measure | Charities + social enterprises (n=149) | Government + private (n=128) | Overall (n=376) |
+|---------|:--------------------------------------:|:----------------------------:|:---------------:|
+| LLM quality (mean) | 19.3% | 20.3% | 18.6% |
+| LLM quality (median) | 18.8% | 18.8% | 18.8% |
+| Keyword quality (mean) | 38.3% | 42.9% | 40.4% |
+| P5 LLM compliance | 10.1% | 15.2% | 11.2% |
+| Assurance rate | 14.8% | 22.7% | 16.4% |
+
+**Table 6: Quality comparison by organization type (LLM scores)**
+*Assurance rates: charity n=128 (14.1%), social enterprise n=21 (19.0%), government n=85 (22.4%), private n=43 (23.3%). Unknown organization type (n=106, assurance rate 11.3%) excluded from comparison columns but included in overall average.*
+
+The assurance rate gap between charities and social enterprises (14.8%) and government and private organizations (22.7%) is consistent with the access barrier argument: charities and social enterprises, which face the strongest funder pressure to demonstrate social value, are also less likely to have the resources to pursue formal assurance. The compliance quality findings are robust to this subsample restriction. The compliance deficit documented here is a nonprofit phenomenon, not an artifact of including government and private sector reporters who may have different motivations for applying SROI.
+
+## Simulation Results
+
+Bootstrap resampling (B=10,000) confirms precision: overall quality score 41.2% (95% CI: 39.2%--43.1%); assurance gap 19.9pp (95% CI: 14.7--25.1). Critically, the upper bound of P5's CI (17.3%) falls below the lower bound of every other principle, confirming that the "do not over-claim" gap is structural rather than a sampling artefact. A permutation F-test (B=10,000) across eleven sectors yields F=1.23, p=0.267, confirming that low compliance cuts across all sectors, not just low-resource ones.
+
+### Monte Carlo Simulation: The Hidden Cost of P5 Non-Compliance
+
+The most novel and consequential finding emerges from the Monte Carlo simulation. Among the 251 reports with extractable SROI ratios, those with P5 score of zero --- containing no substantive evidence of applying deadweight, attribution, drop-off, or displacement corrections --- account for 71% of the ratio-extractable sample. The simulation draws adjustment factor distributions calibrated to the empirically-observed values from full-PDF LLM extraction rather than purely from the literature: deadweight Beta(mean=26%, SD=19%); attribution Beta(mean=31%, SD=23%); annual drop-off Beta(mean=29%, SD=23%); displacement Beta(mean=22%, SD=17%). Reports with P5 score=0 receive full simulated corrections; those with P5 score=1 receive partial corrections (50%); those with P5 score=2 are left unchanged. I run 50,000 iterations per report.
+
+The results are stark (Figure 10). The observed median SROI ratio of 3.58:1 would fall to an estimated 1.99:1 (95% CI: 1.87--2.11) if uncorrected reports had applied adjustment factors drawn from the empirically-observed practitioner distribution, implying a **median overstatement of approximately 80%**. For the mean, the implied overstatement is 90.4% (observed 6.93:1 vs. corrected 3.64:1), reflecting the influence of high-ratio outliers in the right tail of the full LLM-extracted corpus.
+
+A sensitivity analysis varying assumed correction parameters across conservative (DW=15%, AT=20%), base (DW=26%, AT=31%), and optimistic (DW=35%, AT=40%) scenarios confirms that the overstatement is robust: even under the most conservative scenario, the median ratio is overstated by approximately 40--50% (Figure 12). Taken together, the plausible range of overstatement is **50--80%**, with 80% representing the base-case estimate calibrated to empirically-observed adjustment factor distributions. The "caterpillar" plot in Figure 11 shows per-report uncertainty intervals, revealing that most reports show corrected ratios substantially below observed values --- and that reported ratios above 10:1 would typically fall below 6:1 under empirically-calibrated corrections.
+
+One circularity limitation deserves explicit acknowledgment: the simulation calibrates correction factor distributions from the same corpus being evaluated. Reports that applied non-zero adjustments provide the distribution used to correct those that applied none. If the practitioners who applied adjustments systematically over- or under-corrected relative to the true counterfactual, the simulation inputs inherit that bias. This is unavoidable given data constraints; the 80% figure should be interpreted as the implied overstatement *if practitioners who did not adjust should have applied adjustments consistent with observed practice* --- a reasonable but not certain assumption.
+
+![Monte Carlo simulation of SROI ratio bias from P5 non-compliance.](figures/fig10_mc_ratio_bias.png){#fig-mc-bias width=100%}
+
+![Per-report observed vs. MC-corrected ratios with 95% uncertainty intervals.](figures/fig11_mc_caterpillar.png){#fig-caterpillar width=100%}
+
+![Sensitivity analysis: implied overstatement under alternative correction assumptions.](figures/fig12_mc_sensitivity.png){#fig-sensitivity width=100%}
+
+![Sequential adjustment effect on a base SROI ratio of 5:1. Each stage applies the adjustment factor at the empirically-observed median (deadweight 20%, attribution 25.5%, drop-off 21.5%, discount rate 3.5%). Boxes show the interquartile range of corrected ratios from the observed distribution; the dashed line marks the fully-corrected median.](figures/fig_factor_simulation.png){#fig-simulation width=100%}
+
+These simulation results should be interpreted with care. The full-PDF extraction found that 40% of reports apply a non-zero deadweight correction --- higher than the keyword-based P5 compliance suggests. The Monte Carlo reflects this by leaving P5-compliant reports unchanged. However, the adjustment factor magnitudes used as simulation inputs are drawn from the cross-sectional distribution of all practitioners, not from program-specific evidence; reports that genuinely face zero deadweight (e.g., interventions in uncontested niches) would not be appropriately labelled as "overstated" even with a P5 quality score of zero. The most defensible interpretation is that the simulation identifies the ceiling of plausible overstatement given the observed adjustment factor distribution.

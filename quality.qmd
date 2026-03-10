@@ -8,7 +8,12 @@ subtitle: "Compliance with SVI's Eight Guiding Principles"
 SVI's eight guiding principles define what a high-quality SROI report looks like. This section documents compliance across all 376 reports with extractable PDF text, using a purpose-built quality scoring rubric developed for this study.
 
 ::: {.callout-note}
-**Rubric design:** Each principle was scored on a 0–2 scale using keyword and pattern matching on PDF text: 0 = no evidence, 1 = partial evidence, 2 = clear evidence. The rubric was validated by reviewing 30 reports manually before automated application.
+**Dual-measure design:** Two independent quality scores are reported for each principle.
+
+- **Keyword score (upper bound):** 0–2 scale using keyword and pattern matching on PDF text. Generous — accepts any mention of relevant terminology.
+- **LLM score (conservative estimate):** 0–2 scale using GPT-4o-mini as a systematic content analysis coder, explicitly penalising false positives from generic vocabulary. Applied to all 383 reports (3,064 coding decisions).
+
+The keyword score establishes a **ceiling**: how much compliance is plausible. The LLM score establishes a **floor**: how much is substantively defensible. The truth lies between, but closer to the LLM estimate.
 :::
 
 ## The Eight Principles
@@ -26,27 +31,56 @@ SVI's eight guiding principles define what a high-quality SROI report looks like
 
 ## Compliance by Principle
 
-The most striking finding is the disparity across principles. Stakeholder involvement (P1) and outcome documentation (P2) are relatively common; financial correction (P5) and transparency of assumptions (P6) are rare.
+The most striking finding is the severe disparity across principles. The keyword upper bound and LLM conservative estimate bracket the true compliance range. Both methods agree on the ordering: outcome documentation (P2) is the strongest; materiality discussion (P4) and financial proxies (P3) are the weakest.
 
 ![Mean compliance scores (0–2 scale) for each of SVI's eight principles, with bootstrap 95% confidence intervals (B=10,000). The dashed line marks the 50% compliance threshold (score = 1.0).](figures/fig2_quality_by_principle.png)
 
-### Compliance scores — full table
+### Compliance scores — dual-measure table
 
-| Principle | Mean score (0–2) | % Compliant (≥1) | 95% CI |
-|-----------|-----------------|-----------------|---------|
-| P1 Involve stakeholders | 1.10 | 62.0% | 57.2%–66.8% |
-| P2 Understand what changes | 1.28 | 71.3% | 66.8%–75.8% |
-| P3 Value what matters | 0.72 | 42.0% | 37.2%–46.8% |
-| P4 Only include material | 0.48 | 24.0% | 19.8%–28.2% |
-| **P5 Do not over-claim** | **0.28** | **13.8%** | **10.5%–17.3%** |
-| P6 Be transparent | 0.62 | 34.5% | 29.9%–39.1% |
-| P7 Verify the result | 0.35 | 16.8% | 13.1%–20.5% |
-| P8 Be responsive | 0.75 | 43.4% | 38.6%–48.2% |
-| **Overall average** | **0.70** | **41.2%** | **39.2%–43.1%** |
+| Principle | Keyword score | LLM score | False positives | False negatives |
+|-----------|--------------|-----------|----------------|-----------------|
+| P1 Involve stakeholders | 1.106 | **0.452** | 127 | 12 |
+| P2 Understand what changes | 1.279 | **0.974** | 37 | 2 |
+| P3 Value what matters | 0.854 | **0.128** | 232 | 2 |
+| P4 Only include material | 0.484 | **0.057** | 136 | 5 |
+| P5 Do not over-claim | 0.277 | **0.225** | 32 | 59 |
+| P6 Be transparent | 1.101 | **0.504** | 142 | 27 |
+| P7 Verify the result | 0.702 | **0.217** | 140 | 14 |
+| P8 Be responsive | 0.774 | **0.426** | 108 | 65 |
+| **Overall % of max** | **40.4%** | **18.6%** | **— total: 954** | **— total: 186** |
+
+::: {.callout-important}
+**Measurement finding:** Keyword scores contain 954 false positives and 186 false negatives across the 383-report corpus. The false positive rate is highest for P3 (232 cases — the word "value" appears in every SROI title), P6 (142 — "data" and "evidence" are ubiquitous), and P7 (140 — "sensitivity" appears in contexts unrelated to scenario testing). The LLM-validated 18.6% compliance represents the most defensible conservative estimate. Even the keyword upper bound of 40.4% documents a severe principles–practice gap.
+:::
+
+## LLM Validation: Methodology and Results
+
+### Why validate?
+
+Keyword-based content analysis is fast and transparent, but vulnerable to false positives: generic vocabulary that appears in every SROI report ("value", "data", "stakeholders") can trigger compliance scores without genuine methodological adherence.
+
+To bound this error, we applied a **multi-agent LLM validation** to all 383 reports × 8 principles = 3,064 coding decisions using OpenAI's `gpt-4o-mini`. Each report was scored by a systematic coder (Agent A), with the explicit instruction to penalise superficial keyword matches. False positive counts were logged as the number of cases where keyword score > 0 but LLM score = 0.
+
+### Inter-rater reliability
+
+On a stratified sample of 10 reports validated with two independent agents + a `gpt-4o` reconciler:
+
+| Metric | Value | Interpretation |
+|--------|-------|---------------|
+| Overall agent agreement | 76.2% | Substantial |
+| Mean Cohen's κ | 0.53 | Moderate (Landis & Koch, 1977) |
+| Mean Krippendorff's α | 0.58 | Acceptable for ordinal coding |
+| Reconciler: % false positives | 84% of disagreements | Keywords inflate scores |
+
+The lowest κ values were for P1, P2, P3 (0.29–0.32) — principles where generic vocabulary creates the most ambiguity. P4, P6, P7, P8 achieved κ ≥ 0.71.
+
+### Bias direction
+
+False positives (954) outnumber false negatives (186) by 5:1, confirming that **keyword scores are an upper bound**. Notably, P5 "do not over-claim" shows 59 false negatives and only 32 false positives — the keyword method actually *under-identifies* compliance with this principle (technical adjustment terms appear in contexts the keywords miss). This is consistent with P5 being the most technically precise principle.
 
 ## Distribution of Quality Scores
 
-The overall compliance distribution is approximately normal, centred around 41%. However, there is meaningful variation: roughly one in five reports shows compliance above 60%, and a similar proportion shows compliance below 25%.
+The overall compliance distribution is approximately normal, centred around 41% (keyword) or 19% (LLM-validated). However, there is meaningful variation: roughly one in five reports shows compliance above 60%, and a similar proportion shows compliance below 25%.
 
 ![Distribution of overall quality scores across 376 reports.](figures/fig3_quality_distribution.png)
 

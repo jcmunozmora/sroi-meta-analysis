@@ -1,0 +1,65 @@
+---
+title: "Measuring Without Accounting: SROI Compliance and the Limits of Social Value Reporting"
+date: "March 2026"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+  docx:
+    toc: true
+bibliography: /Users/jcmunoz/Library/CloudStorage/OneDrive-UniversidadEAFIT/Agents_JC/SROI/03_Literature/references.bib
+csl: apa.csl
+execute:
+  echo: false
+  warning: false
+abstract: |
+  Social Return on Investment (SROI) is one of the most widely applied social value measurement frameworks in the nonprofit sector, yet compliance with its governing principles at scale is unknown. This paper presents the first systematic content analysis of 383 SROI practitioner reports from the Social Value UK database, using a three-method quality scoring design --- keyword upper bound (40.4%), LLM systematic coder (18.6%), and expert-calibrated classifier (20.2%) --- to bound compliance with SVI's eight guiding principles. Compliance is lowest precisely where SROI is most consequential: the "do not over-claim" principle (LLM: 11.2%) and materiality (2.9%), consistent with Ebrahim's (2005) accountability myopia prediction. A Monte Carlo simulation implies a median ratio overstatement of 50--82% in non-compliant reports. Formal assurance raises quality (β = 10.36 pp, p < .001) but leaves even assured reports at 22.9% of the maximum standard. Implications for practitioners, Social Value International, and funders are discussed.
+
+  **Keywords:** Social Return on Investment; SROI; social value measurement; accountability; nonprofit evaluation
+---
+
+**Data Availability Statement:** The full dataset (383 SROI reports × 120 variables), scoring scripts, Monte Carlo simulation code, and proxy extraction pipeline supporting this article are available at: [Repository URL removed for blind review]. A companion interactive benchmarking tool translating corpus findings into practitioner decision-support is accessible at: [URL removed for blind review].
+
+**Declaration of Conflicting Interests:** The author(s) declared no potential conflicts of interest with respect to the research, authorship, and/or publication of this article.
+
+---
+
+{{< include sections/01_introduction_blind.qmd >}}
+
+---
+
+{{< include sections/02_background.qmd >}}
+
+---
+
+{{< include sections/03_data_methods_blind.qmd >}}
+
+---
+
+{{< include sections/04_findings_empirical.qmd >}}
+
+---
+
+{{< include sections/05_findings_quality.qmd >}}
+
+---
+
+{{< include sections/06_findings_calculation.qmd >}}
+
+---
+
+{{< include sections/07_discussion_blind.qmd >}}
+
+---
+
+{{< include sections/09_conclusion.qmd >}}
+
+---
+
+{{< include sections/10_references.qmd >}}
+
+---
+
+{{< include sections/11_appendix.qmd >}}

@@ -1,0 +1,9 @@
+principle,n,human_llm_agree_pct,human_llm_kappa,human_llm_alpha,human_kw_agree_pct,human_kw_kappa,fp_kw_over_human,fn_kw_under_human,fp_llm_over_human,fn_llm_under_human
+p1_involve_stakeholders,10,60.0,0.394,0.525,40.0,0.146,2,1,2,0
+p2_understand_changes,10,30.0,0.3,0.486,30.0,0.167,5,0,3,0
+p3_value_what_matters,10,80.0,0.583,0.604,50.0,0.186,4,0,1,1
+p4_only_material,10,60.0,0.286,0.441,70.0,0.429,2,0,1,2
+p5_do_not_overclaim,10,70.0,0.286,0.24,80.0,0.444,1,0,3,0
+p6_be_transparent,10,60.0,0.2,0.208,30.0,0.1,4,0,3,1
+p7_verify_result,10,100.0,1.0,1.0,70.0,0.571,2,0,0,0
+p8_be_responsive,10,70.0,0.444,0.565,50.0,0.333,4,0,2,0

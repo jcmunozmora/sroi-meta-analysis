@@ -1,0 +1,62 @@
+# Data and Methods
+
+## Data Source
+
+The data for this analysis consists of 383 SROI reports scraped from the Social Value UK reports database (socialvalueuk.org) in March 2026. Social Value UK is the UK national network of SVI, and its reports database is the largest publicly accessible repository of SROI reports in the world. Reports are submitted voluntarily by practitioners and organizations; the database includes both reports that have received SVI Report Assurance and those that have not.
+
+For each report, I scraped: the report title, abstract where available, URL, published date, and---where a PDF was publicly accessible---the full text of the PDF document. Of the 383 reports in the corpus, 376 (98.2%) had extractable PDF text. All reports were publicly available at the time of scraping; no individual-level data or confidential information was accessed.
+
+## Metadata Extraction
+
+For each report, I extracted the following structured metadata from the PDF text and report metadata using a purpose-built Python pipeline:
+
+- **Sector**: classified into 15 categories (housing, education, employment, health, environment, disability, arts and culture, agriculture/food, social inclusion, youth, community, sports, justice, elderly, microfinance) using keyword matching on the first 3,000 characters of each PDF. Reports not classifiable were coded as "other."
+- **Country**: classified using country- and city-name keywords applied to the first 5,000 characters of each PDF.
+- **Report year**: extracted from the earliest valid year (1996--2025) found in the first 800 characters of the PDF text---prioritizing the report itself rather than the website upload date.
+- **Report type**: classified as Forecast, Evaluative, or Scoping based on keyword presence.
+- **Organization type**: classified as charity, social enterprise, government, private, or unknown.
+- **SROI ratio**: extracted from existing structured fields in the scraped data where available.
+- **Assurance status**: coded 1 if the report text or the scraped `is_assured` field indicated SVI Report Assurance.
+
+## Quality Scoring Rubric
+
+To assess compliance with SVI's eight principles, I developed a binary-to-ordinal quality scoring rubric applied to each report's PDF text. Each principle was operationalized as a set of keywords that indicate either (1) a substantive engagement with the principle (score = 2) or (1) a basic mention (score = 1), or no evidence of engagement (score = 0).
+
+| Principle | Substantive evidence (score 2) | Basic mention (score 1) |
+|-----------|-------------------------------|------------------------|
+| P1: Involve stakeholders | "stakeholder engagement," "stakeholder consultation," "focus group," "participatory" | "stakeholder," "participant," "interview," "survey" |
+| P2: Understand what changes | "theory of change," "outcome map," "impact map," "logic model" | "outcome," "change," "impact," "benefit" |
+| P3: Value what matters | "financial proxy," "monetis/z," "proxy value," "HACT," "WELLBY," "cost per" | "value," "proxy," "worth," "willingness to pay" |
+| P4: Only include what is material | "materiality," "excluded from," "outside the scope," "not included" | "material," "scope," "boundary," "relevant" |
+| P5: Do not over-claim | "deadweight," "attribution rate," "drop-off," "counterfactual," "what would have happened" | Any single mention of deadweight or attribution |
+| P6: Be transparent | "audit trail," "key assumption," "data source," "evidence base," "our assumption" | "assumption," "transparent," "source" |
+| P7: Verify the result | "sensitivity analysis," "sensitivity test," "scenario analysis," "conservative estimate" | "sensitiv," "scenario," "range," "conservative" |
+| P8: Be responsive | "recommendation," "key learning," "lessons learned," "area for improvement" | "recommend," "learning," "lesson," "implication" |
+
+The maximum possible quality score is 16 (8 principles x 2 points each). I report total scores, percentage compliance, and principle-by-principle averages.
+
+**Construct validity.** The rubric was developed by the author and measures *documented evidence* of compliance, not actual compliance. An organization could run a perfunctory focus group and mention it in the opening paragraph; the rubric would credit P1. An organization could calculate deadweight carefully but not name it explicitly; the rubric would not. This means the rubric is a measure of compliance language and disclosure practice, not a direct measure of methodological rigor. Scores are best interpreted as the degree to which each report's text foregrounds the vocabulary and concepts associated with each principle. This is a recognized limitation of large-scale content analysis [@Neuendorf2002; @Krippendorff2004] and is precisely why I supplement keyword scoring with LLM validation: to distinguish reports that merely use the right words from those that use them substantively. This rubric has a second known limitation: keyword matching cannot replace expert reading. The word "value" appears in every SROI title; "sensitivity" appears in many contexts unrelated to scenario testing. Generic vocabulary inflates keyword scores, generating false positives.
+
+### Dual-Measure Design: LLM Validation
+
+To bound keyword-based measurement error, I apply a complementary LLM validation using OpenAI's `gpt-4o-mini` (temperature = 0), instructed to penalize superficial keyword matches. This generates a **keyword score (upper bound)** and an **LLM score (conservative lower bound)**, both on a 0--2 scale per principle (3,064 decisions total).
+
+Inter-rater reliability was established on a stratified sample of 10 reports (80 coding decisions) using a three-classifier framework: two independent `gpt-4o-mini` agents (Agents A and B) achieved 76.2% agreement (mean Cohen's kappa = 0.53; Krippendorff's alpha = 0.58), with a `gpt-4o` reconciler classifying 84% of disagreements as keyword false positives. A third classifier (Agent C, `gpt-4o` with SROI practitioner persona) coded all 80 decisions blind, confirming the bias direction: keyword scores produce 24 false positives versus Agent C's judgement, compared to only 15 for LLM Agent A (kappa: keyword = 0.30, LLM = 0.44). An important limitation applies: the agreement statistics measure consistency between automated classifiers, not validity relative to human expert ground truth. The LLM score is interpreted as a conservative lower bound rather than a validated true compliance rate; systematic human expert coding on a larger stratified sample would be required to establish a reliable point estimate. The replication package includes `human_coding_template.csv` for that future validation step. True compliance likely falls between the LLM lower bound (18.6--20.2%) and the keyword upper bound (40.4%); the LLM estimate is the more defensible anchor given the documented false positive problem in keyword scoring.
+
+## Analytical Strategy
+
+I report descriptive statistics for all metadata variables (frequencies, percentages, means, medians, standard deviations). For SROI ratio analysis, I use the 247 reports (64.5% of the corpus) with an extractable numerical ratio from full-PDF LLM extraction, after removing four implausible outliers (ratio >50).
+
+For quality analysis, I report principle-by-principle average scores for the 376 reports with extractable PDF text, and compare assured versus non-assured reports using independent samples t-tests and Mann-Whitney U tests (given the non-normal distribution of scores). Sector-level variation is examined using Kruskal-Wallis and permutation-based F-tests. Multivariate predictors of quality are assessed via OLS regression with heteroskedasticity-robust standard errors (HC3).
+
+To obtain more reliable interval estimates that do not depend on distributional assumptions, I supplement all point estimates with **bootstrap confidence intervals** (BCa method, B=10,000 resamples). Significance of sector differences is assessed via **permutation F-tests** (B=10,000 permutations) alongside Kruskal-Wallis.
+
+For SROI ratio analysis, I conduct a **Monte Carlo simulation** to quantify the implied bias in observed ratios attributable to non-compliance with P5 (do not over-claim). For each of the 247 reports with extractable ratios, I simulate adjustment factors---deadweight, attribution, drop-off, and displacement---drawn from Beta distributions calibrated to the *empirically observed* factor distributions in this corpus (deadweight median=20%, attribution median=25.5%, drop-off median=21.5%), rather than purely literature-derived priors. Reports with P5 score=0 receive full simulated corrections; those with P5 score=1 receive partial corrections (50%); those with P5 score=2 are left unchanged. Running 50,000 iterations per report, I report the corrected ratio distribution alongside a sensitivity analysis over the adjustment factor assumptions.
+
+## Financial Proxy Extraction
+
+To characterize each report's monetization methodology, I applied a second full-PDF LLM extraction pipeline (`gpt-4o-mini`, temperature=0, ~15,000 characters per report) to classify: primary proxy method (twelve categories: mixed, replacement/avoided cost, unit cost, QALY, WTP, WELLBYs, HACT, academic literature, government statistics, market rate, bespoke, or unclear); named proxy sources; monetization scope; and proxy sensitivity analysis. In parallel, keyword detection across twelve method families provides `n_methods_detected` (range 0--5) as the primary complexity indicator.^[Used in preference to the LLM's `n_proxies_estimated` field, which showed a systematic rounding bias: 45% of responses defaulted to exactly 5.] Valid extraction was achieved for 377 of 383 reports (98.4%).
+
+All analysis was conducted in Python (pandas, scipy, statsmodels, numpy). The full dataset (`sroi_clean_dataset_v4.csv`, 383 rows × 120 columns), scoring scripts, simulation code, proxy extraction pipeline, and replication files are available at the project replication repository.^[[Repository URL removed for blind review]] In addition, the corpus findings have been translated into a freely accessible interactive benchmarking tool --- the **SROI Benchmark**^[[URL removed for blind review]] --- developed as a companion practitioner resource to this paper. The tool allows practitioners to compare their own SROI ratios, adjustment factor choices, proxy methods, and quality profiles against the empirical distributions documented here, supporting evidence-based calibration of future studies.
+
+**Positionality.** The author has conducted applied SROI analyses and is familiar with the SVI principles from a practitioner standpoint. This insider familiarity informed the design of the quality scoring rubric --- particularly the operationalization of P5 (do not over-claim), which practitioners often find the most technically demanding. The author has no formal affiliation with Social Value International or Social Value UK, and the research was not commissioned or reviewed by either organization. The author acknowledges that practitioner experience shapes interpretive judgements in content analysis, and that a researcher without SROI practice experience might operationalize the rubric differently.

@@ -1,0 +1,301 @@
+{
+  "metadata": {
+    "n_reports": 383,
+    "source": "Social Value International reports database",
+    "extracted": "2026-03",
+    "method": "Full-PDF LLM extraction (GPT-4o-mini + GPT-4o reconciler)"
+  },
+  "factors": {
+    "deadweight": {
+      "name": "Deadweight rate (%)",
+      "n": 154,
+      "mean": 26.04,
+      "median": 20.0,
+      "sd": 18.44,
+      "p10": 5.2,
+      "p25": 10.0,
+      "p75": 34.75,
+      "p90": 50.0,
+      "min": 0.07,
+      "max": 100.0
+    },
+    "attribution": {
+      "name": "Attribution deduction (%)",
+      "n": 216,
+      "mean": 30.95,
+      "median": 25.5,
+      "sd": 21.22,
+      "p10": 10.0,
+      "p25": 15.0,
+      "p75": 42.0,
+      "p90": 53.0,
+      "min": 0.05,
+      "max": 100.0
+    },
+    "drop_off": {
+      "name": "Annual drop-off rate (%)",
+      "n": 90,
+      "mean": 29.11,
+      "median": 21.5,
+      "sd": 21.98,
+      "p10": 10.0,
+      "p25": 10.0,
+      "p75": 50.0,
+      "p90": 50.0,
+      "min": 2.33,
+      "max": 100.0
+    },
+    "discount_rate": {
+      "name": "Discount rate (%)",
+      "n": 246,
+      "mean": 4.05,
+      "median": 3.5,
+      "sd": 1.92,
+      "p10": 3.5,
+      "p25": 3.5,
+      "p75": 3.5,
+      "p90": 4.38,
+      "min": 2.0,
+      "max": 15.0
+    },
+    "sroi_ratio": {
+      "name": "SROI ratio",
+      "n": 247,
+      "mean": 5.42,
+      "median": 3.56,
+      "sd": 5.55,
+      "p10": 1.31,
+      "p25": 2.06,
+      "p75": 6.6,
+      "p90": 10.22,
+      "min": 0.13,
+      "max": 37.14
+    }
+  },
+  "sector_breakdown": {
+    "deadweight": [
+      {
+        "sector": "Housing",
+        "n": 34,
+        "mean": 21.6,
+        "median": 15.0
+      },
+      {
+        "sector": "Education",
+        "n": 33,
+        "mean": 27.6,
+        "median": 25.0
+      },
+      {
+        "sector": "Employment",
+        "n": 17,
+        "mean": 17.9,
+        "median": 15.0
+      },
+      {
+        "sector": "Health",
+        "n": 12,
+        "mean": 30.1,
+        "median": 25.0
+      },
+      {
+        "sector": "Environment",
+        "n": 10,
+        "mean": 25.9,
+        "median": 20.0
+      },
+      {
+        "sector": "Disability",
+        "n": 10,
+        "mean": 29.4,
+        "median": 27.5
+      },
+      {
+        "sector": "Arts & Culture",
+        "n": 9,
+        "mean": 30.3,
+        "median": 20.0
+      },
+      {
+        "sector": "Social Inclusion",
+        "n": 7,
+        "mean": 38.6,
+        "median": 25.0
+      }
+    ],
+    "attribution": [
+      {
+        "sector": "Housing",
+        "n": 43,
+        "mean": 31.1,
+        "median": 25.0
+      },
+      {
+        "sector": "Education",
+        "n": 50,
+        "mean": 30.4,
+        "median": 27.0
+      },
+      {
+        "sector": "Employment",
+        "n": 21,
+        "mean": 31.7,
+        "median": 26.0
+      },
+      {
+        "sector": "Health",
+        "n": 23,
+        "mean": 29.2,
+        "median": 25.0
+      },
+      {
+        "sector": "Environment",
+        "n": 16,
+        "mean": 38.4,
+        "median": 31.5
+      },
+      {
+        "sector": "Disability",
+        "n": 13,
+        "mean": 33.2,
+        "median": 30.0
+      },
+      {
+        "sector": "Arts & Culture",
+        "n": 9,
+        "mean": 26.1,
+        "median": 19.0
+      },
+      {
+        "sector": "Social Inclusion",
+        "n": 7,
+        "mean": 32.8,
+        "median": 20.0
+      }
+    ],
+    "drop_off": [
+      {
+        "sector": "Housing",
+        "n": 26,
+        "mean": 36.8,
+        "median": 29.0
+      },
+      {
+        "sector": "Education",
+        "n": 15,
+        "mean": 29.9,
+        "median": 25.0
+      },
+      {
+        "sector": "Employment",
+        "n": 9,
+        "mean": 22.1,
+        "median": 20.0
+      },
+      {
+        "sector": "Health",
+        "n": 6,
+        "mean": 17.4,
+        "median": 8.5
+      },
+      {
+        "sector": "Environment",
+        "n": 3,
+        "mean": 10.0,
+        "median": 10.0
+      },
+      {
+        "sector": "Disability",
+        "n": 6,
+        "mean": 22.7,
+        "median": 15.0
+      },
+      {
+        "sector": "Arts & Culture",
+        "n": 5,
+        "mean": 23.2,
+        "median": 30.0
+      },
+      {
+        "sector": "Social Inclusion",
+        "n": 3,
+        "mean": 8.3,
+        "median": 10.0
+      }
+    ]
+  },
+  "country_breakdown": {
+    "discount_rate": {
+      "Australia": {
+        "n": 15,
+        "mean": 5.0,
+        "median": 3.5
+      }
+    },
+    "deadweight": {
+      "Australia": {
+        "n": 18,
+        "mean": 29.1,
+        "median": 25.0
+      }
+    }
+  },
+  "by_report_type": {
+    "deadweight": {
+      "forecast": {
+        "name": "Deadweight - Forecast",
+        "n": 23,
+        "mean": 30.26,
+        "median": 25.0,
+        "sd": 20.71,
+        "p10": 6.0,
+        "p25": 12.5,
+        "p75": 45.0,
+        "p90": 58.0,
+        "min": 4.0,
+        "max": 75.0
+      },
+      "evaluative": {
+        "name": "Deadweight - Evaluative",
+        "n": 131,
+        "mean": 25.29,
+        "median": 20.0,
+        "sd": 18.0,
+        "p10": 5.67,
+        "p25": 10.0,
+        "p75": 30.0,
+        "p90": 50.0,
+        "min": 0.07,
+        "max": 100.0
+      }
+    },
+    "attribution": {
+      "forecast": {
+        "name": "Attribution - Forecast",
+        "n": 24,
+        "mean": 30.68,
+        "median": 25.0,
+        "sd": 21.66,
+        "p10": 4.51,
+        "p25": 10.0,
+        "p75": 50.0,
+        "p90": 57.0,
+        "min": 0.05,
+        "max": 70.0
+      },
+      "evaluative": {
+        "name": "Attribution - Evaluative",
+        "n": 192,
+        "mean": 30.98,
+        "median": 26.0,
+        "sd": 21.23,
+        "p10": 10.0,
+        "p25": 15.0,
+        "p75": 40.5,
+        "p90": 52.8,
+        "min": 0.33,
+        "max": 100.0
+      }
+    }
+  }
+}

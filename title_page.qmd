@@ -1,0 +1,62 @@
+---
+title: "Title Page — Submission to Nonprofit and Voluntary Sector Quarterly"
+format:
+  docx:
+    toc: false
+execute:
+  echo: false
+  warning: false
+---
+
+## Manuscript Title
+
+Measuring Without Accounting: SROI Compliance and the Limits of Social Value Reporting
+
+## Author Information
+
+**Name:** Juan Carlos Muñoz-Mora
+
+**Affiliation:** Escuela de Economía y Finanzas, Universidad EAFIT, Medellín, Colombia
+
+**Email:** jmunozm1@eafit.edu.co
+
+**ORCID:** 0000-0002-7304-8115
+
+**Discipline:** Economics / Nonprofit and Voluntary Sector Studies
+
+## Corresponding Author
+
+Juan Carlos Muñoz-Mora
+Escuela de Economía y Finanzas, Universidad EAFIT
+Carrera 49 # 7 Sur-50, Medellín, Colombia
+Email: jmunozm1@eafit.edu.co
+
+## Author Biography
+
+Juan Carlos Muñoz-Mora is a researcher at the Escuela de Economía y Finanzas, Universidad EAFIT (Medellín, Colombia), specializing in program evaluation, social value measurement, and applied microeconomics. He has conducted applied SROI analyses for social programs and has no formal affiliation with Social Value International or Social Value UK. This research was not commissioned or reviewed by either organization.
+
+## Manuscript Information
+
+**Word count (body text, excluding abstract, references, and appendix):** ~10,000 words
+
+**Number of tables:** 4
+
+**Number of figures:** 6
+
+**Supplementary materials:** Replication dataset and code (see Data Availability Statement in manuscript)
+
+## Funding
+
+[Funding statement or: This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.]
+
+## Data Availability Statement
+
+The full dataset (383 SROI reports × 120 variables), scoring scripts, Monte Carlo simulation code, and proxy extraction pipeline supporting this article are available at: https://github.com/jcmunoz-eafit/2026_sroi. A companion interactive benchmarking tool is accessible at: https://apps.jcmunozmora.co/shiny/sroi-benchmark/
+
+## Declaration of Conflicting Interests
+
+The author declared no potential conflicts of interest with respect to the research, authorship, and/or publication of this article.
+
+## Acknowledgments
+
+The author is grateful to the Equipo de Valor Público at the Escuela de Economía y Finanzas, Universidad EAFIT, for ongoing intellectual exchange and collaborative engagement with social value measurement in practice. This work has also benefited from the experience accumulated through partnerships with the many organizations that have trusted us to accompany them in measuring their social value — their questions and practice shaped the research questions that motivated this paper. All errors and interpretive judgements remain the author's own.

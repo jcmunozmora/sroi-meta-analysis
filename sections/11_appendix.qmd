@@ -1,0 +1,14 @@
+# Appendix A: Quality Scoring Rubric
+
+| Principle | Score = 2 (substantive keywords) | Score = 1 (mention keywords) |
+|-----------|----------------------------------|------------------------------|
+| P1 Involve stakeholders | stakeholder engagement, stakeholder consultation, focus group, participatory, co-production, service user involvement | stakeholder, participant, beneficiary, interview, survey, engagement |
+| P2 Understand what changes | theory of change, outcome map, impact map, logic model, causal pathway, intended change | outcome, change, impact, benefit, result, difference |
+| P3 Value what matters | financial proxy, monetisation, proxy value, HACT, WELLBY, QALY, cost per, unit value | value, proxy, worth, willingness to pay, cost saving |
+| P4 Only include material | materiality, excluded from, outside the scope, not included, immaterial | material, scope, boundary, relevant |
+| P5 Do not over-claim | deadweight, attribution rate, drop-off, counterfactual, what would have happened, displacement | deadweight, attribution, displacement, drop off |
+| P6 Be transparent | audit trail, key assumption, data source, evidence base, our assumption | assumption, transparent, source, evidence, data |
+| P7 Verify the result | sensitivity analysis, sensitivity test, scenario analysis, conservative estimate, what if analysis | sensitivity, scenario, range, conservative, robustness |
+| P8 Be responsive | recommendation, key learning, lessons learned, area for improvement, future action | recommend, learning, lesson, implication, next step |
+
+**Table A1: Quality Scoring Rubric — Keywords by Principle and Score Level**

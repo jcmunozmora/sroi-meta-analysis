@@ -35,11 +35,11 @@ This project presents the **first systematic content analysis of SROI practition
 :::
 
 ::: {.stat-card}
-**41.2%**
+**18.6%–40.4%**
 
-[Average Principle Compliance]{.stat-label}
+[LLM-Validated / Keyword Compliance]{.stat-label}
 
-[95% CI: 39.2%–43.1%]{.stat-ci}
+[True compliance within this range]{.stat-ci}
 :::
 
 ::: {.stat-card}
@@ -81,8 +81,8 @@ This project presents the **first systematic content analysis of SROI practition
 ## Core Findings
 
 ::: {.finding-card .warning}
-**Principles–practice gap at scale**
-Average compliance across SVI's eight principles is only 41.2% (95% CI: 39.2%–43.1%). The weakest principle is "do not over-claim" (P5: 13.8%), which requires the four standard adjustment factors.
+**Principles–practice gap at scale — larger than initially reported**
+LLM-validated compliance across SVI's eight principles is 18.6% (keyword upper bound: 40.4%). A multi-agent LLM validation of all 3,064 quality scoring decisions found 954 false positives in the keyword method — generic vocabulary ("value", "data", "evidence") triggers scores without substantive compliance. Even the keyword ceiling documents a severe gap. The weakest substantive principles are P4 "only include material" (LLM: 2.9%) and P3 "value what matters" (LLM: 6.4%).
 :::
 
 ::: {.finding-card .warning}
@@ -112,9 +112,10 @@ SVI's assurance programme is associated with significantly higher compliance (57
 ### Fourfold Contribution
 
 1. **First large-scale empirical analysis of SROI practitioner reports** — as distinct from academic literature
-2. **Original quality scoring rubric** operationalising SVI's eight principles as measurable indicators, replicable for ongoing monitoring
-3. **Simulation-grounded evidence** of the principles–practice gap using Bootstrap CIs and Monte Carlo ratio bias estimation
-4. **First systematic anatomy of SROI calculation element prevalence** — which steps practitioners actually implement, at what rates, and how rates vary by type, country, and assurance status
+2. **Original dual-measure quality scoring framework** — keyword upper bound + LLM-validated conservative estimate, operationalising SVI's eight principles across 3,064 coding decisions with documented false positive rates
+3. **Multi-agent LLM validation methodology** — parallel GPT agents + reconciler establish inter-rater reliability (mean κ = 0.53) for automated content analysis at scale; replicable framework for future coding studies
+4. **Simulation-grounded evidence** of the principles–practice gap using Bootstrap CIs and Monte Carlo ratio bias estimation
+5. **First systematic anatomy of SROI calculation element prevalence** — which steps practitioners actually implement, at what rates, and how rates vary by type, country, and assurance status
 
 ### Data and Methods
 
@@ -123,7 +124,7 @@ SVI's assurance programme is associated with significantly higher compliance (57
 | Data source | Social Value UK reports database (scrape: March 2026) |
 | Corpus | 383 reports; 376 (98.2%) with extractable PDF text |
 | Period | 2004–2025 |
-| Methods | Content analysis · Quality scoring rubric · Bootstrap CIs (B=10,000) · Permutation tests · Monte Carlo simulation · OLS regression |
+| Methods | Content analysis · Dual-measure quality scoring (keyword + LLM) · Multi-agent IRR validation (GPT-4o-mini × 2 + GPT-4o reconciler) · Bootstrap CIs (B=10,000) · Permutation tests · Monte Carlo simulation · OLS regression |
 | Software | Python (pandas, scipy, matplotlib, seaborn) |
 | Reproducibility | Full code and data available on this site |
 

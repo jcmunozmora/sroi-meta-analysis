@@ -1,0 +1,48 @@
+---
+format:
+  docx:
+    toc: false
+execute:
+  echo: false
+  warning: false
+---
+
+Juan Carlos Muñoz-Mora\
+Escuela de Economía y Finanzas\
+Universidad EAFIT\
+Carrera 49 # 7 Sur-50, Medellín, Colombia\
+jmunozm1@eafit.edu.co\
+ORCID: 0000-0002-7304-8115
+
+March 2026
+
+---
+
+Editor-in-Chief\
+*Nonprofit and Voluntary Sector Quarterly*
+
+---
+
+Dear Editor,
+
+I am pleased to submit the manuscript **"Measuring Without Accounting: SROI Compliance and the Limits of Social Value Reporting"** for consideration for publication in *Nonprofit and Voluntary Sector Quarterly*.
+
+**What this paper does.** This paper presents the first large-scale systematic content analysis of SROI (Social Return on Investment) practitioner reports, drawing on all 383 reports held in the Social Value UK database. Using a three-method quality scoring design — a keyword upper bound (40.4%), a large language model (LLM) systematic coder (18.6%), and an expert-calibrated classifier (20.2%) — I bound compliance with Social Value International's eight guiding principles. The paper further documents the distribution of SROI ratios across a practitioner corpus for the first time (median 3.56:1; n=247 extractable reports), and uses a Monte Carlo simulation — calibrated to empirically observed adjustment factor distributions extracted from the corpus itself — to estimate the implied ratio overstatement in non-compliant reports (50–82% at the median).
+
+**Why this matters for nonprofit scholarship.** SROI is now mandated or strongly encouraged by funders, commissioners, and policymakers across the UK, Australia, and beyond, yet no prior study has assessed whether practitioners actually comply with the principles that govern the method's claims to rigor. The findings reveal a consistent principles–practice gap that is not uniformly distributed: compliance is highest for the most visible principles (stakeholder involvement, documenting change) and lowest precisely where SROI ratios are most sensitive to methodological choices (materiality, do not over-claim). This gradient is consistent with Ebrahim's (2005) accountability myopia thesis — organizations comply with what funders can see and avoid what would reduce headline ratios — and extends that theoretical framework to the domain of social value measurement.
+
+**Fit with NVSQ.** The paper makes three contributions that align directly with NVSQ's core agenda: (1) it applies rigorous empirical methods (content analysis, OLS regression, Monte Carlo simulation) to a question of central concern in nonprofit accountability research; (2) it engages the accountability myopia literature (Ebrahim, 2005; Christensen & Ebrahim, 2006; Barman, 2016) and connects it to the measurement practices of practitioner organizations; and (3) it offers findings with direct implications for Social Value International's standard-setting, funders who use SROI ratios in allocation decisions, and the growing practitioner community. The manuscript is approximately 10,000 words (body text, excluding abstract, references, and appendix), within the journal's stated guidelines.
+
+**Originality and prior presentation.** This manuscript is original work that has not been published elsewhere and is not currently under review at any other journal. A working paper version has been posted on SSRN (consistent with SAGE's preprint policy) to facilitate early dissemination. No portion of this research was commissioned or reviewed by Social Value International or Social Value UK.
+
+**Data availability.** The full dataset (383 SROI reports × 120 variables), quality scoring scripts, Monte Carlo simulation code, and proxy extraction pipeline supporting this article are available in a public replication repository. A companion interactive benchmarking tool is accessible at: https://apps.jcmunozmora.co/shiny/sroi-benchmark/
+
+**Declaration of conflicting interests.** The author declares no potential conflicts of interest with respect to the research, authorship, or publication of this article. I have no formal affiliation with Social Value International or Social Value UK.
+
+I am grateful for your consideration and look forward to hearing from you.
+
+Sincerely,
+
+Juan Carlos Muñoz-Mora\
+Researcher, Escuela de Economía y Finanzas\
+Universidad EAFIT, Medellín, Colombia

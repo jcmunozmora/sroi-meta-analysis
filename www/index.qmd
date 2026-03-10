@@ -1,0 +1,139 @@
+---
+title: ""
+page-layout: full
+toc: false
+---
+
+::: {.hero-banner}
+# From Principles to Practice
+
+**A Systematic Content Analysis of SROI Reporting in the Social Value International Database**
+
+::: {.meta}
+*Working paper — March 2026 · Under review at NVSQ*
+:::
+:::
+
+## The Question
+
+When an organisation completes an SROI study, it makes an implicit claim: that the social value it creates can be measured, monetised, and expressed as a credible ratio. Social Value International (SVI) developed eight guiding principles to ensure that claim holds. **In practice, how many SROI reports actually follow them?**
+
+This project presents the **first systematic content analysis of SROI practitioner reports** in the Social Value International database — 383 reports, scraped in March 2026, covering 2004–2025. Prior systematic reviews examined academic publications (Krlev et al., 2013: 114 studies; Corvo et al., 2022: 284 papers). This analysis examines the practitioner corpus itself.
+
+---
+
+## Key Numbers
+
+::: {.grid-stats}
+
+::: {.stat-card}
+**383**
+
+[SROI Reports Analysed]{.stat-label}
+
+[From SVI database, 2004–2025]{.stat-ci}
+:::
+
+::: {.stat-card}
+**41.2%**
+
+[Average Principle Compliance]{.stat-label}
+
+[95% CI: 39.2%–43.1%]{.stat-ci}
+:::
+
+::: {.stat-card}
+**3.56:1**
+
+[Median SROI Ratio (Observed)]{.stat-label}
+
+[Range: 0.13 – 37.1:1 · n=247]{.stat-ci}
+:::
+
+::: {.stat-card}
+**1.96:1**
+
+[Corrected Median (Monte Carlo)]{.stat-label}
+
+[95% CI: 1.84 – 2.08]{.stat-ci}
+:::
+
+::: {.stat-card}
+**82%**
+
+[Implied Median Overstatement]{.stat-label}
+
+[Due to missing adjustments]{.stat-ci}
+:::
+
+::: {.stat-card}
+**5.2%**
+
+[Reports with All 4 Adjustments]{.stat-label}
+
+[DW + Attribution + Drop-off + Displacement]{.stat-ci}
+:::
+
+:::
+
+---
+
+## Core Findings
+
+::: {.finding-card .warning}
+**Principles–practice gap at scale**
+Average compliance across SVI's eight principles is only 41.2% (95% CI: 39.2%–43.1%). The weakest principle is "do not over-claim" (P5: 13.8%), which requires the four standard adjustment factors.
+:::
+
+::: {.finding-card .warning}
+**Cascade pattern in calculation elements**
+Stakeholder engagement is evidenced in 73.1% of reports. Theory of change: 20.6%. Financial proxies: 14.4%. All four standard adjustments together: only 5.2%. The distribution is polarised — 87% apply zero adjustment factors, 5.2% apply all four.
+:::
+
+::: {.finding-card}
+**Monte Carlo simulation: ~82% implied overstatement**
+If the 88.8% of non-compliant reports had applied standard adjustment factors (using Beta-calibrated distributions for each factor), the median SROI ratio would fall from 3.56:1 to approximately 1.96:1.
+:::
+
+::: {.finding-card}
+**Forecast premium: 3–5× higher adjustment compliance**
+Forecast reports (n=40) show three to five times higher compliance with adjustment factors than evaluative reports (n=343), revealing a structural incentive asymmetry — forecast studies must make assumptions explicit; evaluative studies often do not.
+:::
+
+::: {.finding-card .success}
+**Assurance works — but incompletely**
+SVI's assurance programme is associated with significantly higher compliance (57.7% vs. 37.9%, gap = 19.9pp, 95% CI: 14.7–25.1pp). But even among assured reports, average compliance does not exceed 58%.
+:::
+
+---
+
+## About This Analysis
+
+### Fourfold Contribution
+
+1. **First large-scale empirical analysis of SROI practitioner reports** — as distinct from academic literature
+2. **Original quality scoring rubric** operationalising SVI's eight principles as measurable indicators, replicable for ongoing monitoring
+3. **Simulation-grounded evidence** of the principles–practice gap using Bootstrap CIs and Monte Carlo ratio bias estimation
+4. **First systematic anatomy of SROI calculation element prevalence** — which steps practitioners actually implement, at what rates, and how rates vary by type, country, and assurance status
+
+### Data and Methods
+
+| Item | Details |
+|------|---------|
+| Data source | Social Value UK reports database (scrape: March 2026) |
+| Corpus | 383 reports; 376 (98.2%) with extractable PDF text |
+| Period | 2004–2025 |
+| Methods | Content analysis · Quality scoring rubric · Bootstrap CIs (B=10,000) · Permutation tests · Monte Carlo simulation · OLS regression |
+| Software | Python (pandas, scipy, matplotlib, seaborn) |
+| Reproducibility | Full code and data available on this site |
+
+### Navigation
+
+| Section | What you'll find |
+|---------|----------------|
+| [Empirical Patterns](empirical.qmd) | Sectors, geographies, organisational types, SROI ratios |
+| [Quality Analysis](quality.qmd) | Compliance with SVI's eight principles; predictors of quality |
+| [Calculation Elements](factors.qmd) | Anatomy of which calculation steps practitioners implement |
+| [Simulations](simulations.qmd) | Bootstrap CIs, permutation tests, Monte Carlo ratio bias |
+| [Literature](literature.qmd) | Corpus of 60 references, key fichas, bibliometrics |
+| [Replication](replication.qmd) | All code, data, and instructions to reproduce the analysis |

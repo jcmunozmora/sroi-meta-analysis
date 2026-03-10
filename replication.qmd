@@ -14,17 +14,29 @@ This page documents not just **how to replicate** the analysis, but **what we kn
 ├── data/
 │   ├── enrich_dataset.py             # v1: original enrichment pipeline
 │   ├── data_audit.py                 # v2: rigorous audit + corrected dataset
+│   ├── llm_scoring.py                # v3: full-corpus LLM quality validation
 │   ├── analysis.py                   # Main analysis
 │   ├── simulations.py                # Bootstrap, permutation, Monte Carlo
 │   ├── factors_analysis.py           # Calculation element extraction
 │   │
-│   ├── sroi_clean_dataset_v2.csv     # ← USE THIS (with confidence scores)
+│   ├── sroi_clean_dataset_v3.csv     # ← USE THIS (LLM-validated quality scores)
+│   ├── sroi_clean_dataset_v2.csv     # v2 (keyword scores + confidence metadata)
 │   ├── sroi_ratios_subset.csv        # 64 reports with SROI ratios
 │   ├── sroi_factors.csv              # 11 calculation elements × 383 reports
 │   │
+│   ├── llm_scoring_log.csv           # ← 3,064 LLM coding decisions with key phrases
+│   ├── llm_scoring_summary.md        # ← Keyword vs LLM comparison by principle
 │   ├── audit_report.md               # ← Full data quality audit narrative
 │   ├── audit_flags.csv               # ← Per-report classification flags
-│   └── classification_evidence.csv   # ← Quality score evidence per report
+│   └── classification_evidence.csv   # ← Keyword evidence per report
+├── validation/
+│   ├── validate_coding.py            # Multi-agent IRR framework
+│   ├── sample_manifest.csv           # Stratified validation sample (n=60)
+│   ├── agent_A_codings.csv           # Systematic coder results
+│   ├── agent_B_codings.csv           # Critical coder (false positive detection)
+│   ├── reconciled_codings.csv        # GPT-4o reconciler on disagreements
+│   ├── false_positive_log.csv        # Detected keyword false positives
+│   └── reliability_report.md         # IRR statistics (κ, α) by principle
 └── figures/                          # All 16 figures
 ```
 
@@ -135,27 +147,32 @@ pip install pandas numpy scipy matplotlib seaborn scikit-learn
 # Step 1: Generate audit + corrected dataset (v2)
 python data/data_audit.py
 
-# Step 2: Main analysis
+# Step 2: LLM quality validation — full corpus (requires OPENAI_API_KEY)
+export OPENAI_API_KEY=sk-...
+python data/llm_scoring.py   # ~10 min, resumable via cache
+
+# Step 3: Main analysis
 python data/analysis.py
 
-# Step 3: Simulations (bootstrap, Monte Carlo)
+# Step 4: Simulations (bootstrap, Monte Carlo)
 python data/simulations.py
 
-# Step 4: Calculation elements
+# Step 5: Calculation elements
 python data/factors_analysis.py
 
-# Step 5: Compile website
+# Step 6: Compile website
 quarto render
 ```
 
 ### Expected runtime
 
-| Script | Time |
-|--------|------|
-| `data_audit.py` | ~2 min |
-| `analysis.py` | ~30 sec |
-| `simulations.py` | ~3 min (50k MC iterations) |
-| `factors_analysis.py` | ~1 min |
+| Script | Time | Notes |
+|--------|------|-------|
+| `data_audit.py` | ~2 min | |
+| `llm_scoring.py` | ~10 min | Resumable; uses `.llm_score_cache.json` |
+| `analysis.py` | ~30 sec | |
+| `simulations.py` | ~3 min | 50k MC iterations |
+| `factors_analysis.py` | ~1 min | |
 
 ---
 
@@ -188,13 +205,19 @@ quarto render
 ```python
 import pandas as pd
 
-df = pd.read_csv('data/sroi_clean_dataset_v2.csv')
+# Load v3 (LLM-validated)
+df = pd.read_csv('data/sroi_clean_dataset_v3.csv')
 
-# Main result
-print(df['quality_pct'].mean())  # ~41.2%
+# Main results — dual measure
+print(f"Keyword compliance: {df['quality_pct_kw'].mean():.1f}%")   # ~40.4%
+print(f"LLM compliance:     {df['quality_pct_llm'].mean():.1f}%")  # ~18.6%
 
-# R1: High-confidence sectors only
-print(df[df['sector_confidence']=='HIGH']['quality_pct'].mean())
+# R1: LLM compliance by principle
+for p in ['p1','p2','p3','p4','p5','p6','p7','p8']:
+    print(f"{p}: kw={df[f'{p}_involve_stakeholders' if p=='p1' else p].mean():.3f}, llm={df[f'{p}_involve_stakeholders_llm' if p=='p1' else p+'_llm' if p+'_llm' in df.columns else p].mean():.3f}")
+
+# R2: High-confidence sectors only
+print(df[df['sector_confidence']=='HIGH']['quality_pct_llm'].mean())
 
 # R2: PDF-verified ratios only
 df_r = df[df['ratio_confidence']=='VERIFIED']
@@ -215,13 +238,18 @@ print(df_strict['quality_pct'].mean())
 
 | File | Description |
 |------|-------------|
-| [sroi_clean_dataset_v2.csv](sroi_clean_dataset_v2.csv) | Main dataset (recommended) |
-| [audit_flags.csv](audit_flags.csv) | Per-report flags |
-| [classification_evidence.csv](classification_evidence.csv) | Quality score evidence |
+| [sroi_clean_dataset_v3.csv](sroi_clean_dataset_v3.csv) | **Main dataset (recommended)** — LLM-validated quality scores |
+| [sroi_clean_dataset_v2.csv](sroi_clean_dataset_v2.csv) | v2 — keyword scores + confidence metadata |
+| [llm_scoring_log.csv](llm_scoring_log.csv) | 3,064 LLM coding decisions with key phrases and justifications |
+| [audit_flags.csv](audit_flags.csv) | Per-report classification flags |
+| [classification_evidence.csv](classification_evidence.csv) | Keyword quality score evidence |
 | [sroi_factors.csv](sroi_factors.csv) | Calculation elements |
+| [llm_scoring.py](llm_scoring.py) | LLM full-corpus scoring script |
 | [data_audit.py](data_audit.py) | Full audit script |
 | [analysis.py](analysis.py) | Analysis code |
 | [simulations.py](simulations.py) | Simulation code |
+| [validation/validate_coding.py](validate_coding.py) | Multi-agent IRR framework |
+| [validation/reliability_report.md](reliability_report.md) | IRR statistics (κ, α) by principle |
 
 ---
 

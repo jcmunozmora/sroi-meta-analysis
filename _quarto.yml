@@ -6,6 +6,7 @@ project:
     - empirical.qmd
     - quality.qmd
     - factors.qmd
+    - benchmarks.qmd
     - simulations.qmd
     - literature.qmd
     - replication.qmd
@@ -24,6 +25,8 @@ website:
         text: Quality Analysis
       - href: factors.qmd
         text: Calculation Elements
+      - href: benchmarks.qmd
+        text: Factor Benchmarks
       - href: simulations.qmd
         text: Simulations
       - href: literature.qmd

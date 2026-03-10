@@ -1,0 +1,68 @@
+---
+format:
+  pdf:
+    papersize: letter
+    geometry: margin=1in
+    fontsize: 11pt
+    keep-tex: false
+execute:
+  echo: false
+  warning: false
+---
+
+\begin{center}
+\vspace*{1cm}
+
+{\LARGE \textbf{Measuring Without Accounting: SROI Compliance and the Limits of Social Value Reporting}}
+
+\vspace{1.5cm}
+
+{\large Juan Carlos Muñoz-Mora}
+
+\vspace{0.3cm}
+
+Escuela de Economía y Finanzas, Universidad EAFIT, Medellín, Colombia
+
+Email: jmunozm1@eafit.edu.co \quad ORCID: 0000-0002-7304-8115
+
+\vspace{1.5cm}
+
+{\large Working Paper}
+
+{\large March 2026}
+
+\vspace{1.5cm}
+
+\textbf{JEL Classification:} L31, M14, H43, C89, D64
+
+\vspace{0.3cm}
+
+\textbf{Keywords:} social return on investment, SROI, social value measurement, content analysis, nonprofit accountability, quality compliance, impact measurement, LLM validation, Monte Carlo simulation, practitioner reporting, assurance, accountability myopia
+
+\end{center}
+
+\vspace{1cm}
+
+\hrule
+
+\vspace{0.5cm}
+
+**Abstract**
+
+Social Return on Investment (SROI) has become one of the most widely applied social value measurement frameworks in the nonprofit and public sectors, yet whether practitioners actually comply with its governing principles at scale is unknown. This paper fills that gap with the first large-scale content analysis of 383 SROI practitioner reports drawn from the Social Value UK database. Using a three-method quality scoring design — keyword upper bound (40.4%), LLM systematic coder (18.6%), and expert-calibrated classifier (20.2%) — we bound compliance with Social Value International's eight guiding principles. Compliance is lowest precisely where SROI is most consequential: the "do not over-claim" principle (LLM: 11.2%) and materiality (2.9%), consistent with Ebrahim's (2005) accountability myopia prediction that organizations comply with principles visible to funders while avoiding those that reduce headline ratios. OLS regressions confirm that formal assurance raises quality (β = 10.36 pp, *p* < .001), but even assured reports reach only 22.9% of the maximum standard. A Monte Carlo simulation — calibrated to empirical distributions of deadweight (median 20%), attribution (25.5%), and drop-off (21.5%) extracted from the corpus — implies a median ratio overstatement of 50–82% in non-compliant reports. These findings have direct implications for practitioners, Social Value International, and funders who rely on SROI ratios as accountability signals.
+
+\vspace{0.5cm}
+
+\hrule
+
+\vspace{0.5cm}
+
+**Acknowledgments**
+
+The author is grateful to the Equipo de Valor Público at the Escuela de Economía y Finanzas, Universidad EAFIT, for ongoing intellectual exchange and collaborative engagement with social value measurement in practice. This work has also benefited from the experience accumulated through partnerships with the many organizations that have trusted us to accompany them in measuring their social value. All errors and interpretive judgements remain the author's own.
+
+**Data Availability Statement**
+
+The full dataset (383 SROI reports × 120 variables), scoring scripts, Monte Carlo simulation code, and proxy extraction pipeline are available at: https://github.com/jcmunoz-eafit/2026_sroi. A companion interactive benchmarking tool is accessible at: https://apps.jcmunozmora.co/shiny/sroi-benchmark/
+
+*Comments welcome. Please cite as: Muñoz-Mora, J.C. (2026). Measuring Without Accounting: SROI Compliance and the Limits of Social Value Reporting. Working Paper.*

@@ -1,0 +1,121 @@
+# Findings: Anatomy of SROI Calculation Elements
+
+## The Compliance Cascade Across the Six-Stage Process
+
+Beyond the principle-level quality scores, this section systematically examines the presence of each specific calculation element required by SVI's six-stage SROI methodology. This analysis moves from the aggregate to the granular: rather than scoring compliance with broad principles, the analysis asks which specific technical steps practitioners actually implement.
+
+Figure 13 presents the cascade of compliance across the main calculation elements, drawing on full-PDF LLM extraction for adjustment parameters and keyword scoring for qualitative elements. The pattern is stark. Stakeholder engagement --- the first and most visible element --- is evidenced in 73.1% of reports (280 of 383). Theory of change or outcome mapping appears in 20.6% (79 reports). Evidence of financial proxy use --- the core step that converts outcomes into monetized values --- is present in 14.4% (55 reports). The adjustment factor layer shows dramatically higher prevalence in the full corpus than keyword-based estimates suggested:
+
+| Calculation element | n | % of corpus | Method |
+|---------------------|---|-------------|--------|
+| Stakeholder engagement (any evidence) | 280 | 73.1% | Keyword |
+| Sensitivity analysis (any evidence) | 202 | 52.7% | Keyword |
+| Theory of change / outcome map | 79 | 20.6% | Keyword |
+| Financial proxies mentioned | 55 | 14.4% | Keyword |
+| Attribution deduction applied (>0%) | 216 | 56.4% | Full-PDF LLM |
+| Discount rate documented | 246 | 64.2% | Full-PDF LLM |
+| Deadweight adjustment applied (>0%) | 154 | 40.2% | Full-PDF LLM |
+| Drop-off adjustment applied (>0%) | 90 | 23.5% | Full-PDF LLM |
+| Displacement adjustment applied (>0%) | 40 | 10.4% | Full-PDF LLM |
+
+**Table 7: SROI calculation element prevalence across the corpus (n=383 reports)**
+*Keyword method: based on 5,000-character opening excerpts; Full-PDF LLM: based on smart extraction of executive summary + methodology pages (~15,000 chars), three-agent validation pipeline (GPT-4o-mini x 2, GPT-4o reconciler).*
+
+![SROI calculation elements --- cascade of compliance across the six-stage process.](figures/fig13_calculation_cascade.png){#fig-cascade width=100%}
+
+The cascade reveals a more complex structure than keyword-only analysis suggested. Discount rate documentation (64%) and attribution deduction application (56%) are far more prevalent than the quality scoring rubric indicated --- because the rubric, applied to 5,000-character opening excerpts, could not reach methodology sections where these parameters are reported. Deadweight corrections appear in 40% of reports when full methodology text is analyzed. The cascade does narrow sharply for drop-off (23%) and displacement (10%), and only a minority of reports apply all four adjustments simultaneously. This profile suggests a segmented corpus: roughly half of SROI reports engage substantively with the adjustment calculation layer, while the other half adopt the SROI framework at the stakeholder and outcome mapping stage without completing the impact calculation. Consistent with @Ebrahim2005's accountability myopia framework, the elements most frequently completed --- stakeholder engagement (73%) and outcome documentation --- are precisely those most visible to funders; the elements most frequently omitted --- displacement (10%) and drop-off (23%) --- are the technical calculations that would reduce the headline ratio.
+
+## Adjustment Factor Magnitudes
+
+When adjustment factors are applied, what values do practitioners use? Full-PDF LLM extraction provides the first systematic answer to this question from a large corpus. Among the 154 reports with a non-zero deadweight rate, the mean is 26.0% and the median is 20.0% (range: 0.1%--100%; SD=19.4%). Among the 216 reports with a non-zero attribution deduction, the mean is 30.9% and the median is 25.5% (range: 0.1%--100%; SD=22.7%). Drop-off rates (n=90 with non-zero values) average 29.1% per year (median 21.5%), and displacement rates (n=40 with non-zero values) average 22.2% (median 17.5%). Discount rates are documented in 246 reports, with a mean of 4.1% and median of 3.5% (range: 2.0%--15.0%; SD=1.9%), with the median precisely matching the UK HM Treasury Green Book rate of 3.5%, confirming that the British SROI community has broadly adopted the standard government discount rate.
+
+| Factor | n applying | Mean | Median | SD | Range |
+|--------|-----------|------|--------|----|-------|
+| Deadweight | 154 (40%) | 26.0% | 20.0% | 19.4% | 0.1--100% |
+| Attribution deduction | 216 (56%) | 30.9% | 25.5% | 22.7% | 0.1--100% |
+| Drop-off (annual) | 90 (23%) | 29.1% | 21.5% | 22.9% | 2.3--100% |
+| Displacement | 40 (10%) | 22.2% | 17.5% | 17.2% | 1.0--85% |
+| Discount rate | 246 (64%) | 4.1% | 3.5% | 1.9% | 2.0--15% |
+
+**Table 8: Distribution of adjustment factor magnitudes when applied (full-PDF LLM extraction, n=381 reports)**
+
+![Distribution of SROI adjustment factor values across 383 reports. Top-left: deadweight rate (n=154, median=20.0%). Top-right: attribution deduction (n=216, median=25.5%). Bottom-left: annual drop-off rate (n=90, median=21.5%). Bottom-right: discount rate (n=246, median=3.5%). Distributions include kernel density estimates; vertical dashed lines mark the median. Box inserts show practitioner benchmark summaries.](figures/fig_factor_combined.png){#fig-factor-combined width=100%}
+
+These empirically-observed distributions update the assumption that SROI practitioners use broadly similar adjustment factor values. Deadweight rates cluster around 20--30% but show substantial spread (SD=19.4%), with a long upper tail: 22 reports use deadweight rates above 50%, and 5 set deadweight at 100%. Attribution deductions are similar in their spread. The wide variation in these parameters --- which are among the most consequential for ratio magnitude --- implies that two SROI studies of similar programs could produce substantially different ratios not because of genuine outcome differences but because of practitioner choice of adjustment magnitudes.
+
+## Co-occurrence and Cascading Application
+
+A critical question is whether the adjustment factors appear in isolation or together. Figure 14 presents the co-occurrence matrix. Among the 39 reports that mention deadweight, 79.5% also mention attribution, 61.5% mention drop-off, and 59.0% mention displacement. Nearly half (46.2%) also conduct sensitivity analysis. When practitioners engage with the adjustment framework at all, they tend to engage comprehensively: 86.7% apply no adjustments while 5.2% apply all four.
+
+This polarization carries theoretical significance. The bricolage logic identified by @MoleckePinkse2017 would predict selective adoption --- some elements adopted, others not. What the data reveal instead is a threshold phenomenon: practitioners either engage with the adjustment framework or do not, and those who do tend to be broadly compliant with it. This suggests that the barrier to adjustment factor application is not primarily about knowledge of individual factors but about crossing an initial threshold --- perhaps institutional capacity, funder requirement, or the presence of a trained SROI analyst.
+
+![Co-occurrence of adjustment factors and conditional compliance.](figures/fig14_factor_cooccurrence.png){#fig-cooccurrence width=100%}
+
+## Forecast versus Evaluative Reports
+
+Report type moderates adjustment factor compliance. Forecast reports (n=40) show higher compliance than the evaluative or unclassified majority (n=343), though the differences are smaller than keyword-only analysis suggested --- because full-PDF extraction reveals substantially higher baseline application rates in evaluative reports:
+
+| Factor | Forecast (n=40) | Evaluative / unknown (n=343) | Ratio |
+|--------|:-----------:|:-------------------:|------:|
+| Deadweight (>0%) | 57.5% | 38.2% | 1.5x |
+| Attribution (>0%) | 60.0% | 56.0% | 1.1x |
+| Drop-off (>0%) | 45.0% | 21.0% | 2.1x |
+| Displacement (>0%) | 20.0% | 9.3% | 2.1x |
+
+**Table 9: Adjustment factor compliance by report type (Forecast vs. Evaluative/unknown; full-PDF LLM extraction)**
+
+The pattern confirms that forecast reports are more methodologically thorough, particularly for drop-off and displacement (2.1x higher application rates). The large gap previously observed in keyword-only analysis narrows considerably with full-PDF extraction: evaluative reports show 38% deadweight and 56% attribution application, underscoring that opening-excerpt methods substantially underestimate adjustment factor use in reports that document calculations in later methodology sections.
+
+![Adjustment factor compliance by report type and assurance status.](figures/fig15_factors_by_type_assurance.png){#fig-factors-type width=100%}
+
+## The Quality Premium of Full Adjustment Compliance
+
+Reports with all four adjustment factors present score dramatically higher on the overall quality rubric (mean 78.4%) than reports with no adjustments (mean 37.2%): a gap of 41.2 percentage points. Figure 16 shows the monotonic relationship between adjustment factor count and quality score. Each additional factor is associated with a meaningful quality increment, suggesting a cumulative learning or institutional capacity dynamic: organizations that engage with the first adjustment tend to apply the others as well, and this comprehensive engagement permeates the entire report.
+
+Among the 247 reports with extractable SROI ratios, a striking pattern emerges when ratios are stratified by adjustment factor application. Reports with deadweight applied (>0%) show a lower median ratio (3.44:1, n=120) than those without (3.68:1, n=127), consistent with the directional expectation that deadweight corrections reduce ratios. Reports with attribution deduction applied show a similar pattern (median 3.28:1 vs. 3.89:1 for those without). Reports where all four adjustments are applied have a median ratio of 3.11:1 --- lower than the corpus median --- which is the expected direction: comprehensive adjustment compliance should reduce ratios. Selection effects may also be present (organizations with capacity to apply all adjustments may operate differently); these patterns are descriptive and should not be interpreted causally.
+
+![Quality score and SROI ratio distribution by number of adjustment factors applied.](figures/fig16_quality_ratio_by_factors.png){#fig-quality-factors width=100%}
+
+## Financial Proxy Methods: The Monetization Infrastructure of SROI
+
+A SROI study's credibility rests not only on whether adjustment factors are applied but on *how outcomes are converted into monetary values*. Financial proxies --- the unit prices that translate non-market outcomes into pounds or dollars --- are the monetization infrastructure of SROI. Yet no prior systematic review has characterized the proxy landscape at scale. Drawing on the full-PDF LLM extraction pipeline (383 reports, 377 with valid extraction), this analysis presents the first large-scale anatomy of SROI proxy methodology.
+
+### Dominant Method: No Single Standard
+
+The most striking finding is the absence of a dominant methodology. Nearly half of all reports (182, 48.3%) use a *mixed* approach --- combining two or more proxy methods within the same study. A further 22.0% rely primarily on *replacement or avoided cost* (valuing outcomes by the cost of the service or intervention they displace), and 16.2% use *unit costs* drawn from public or administrative datasets. Specialist methods --- Quality-Adjusted Life Years (QALY, 2.4%), Willingness to Pay (WTP, 2.4%), Wellbeing-Based Valuation (WELLBYs/wellbeing valuation, 1.6%), and HACT Social Value Bank benchmarks (1.1%) --- together account for less than 9% of the corpus. Eleven reports (2.9%) could not be classified.
+
+| Primary proxy method | n | % |
+|----------------------|---|---|
+| Mixed (2+ methods combined) | 182 | 48.3% |
+| Replacement / avoided cost | 83 | 22.0% |
+| Unit cost | 61 | 16.2% |
+| QALY | 9 | 2.4% |
+| Willingness to Pay | 9 | 2.4% |
+| WELLBYs / wellbeing valuation | 6 | 1.6% |
+| HACT Social Value Bank | 4 | 1.1% |
+| Academic literature | 4 | 1.1% |
+| Government statistics | 4 | 1.1% |
+| Market / wage rate | 4 | 1.1% |
+| Unclear | 11 | 2.9% |
+
+**Table 10: Distribution of primary financial proxy methods across the corpus (n=377 valid reports)**
+
+Among reports classified as mixed, the named proxy sources reveal striking fragmentation: 182 mixed-method reports reference 425 distinct sources, with Cabinet Office WELLBYs (13 citations), HACT Social Value Bank (9), government department datasets (DWP, Cabinet Office, NHS: ~15 combined), and academic literature citations making up the most common anchors. The long tail of idiosyncratic sources --- country-specific statistics bureaux, local authority datasets, consultancy reports, and bespoke stakeholder valuations --- is itself evidence of methodological diversity. The absence of a dominant proxy infrastructure outside the UK implies that each SROI study in the corpus is, to a significant degree, constructing its own monetization framework.
+
+![Primary financial proxy method by sector. Stacked bars show percentage share within each sector. Employment sector shows the most balanced distribution across methods; Environment sector has the highest rate of mixed approaches; Health is the only sector with a notable QALY share.](figures/fig_monetization_by_sector.png){#fig-monetization-sector width=100%}
+
+### Sectoral and Geographic Variation in Proxy Choice
+
+Proxy methods vary systematically across sectors and countries, reflecting differences in the availability of established valuation frameworks (Figure above). In health (n=32), QALY-based valuation accounts for 12% of reports --- the only sector where this method registers at scale, consistent with NHS and NICE frameworks. The environment sector (n=28) shows the highest mixed-method rate (61%) and is the only sector with a notable WTP share (7%). Employment (n=41) is the most methodologically balanced sector, with replacement cost, unit cost, and mixed approaches each near 29%. Country of origin is strongly associated with proxy method: UK reports (n=264) are predominantly mixed-method (53%), reflecting the UK's rich proxy database landscape (Cabinet Office, DWP, NHS reference costs, HACT). North American practitioners favor replacement/avoided cost (USA 44%, Canada 46%), consistent with a cost-benefit tradition focused on service utilization savings and the absence of UK-equivalent proxy databases. Proxy method use also shifted over time: mixed methods rose from 30% of reports in 2007--09 to 60% in 2012--13, tracking the professionalization of SROI practice as validated proxy databases became available. Sensitivity analysis on proxy values is reported in 134 of 377 reports (35.5%), concentrated in methods with established uncertainty frameworks (WTP 67%, QALY 56%); government statistics and market rate proxies show zero proxy sensitivity analysis, a gap that deserves attention.
+
+### Proxy Method and Reporting Quality
+
+Reports using HACT Social Value Bank benchmarks score highest on the overall quality rubric (median 28.1%), followed by academic literature-anchored reports (21.9%). Mixed-method, replacement cost, and unit cost reports cluster around the corpus median (18.8%). Reports relying on government statistics, market rates, or WTP methods score substantially below the median (6.2%, 9.4%, and 12.5% respectively), though small group sizes limit inference.
+
+The HACT quality premium is consistent with the framework's design: HACT provides pre-validated proxies with published uncertainty ranges, built-in guidance on displacement and deadweight, and a UK housing-sector specific evidence base --- each of which scaffolds substantive compliance with multiple SVI principles simultaneously. This finding points to a practical lever for quality improvement: sector-specific proxy databases that embed methodological guidance alongside point estimates tend to elevate report quality beyond what is achievable with ad hoc proxy selection.
+
+![Quality score distribution by primary proxy method (LLM-scored quality, % of 8 principles). Box plots with median lines. Dashed horizontal line = corpus median (18.8%). HACT and academic literature anchor the upper range; government statistics and market rate anchor the lower range.](figures/fig_monetization_quality.png){#fig-monetization-quality width=100%}
+
+### Implications: The Proxy Standardization Deficit
+
+Taken together, these findings document a *proxy standardization deficit* in SROI practice. Unlike established economic evaluation frameworks --- where QALY-based NICE guidance provides sector-wide proxy values for health interventions, or where HM Treasury Green Book rates govern public investment appraisal --- SROI operates without a dominant proxy infrastructure outside specialist UK contexts. The 425 distinct sources identified across 182 mixed-method reports, the near-zero overlap between UK and North American proxy practices, and the declining unit-cost share over time all point to a field where proxy selection remains largely idiosyncratic. This fragmentation is consequential: it means that SROI ratios across studies are not directly comparable even within sectors, undermining the method's potential as a basis for cross-program allocation decisions.

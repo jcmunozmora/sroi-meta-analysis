@@ -95,8 +95,8 @@ bars = ax.barh(ys, xs, color=BLUE, alpha=0.85, height=0.65)
 ax.set_yticks(ys)
 ax.set_yticklabels(lbls, fontsize=9)
 ax.set_xlabel("Number of reports")
-ax.set_title("Figure 1. Sectoral distribution of SROI reports\n(Social Value UK database, n=383)",
-             fontsize=10, loc="left", pad=8)
+# ax.set_title("Figure 1. Sectoral distribution of SROI reports\n(Social Value UK database, n=383)",
+#              fontsize=10, loc="left", pad=8)
 for bar, val in zip(bars, xs):
     ax.text(bar.get_width() + 0.8, bar.get_y() + bar.get_height()/2,
             str(val), va="center", fontsize=8, color=GREY)
@@ -132,8 +132,8 @@ ax.set_xticks(x)
 ax.set_xticklabels(P_LABELS, fontsize=8.5)
 ax.set_ylabel("Percentage of reports (%)")
 ax.set_ylim(0, 115)
-ax.set_title("Figure 2. Compliance with SVI's eight reporting principles\n(% of reports by score, mean score shown above bars; max=2.0)",
-             fontsize=10, loc="left", pad=8)
+# ax.set_title("Figure 2. Compliance with SVI's eight reporting principles\n(% of reports by score, mean score shown above bars; max=2.0)",
+#              fontsize=10, loc="left", pad=8)
 ax.legend(loc="upper right", fontsize=9, framealpha=0.9)
 ax.axhline(50, color=GREY, lw=0.8, linestyle="--", alpha=0.5)
 plt.tight_layout()
@@ -179,8 +179,8 @@ ax.set_ylabel("Quality score (%)")
 ax.set_title(f"(b) Quality by assurance status\nt={t_stat:.2f}, p<0.001, Cohen's d={cohen_d:.2f}", fontsize=10)
 ax.axhline(qdata.mean(), color=GREY, lw=0.8, linestyle="--", alpha=0.5)
 
-fig.suptitle("Figure 3. Distribution of overall quality scores across 376 SROI reports",
-             fontsize=10, y=1.01)
+# fig.suptitle("Figure 3. Distribution of overall quality scores across 376 SROI reports",
+#              fontsize=10, y=1.01)
 plt.tight_layout()
 plt.savefig(FIGDIR / "fig3_quality_distribution.pdf", bbox_inches="tight")
 plt.savefig(FIGDIR / "fig3_quality_distribution.png", bbox_inches="tight", dpi=200)
@@ -215,8 +215,8 @@ ax.set_yticklabels([sect_labels.get(s, s.title()) + f" (n={int(c)})"
 for i, (mean, ci) in enumerate(zip(sect_stats["mean"], sect_stats["ci95"])):
     ax.text(mean + ci + 0.5, i, f"{mean:.1f}%", va="center", fontsize=8)
 ax.set_xlabel("Mean quality score (%) ± 95% CI")
-ax.set_title("Figure 4. Mean quality scores by sector\n(bars: 95% CI; green = above overall mean)",
-             fontsize=10, loc="left", pad=8)
+# ax.set_title("Figure 4. Mean quality scores by sector\n(bars: 95% CI; green = above overall mean)",
+#              fontsize=10, loc="left", pad=8)
 ax.legend(fontsize=9, loc="lower right")
 ax.set_xlim(0, 80)
 plt.tight_layout()
@@ -247,10 +247,10 @@ ax.plot(x_fit, intercept + slope * np.log1p(x_fit), color=RED, lw=2,
         label=f"Log-linear fit (r={r_val:.2f})")
 ax.set_xlabel("Stakeholder keyword mentions in PDF text")
 ax.set_ylabel("Overall quality score (%)")
-ax.set_title(
-    f"Figure 5. Stakeholder engagement and reporting quality\n"
-    f"Spearman ρ = {r_sp:.3f}, p < 0.001 (n={len(sub)})",
-    fontsize=10, loc="left", pad=8)
+# ax.set_title(
+#     f"Figure 5. Stakeholder engagement and reporting quality\n"
+#     f"Spearman ρ = {r_sp:.3f}, p < 0.001 (n={len(sub)})",
+#     fontsize=10, loc="left", pad=8)
 ax.legend(fontsize=9)
 plt.tight_layout()
 plt.savefig(FIGDIR / "fig5_stakeholders_vs_quality.pdf", bbox_inches="tight")
@@ -285,8 +285,8 @@ w_r, p_r = stats.shapiro(np.log(ratios))
 ax.text(0.97, 0.95, f"Shapiro-Wilk (log): W={w_r:.3f}, p={p_r:.3f}",
         transform=ax.transAxes, fontsize=8, ha="right", va="top", color=GREY)
 
-fig.suptitle(f"Figure 6. Distribution of SROI ratios (n={len(ratios)} reports with extractable ratios)",
-             fontsize=10, y=1.01)
+# fig.suptitle(f"Figure 6. Distribution of SROI ratios (n={len(ratios)} reports with extractable ratios)",
+#              fontsize=10, y=1.01)
 plt.tight_layout()
 plt.savefig(FIGDIR / "fig6_sroi_ratio_distribution.pdf", bbox_inches="tight")
 plt.savefig(FIGDIR / "fig6_sroi_ratio_distribution.png", bbox_inches="tight", dpi=200)

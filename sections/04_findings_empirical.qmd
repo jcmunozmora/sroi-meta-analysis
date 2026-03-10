@@ -1,0 +1,63 @@
+# Findings: Empirical Patterns of SROI Practice
+
+## Corpus Overview
+
+The corpus of 383 SROI reports spans approximately two decades of practice, with identifiable report years ranging from 1996 to 2016 (note: year extraction was limited to years readable in the opening text of each PDF; reports where the opening text does not contain a year are coded as missing). The peak years of activity in the corpus are 2013 (68 reports, 17.7%), followed by 2014 (52, 13.6%), 2011 (47, 12.3%), and 2012 (43, 11.2%), consistent with the period of rapid SROI adoption in the UK following publication of the SVI Guide [@NichollsEtAl2012] and the Social Value Act 2012. Reports from before 2006 are sparse (22 reports, 5.7%), reflecting the method's early stage.
+
+A total of 376 reports (98.2%) had PDF text available for analysis. Sixty-three reports (16.4%) were identified as having received SVI Report Assurance. Using full-PDF LLM extraction (smart page selection targeting executive summary and methodology sections, ~15,000 characters per report), 247 reports (64.5%) had extractable SROI ratio values --- a fourfold increase over keyword-based extraction (64 reports, 16.7%).
+
+## Sectoral Distribution
+
+The corpus is distributed across 15 sectors, with notable concentration in housing and education (Figure 1). The five most represented sectors account for 64.8% of all reports:
+
+| Sector | n | % |
+|--------|---|---|
+| Housing | 84 | 21.9% |
+| Education | 78 | 20.4% |
+| Employment | 39 | 10.2% |
+| Health | 30 | 7.8% |
+| Environment | 24 | 6.3% |
+| Disability | 19 | 5.0% |
+| Arts and culture | 19 | 5.0% |
+| Agriculture and food | 16 | 4.2% |
+| Social inclusion | 15 | 3.9% |
+| Youth | 13 | 3.4% |
+| Other / unclassified | 21 | 5.5% |
+| Community | 9 | 2.3% |
+| Sports | 7 | 1.8% |
+| Justice | 6 | 1.6% |
+| Elderly and microfinance | 3 | 0.8% |
+
+**Table 1: Sectoral distribution of SROI reports in the Social Value UK database (n=383)**
+
+![Sectoral distribution of SROI reports in the Social Value UK database.](figures/fig1_sector_distribution.png){#fig-sector width=90%}
+
+Housing and education together account for 42% of the corpus, reflecting their centrality to UK public-sector commissioning [@Arvidson2013]. The relatively low proportion of disability-sector reports (5.0%) may reflect underrepresentation in the public database rather than lower adoption rates, given SROI's early development in disability services [@OlsenNicholls2005].
+
+## Geographic Distribution
+
+The corpus is heavily concentrated in the United Kingdom. UK-based reports account for 264 of 383 (68.9%), the largest share of any country grouping. The next largest are Australia (31, 8.1%), Canada (24, 6.3%), the United States (18, 4.7%), and Ireland (7, 1.8%). Austria accounts for 5 reports (1.3%), all produced through the Vienna University of Economics and Business SROI practicum program. Approximately 5.2% of reports originate from low- and middle-income countries including Nepal, Kenya, Indonesia, Cambodia, the Philippines, Bangladesh, South Africa, Uganda, and Sudan, reflecting the gradual internationalization of SROI beyond its UK origins. The UK's dominance reflects the unique policy context created by the Social Value Act 2012 and two decades of sustained investment by the SROI Network and its successor organizations.
+
+## Organizational Types
+
+Charities represent the most common type of reporting organization (128 reports, 33.4%), followed by organizations of unknown type (106, 27.7%), government and public sector bodies (85, 22.2%), private sector organizations (43, 11.2%), and social enterprises (21, 5.5%). The prominence of charities and government bodies reflects the primary institutional contexts in which SROI has been demanded: public-sector commissioning environments in which third-sector organizations must demonstrate value for money. The substantial share of government (22.2%) and private sector (11.2%) organizations in the corpus --- 33.4% combined --- is worth noting: while SROI is most commonly associated with the nonprofit sector, a significant portion of the practice base lies outside it.
+
+## SROI Ratio Distribution
+
+For the 247 reports with extractable SROI ratios, the distribution is highly right-skewed (Table 2; Figure 6). A Shapiro-Wilk test confirms significant departure from normality on the linear scale (W=0.74, p<0.001). On a log scale, however, the distribution approximates normality (W=0.96, p<0.001), consistent with the multiplicative nature of SROI calculations and aligning with the log-normal pattern observed in cost--benefit analysis more broadly. The mean ratio is 5.42, reflecting the influence of values above 10:1; the median of 3.56 is the more representative measure of central tendency. The minimum observed ratio is 0.13 and the maximum is 37.14 (SD=5.55). Four ratios above 50:1 were identified as likely extraction errors and excluded; the largest verified ratio in the corpus is 37.14:1, a disability-sector housing intervention using avoided-cost calculations.
+
+| Statistic | Value |
+|-----------|-------|
+| n | 247 |
+| Mean | 5.42 |
+| Median | 3.56 |
+| Std. deviation | 5.55 |
+| Minimum | 0.13 |
+| Maximum | 37.14 |
+| Interquartile range (P25--P75) | 2.06--6.60 |
+
+**Table 2: Distribution of SROI ratios (n=247 reports with extractable values)**
+
+![Distribution of SROI ratios on linear and log scales.](figures/fig6_sroi_ratio_distribution.png){#fig-ratios width=95%}
+
+The median ratio of 3.56 (IQR: 2.06--6.60) represents the first large-scale systematic characterization of SROI ratio distributions from a practitioner corpus. Neither @Krlev2013 nor @Corvo2022 focused on ratio distributions at scale, leaving the question of typical SROI ratios unanswered. The figure is notably lower than smaller-sample estimates based on assurance-verified reports, suggesting the full practitioner corpus includes a wider methodological range. The long right tail (values above 15:1 account for 8.9% of the sample) is concentrated in disability-sector reports using avoided-cost calculations and in Australian environmental and social inclusion programs.
